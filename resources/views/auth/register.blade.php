@@ -73,21 +73,21 @@
 
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Full Name</label>
-                                        <input type="text" name="name" class="form-control" id="username" placeholder="Enter full name">
+                                        <input type="text" name="name" class="form-control" id="username" placeholder="Enter full name" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Email</label>
-                                        <input type="email" name="email" class="form-control" id="username" placeholder="Enter email">
+                                        <input type="email" name="email" class="form-control" id="username" placeholder="Enter email" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Phone Number</label>
-                                        <input type="number" name="phone_number" class="form-control" id="username" placeholder="Enter phone number">
+                                        <input type="number" name="phone_number" class="form-control" id="username" placeholder="Enter phone number" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" name="password" class="form-control pe-5" placeholder="Enter password" id="password-input">
+                                            <input type="password" name="password" class="form-control pe-5" placeholder="Enter password" id="password-input" required>
                                             <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                     </div>
@@ -95,13 +95,13 @@
                                     <div class="mb-3">
                                         <label class="form-label" for="password-input">Confirm Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" name="confirm_password" class="form-control pe-5" placeholder="Enter Confirm password" id="password-input">
+                                            <input type="password" name="confirm_password" class="form-control pe-5" placeholder="Enter Confirm password" id="password-input" required>
                                             <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                     </div>
 
                                     <div class="mt-4">
-                                        <button class="btn btn-success w-100" type="submit">Sign In</button>
+                                        <button class="btn btn-success w-100" type="submit">Sign Up</button>
                                     </div>
 
                                 </form>

@@ -390,7 +390,7 @@
 
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Balance : <b>$5971.67</b></span></a>
+                                    class="align-middle">Balance : <b>${{number_format(Auth::user()->balance,2)}}</b></span></a>
                             <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
                                     class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Change Password</span></a>
@@ -458,12 +458,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('admin.general.settings')}}">
+                        <a class="nav-link menu-link" href="{{route('user.withdraw')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Withdraw</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('admin.general.settings')}}">
+                        <a class="nav-link menu-link" href="{{route('user.all.transaction')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">All Transaction</span>
                         </a>
                     </li>

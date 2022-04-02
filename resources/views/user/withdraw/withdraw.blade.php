@@ -8,11 +8,11 @@
                 <div class="card-body">
 
                     <div class="live-preview">
-                        <form class="row g-3" action="{{route('user.deposit.save')}}" method="post">
+                        <form class="row g-3" action="{{route('user.withdraw.save')}}" method="post">
                             @csrf
                             <div class="col-md-12">
-                                <label for="validationDefault01" class="form-label">Deposit Type</label>
-                                <select class="form-control deposit_type" name="deposit_type" required>
+                                <label for="validationDefault01" class="form-label">Withdraw Type</label>
+                                <select class="form-control deposit_type" name="withdraw_type" required>
                                     <option value="">select any</option>
                                     @foreach($payment_gateway as $gateway)
                                         <option value="{{$gateway->id}}">{{$gateway->gateway_name}}</option>
@@ -46,12 +46,8 @@
                                 <input type="text" class="form-control total_usd" name="total_usd" value="0.00" readonly>
                             </div>
                             <div class="col-md-6">
-                                <label for="validationDefault01" class="form-label">Sender Number</label>
-                                <input type="text" class="form-control" name="sender_number" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="validationDefault01" class="form-label">Transaction Number</label>
-                                <input type="text" class="form-control" name="transaction_number" required>
+                                <label for="validationDefault01" class="form-label">Receiver Number</label>
+                                <input type="text" class="form-control" name="receiver_number" required>
                             </div>
 
 
@@ -68,8 +64,6 @@
             </div>
         </div> <!-- end col -->
     </div>
-
-
 
     <div class="row">
         <div class="col-xl-12">
@@ -91,29 +85,29 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($all_deposit as $dep)
-                            <tr>
-                                <td>{{$dep->transaction_id}}</td>
-                                <td>Deposit</td>
-                                <td>{{$dep->amount}}</td>
-                                <td>
-                                    {{\Carbon\Carbon::parse($dep->created_at)->format('Y-m-d')}}
-                                </td>
-                                <td>
-                                    @if ($dep->status == 0)
+                            @foreach($user_withdraw as $with)
+                                <tr>
+                                    <td>{{$with->transaction_id}}</td>
+                                    <td>Withdraw</td>
+                                    <td>{{$with->amount}}</td>
+                                    <td>
+                                        {{\Carbon\Carbon::parse($with->created_at)->format('Y-m-d')}}
+                                    </td>
+                                    <td>
+                                        @if ($with->status == 0)
 
-                                        <span class="badge bg-warning">Pending</span>
-                                    @elseif($dep->status == 1)
+                                            <span class="badge bg-warning">Pending</span>
+                                        @elseif($with->status == 1)
 
-                                        <span class="badge bg-success">Approved</span>
-                                    @elseif($dep->status == 2)
+                                            <span class="badge bg-success">Approved</span>
+                                        @elseif($with->status == 2)
 
-                                        <span class="badge bg-danger">Rejected</span>
-                                    @else
-                                        Not Set
-                                    @endif
-                                </td>
-                            </tr>
+                                            <span class="badge bg-danger">Rejected</span>
+                                        @else
+                                            Not Set
+                                        @endif
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody><!-- end tbody -->
                         </table><!-- end table -->
@@ -121,10 +115,11 @@
                     </div><!-- end table responsive -->
 
                 </div><!-- end card body -->
-                {{$all_deposit->links()}}
+                {{$user_withdraw->links()}}
             </div><!-- end card -->
         </div>
     </div>
+
 
 @endsection
 @section('js')

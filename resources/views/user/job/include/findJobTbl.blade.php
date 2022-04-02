@@ -34,7 +34,7 @@
                                                     class="ri-eye-fill align-bottom me-2 text-muted"></i>
                                                 View</a>
                                             @if ($job->user_id == Auth::user()->id)
-                                                <a class="dropdown-item" href="{{route('user.find.job.details',$job->id)}}"><i
+                                                <a class="dropdown-item" href="{{route('user.job.edit',$job->id)}}"><i
                                                         class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                     Edit</a>
                                                 <div class="dropdown-divider"></div>

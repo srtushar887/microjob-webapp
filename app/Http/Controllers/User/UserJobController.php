@@ -214,6 +214,12 @@ class UserJobController extends Controller
 
 
 
+    public function job_edit($id)
+    {
+        $job_edit = all_job::where('id',$id)->first();
+        return view('user.job.editJob',compact('job_edit'));
+    }
+
 
 
 

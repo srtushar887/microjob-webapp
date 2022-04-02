@@ -35,6 +35,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/post-job-get-sub-cat-price', [Controllers\User\UserJobController::class, 'post_job_get_sub_cat_price'])->name('user.post.job.get.sub.category.price');
         Route::post('/post-job-save', [Controllers\User\UserJobController::class, 'post_job_save'])->name('user.post.job.save');
 
+        //job edit
+        Route::get('/job-edit/{id}', [Controllers\User\UserJobController::class, 'job_edit'])->name('user.job.edit');
+
         //user find job
         Route::get('/find-job', [Controllers\User\UserJobController::class, 'find_job'])->name('user.find.job');
         Route::post('/find-job-get-all', [Controllers\User\UserJobController::class, 'find_job_get_all'])->name('user.find.job.get.all');
@@ -52,6 +55,14 @@ Route::group(['middleware' => ['auth']], function () {
         //deposit
         Route::get('/deposit', [Controllers\User\UserDepositController::class, 'deposit'])->name('user.deposit');
         Route::post('/deposit-save', [Controllers\User\UserDepositController::class, 'deposit_save'])->name('user.deposit.save');
+        Route::post('/dep-get-details', [Controllers\User\UserDepositController::class, 'deposit_gate_get_details'])->name('user.deposit.get.gateway.details');
+
+        //withdraw
+        Route::get('/withdraw', [Controllers\User\UserWindrawController::class, 'withdraw'])->name('user.withdraw');
+        Route::post('/withdraw-save', [Controllers\User\UserWindrawController::class, 'withdraw_save'])->name('user.withdraw.save');
+
+        //transaction
+        Route::get('/transaction', [Controllers\User\UserTransactionController::class, 'all_transaction'])->name('user.all.transaction');
     });
 });
 // ===================  admin section
@@ -95,6 +106,50 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/sub-category-single', [Controllers\Admin\AdminCategoryController::class, 'sub_category_single'])->name('admin.job.sub.category.single');
         Route::post('/sub-category-update', [Controllers\Admin\AdminCategoryController::class, 'sub_category_update'])->name('admin.job.sub.category.update');
         Route::post('/sub-category-delete', [Controllers\Admin\AdminCategoryController::class, 'sub_category_delete'])->name('admin.job.sub.category.delete');
+
+        //payment gateway
+        Route::get('/payment-gateway', [Controllers\Admin\AdminGatewayController::class, 'payment_gateway'])->name('admin.payment.gateway');
+        Route::post('/payment-gateway-update', [Controllers\Admin\AdminGatewayController::class, 'payment_gateway_update'])->name('admin.payment.gateway.update');
+
+        //deposit
+        Route::get('/all-deposit', [Controllers\Admin\AdminDepositController::class, 'all_deposit'])->name('admin.all.deposit');
+        Route::get('/all-deposit-get', [Controllers\Admin\AdminDepositController::class, 'all_deposit_get'])->name('admin.all.deposit.get');
+
+        Route::get('/pending-deposit', [Controllers\Admin\AdminDepositController::class, 'pending_deposit'])->name('admin.pending.deposit');
+        Route::get('/pending-deposit-get', [Controllers\Admin\AdminDepositController::class, 'pending_deposit_get'])->name('admin.pending.deposit.get');
+
+        Route::get('/approved-deposit', [Controllers\Admin\AdminDepositController::class, 'approved_deposit'])->name('admin.approved.deposit');
+        Route::get('/approved-deposit-get', [Controllers\Admin\AdminDepositController::class, 'approved_deposit_get'])->name('admin.approved.deposit.get');
+
+        Route::get('/rejected-deposit', [Controllers\Admin\AdminDepositController::class, 'rejected_deposit'])->name('admin.rejected.deposit');
+        Route::get('/rejected-deposit-get', [Controllers\Admin\AdminDepositController::class, 'rejected_deposit_get'])->name('admin.rejected.deposit.get');
+
+
+        Route::post('/deposit-change-status', [Controllers\Admin\AdminDepositController::class, 'deposit_change_status'])->name('admin.deposit.status.change');
+        Route::post('/deposit-delete', [Controllers\Admin\AdminDepositController::class, 'deposit_delete'])->name('admin.deposit.delete');
+
+        //withdraw
+        Route::get('/all-withdraw', [Controllers\Admin\AdminWithdrawController::class, 'all_withdraw'])->name('admin.all.withdraw');
+        Route::get('/all-withdraw-get', [Controllers\Admin\AdminWithdrawController::class, 'all_withdraw_get'])->name('admin.all.withdraw.get');
+        Route::post('/withdraw-status-update', [Controllers\Admin\AdminWithdrawController::class, 'withdraw_status_change'])->name('admin.withdraw.status.change');
+        Route::post('/withdraw-delete', [Controllers\Admin\AdminWithdrawController::class, 'withdraw_delete'])->name('admin.withdraw.delete');
+
+        //pending withdraw
+        Route::get('/pending-withdraw', [Controllers\Admin\AdminWithdrawController::class, 'pending_withdraw'])->name('admin.pending.withdraw');
+        Route::get('/pending-withdraw-get', [Controllers\Admin\AdminWithdrawController::class, 'pending_withdraw_get'])->name('admin.pending.withdraw.get');
+
+        //approved withdraw
+        Route::get('/approved-withdraw', [Controllers\Admin\AdminWithdrawController::class, 'approved_withdraw'])->name('admin.approved.withdraw');
+        Route::get('/approved-withdraw-get', [Controllers\Admin\AdminWithdrawController::class, 'approved_withdraw_get'])->name('admin.approved.withdraw.get');
+
+        //rejected withdraw
+        Route::get('/rejected-withdraw', [Controllers\Admin\AdminWithdrawController::class, 'rejected_withdraw'])->name('admin.rejected.withdraw');
+        Route::get('/rejected-withdraw-get', [Controllers\Admin\AdminWithdrawController::class, 'rejected_withdraw_get'])->name('admin.rejected.withdraw.get');
+
+        //all users
+        Route::get('/all-users', [Controllers\Admin\AdminUsersController::class, 'all_users'])->name('admin.all.users');
+        Route::get('/all-users-get', [Controllers\Admin\AdminUsersController::class, 'all_users_get'])->name('admin.get.all.users');
+        Route::get('/user-details/{id}', [Controllers\Admin\AdminUsersController::class, 'user_details'])->name('admin.user.details');
 
 
 

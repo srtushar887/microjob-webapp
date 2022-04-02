@@ -484,29 +484,71 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.payment.gateway')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Payment Gateway</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <?php
+                        $count_dep = \App\Models\user_deposit::where('status',0)->count();
+                        ?>
                         <a class="nav-link menu-link" href="#deposit" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">User Deposit</span>
+                            <span class="badge badge-pill bg-danger" data-key="t-new">{{$count_dep}}</span>
                         </a>
                         <div class="collapse menu-dropdown" id="deposit">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> All Deposit </a>
+                                    <a href="{{route('admin.all.deposit')}}" class="nav-link" data-key="t-crm"> All Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="index.html" class="nav-link" data-key="t-ecommerce"> Pending Deposit </a>
+                                    <a href="{{route('admin.pending.deposit')}}" class="nav-link" data-key="t-ecommerce"> Pending Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="index.html" class="nav-link" data-key="t-ecommerce"> Approved Deposit </a>
+                                    <a href="{{route('admin.approved.deposit')}}" class="nav-link" data-key="t-ecommerce"> Approved Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="index.html" class="nav-link" data-key="t-ecommerce"> Rejected Deposit </a>
+                                    <a href="{{route('admin.rejected.deposit')}}" class="nav-link" data-key="t-ecommerce"> Rejected Deposit </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
+                    <li class="nav-item">
+                        <?php
+                            $count_with = \App\Models\withdraw::where('status',0)->count();
+                        ?>
+                        <a class="nav-link menu-link" href="#userwithdraw" data-bs-toggle="collapse"
+                           role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">User Withdraw</span>
+                            <span class="badge badge-pill bg-danger" data-key="t-new">{{$count_with}}</span>
+                        </a>
 
+                        <div class="collapse menu-dropdown" id="userwithdraw">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All Withdraw </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pending.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Pending Withdraw </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.approved.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Approved Withdraw </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.rejected.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Rejected Withdraw </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.all.users')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Users</span>
+                        </a>
+                    </li>
 
                 </ul>
             </div>
