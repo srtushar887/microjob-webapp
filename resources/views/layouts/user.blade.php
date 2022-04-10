@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Admin</title>
+    <title>User | @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -373,7 +373,7 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                         src="{{asset('assets/dashboard/')}}/images/users/avatar-1.jpg" alt="Header Avatar">
+                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiMcc9W6s78W6i8ZTNMtPrBDg5hvws2htOXfOxTaEPkgLumwbtLQVVIHZtZmSU92XoLXA&usqp=CAU" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
                                         <span
@@ -384,19 +384,22 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
 
-                            <a class="dropdown-item" href="pages-profile.html"><i
+                            <a class="dropdown-item" href="{{route('user.profile')}}"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Profile</span></a>
 
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Balance : <b>${{number_format(Auth::user()->balance,2)}}</b></span></a>
-                            <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
-                                    class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Change Password</span></a>
-                            <a class="dropdown-item" href="auth-logout-basic.html"><i
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><i
                                     class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle" data-key="t-logout">Logout</span></a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -450,6 +453,11 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{route('user.post.job')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Post Job</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('user.my.jobs')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">My Jobs</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -535,6 +543,10 @@
 
 {{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
 @yield('js')
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('layouts.message')
+
 </body>
 
 </html>

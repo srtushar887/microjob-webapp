@@ -22,6 +22,7 @@
     <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/custom.css" rel="stylesheet" type="text/css" />
     <!-- DataTables -->
     <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
@@ -374,10 +375,9 @@
                                     <img class="rounded-circle header-profile-user"
                                          src="{{asset('assets/dashboard/')}}/images/users/avatar-1.jpg" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
-                                            Adame</span>
+                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
                                         <span
-                                            class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
+                                            class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Admin</span>
                                     </span>
                                 </span>
                         </button>
@@ -478,6 +478,30 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.job.sub.category')}}" class="nav-link" data-key="t-ecommerce"> Sub Category </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="#jonmanagement" data-bs-toggle="collapse"
+                           role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Job Management</span>
+                        </a>
+                        <div class="collapse menu-dropdown" id="jonmanagement">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.all.jobs')}}" class="nav-link" data-key="t-crm"> All Jobs </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pending.jobs')}}" class="nav-link" data-key="t-ecommerce"> Pending Jobs </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.approved.jobs')}}" class="nav-link" data-key="t-ecommerce"> Approved Jobs </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.rejected.jobs')}}" class="nav-link" data-key="t-ecommerce"> Rejected Jobs </a>
                                 </li>
                             </ul>
                         </div>
@@ -594,7 +618,7 @@
     <i class="ri-arrow-up-line"></i>
 </button>
 <!-- JAVASCRIPT -->
-<script src="{{asset('assets/dashboard/')}}/table/libs/jquery/jquery.min.js"></script>
+<script src="{{asset('assets/dashboard/')}}/js/jquery-1.12.4.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/simplebar/simplebar.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/node-waves/waves.min.js"></script>
@@ -610,8 +634,12 @@
 <!-- Responsive examples -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
-
+<script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
+<script>
+    jQuery(window).on('load', function () {
+        jQuery("#preloader").delay(250).fadeOut(250);
+    });
+</script>
 
 {{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
 @yield('js')

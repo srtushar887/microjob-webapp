@@ -1,4 +1,7 @@
 @extends('layouts.user')
+@section('title')
+    Post Job
+@endsection
 @section('user')
     <div class="row">
         <div class="col-xl-12">
@@ -7,7 +10,7 @@
                     <h4 class="card-title mb-0">Find Job</h4>
                 </div><!-- end card header -->
                 <div class="card-body form-steps">
-                    <form action="{{route('user.post.job.save')}}" method="post" enctype="multipart/form-data">
+                    <form action="{{route('user.post.job.save')}}" method="post" enctype="multipart/form-data" id="post_job">
                         @csrf
                         <div id="custom-progress-bar" class="progress-nav mb-4">
                             <div class="progress" style="height: 1px;">
@@ -113,8 +116,8 @@
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
                                                         <input type="radio"
-                                                               class="form-check-input d-none"
-                                                               name="job-category">Assignment
+                                                               class="form-check-input d-none main_category"
+                                                               name="job-category">
                                                     </label>
                                                 </div>
                                             </button>
@@ -154,14 +157,14 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Job Title <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="job_title" class="form-control"  required>
+                                                <input type="text" name="job_title" class="form-control job_title"  required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label>What specific tasks need to be Completed? <span
                                                         class="text-danger">*</span></label>
-                                                <textarea class="form-control" name="specific_task" cols="7" rows="7"
+                                                <textarea class="form-control specific_task" name="specific_task" cols="7" rows="7"
                                                           placeholder="Write here..." required></textarea>
                                             </div>
                                         </div>
@@ -169,7 +172,7 @@
                                             <div class="mb-3">
                                                 <label>Required proof the job was Completed <span
                                                         class="text-danger">*</span></label>
-                                                <textarea class="form-control" name="require_proof" cols="7" rows="7"
+                                                <textarea class="form-control require_proof" name="require_proof" cols="7" rows="7"
                                                           placeholder="Write here..." required></textarea>
                                             </div>
                                         </div>
@@ -226,7 +229,7 @@
                                                 <div class="mb-3">
                                                     <label>Estimated Day <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="number" name="est_day" class="form-control"
+                                                    <input type="number" name="est_day" class="form-control est_day"
                                                            placeholder="Enter here..." required>
                                                 </div>
                                             </div>
@@ -254,7 +257,7 @@
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-primary submit_job" id="submit_job" data-bs-toggle="modal"
                                             data-bs-target="#success-msg">Submit</button>
                                 </div>
                             </div>

@@ -203,7 +203,98 @@
                     }
                     reader.readAsDataURL(input.files[0]);
                 }
-            }
+            };
+
+
+            $(document).on('click', '.submit_job', function () {
+                $('#post_job').submit();
+            })
+
+           $(document).on('submit','#post_job',function (e) {
+               e.preventDefault();
+               var formData = new FormData(this);
+
+
+               var reg_array = [];
+               $('.reg_name:checked').each(function () {
+                   reg_array.push($(this).val());
+               });
+
+               var coun_array = [];
+               $('.country_name:checked').each(function () {
+                   coun_array.push($(this).val());
+               });
+
+               console.log(reg_array)
+
+
+
+               var maincat_array = [];
+               $('.main_cat_name:checked').each(function () {
+                   maincat_array.push($(this).val());
+               });
+
+               var subcat_array = [];
+               $('.sub_cat_name:checked').each(function () {
+                   subcat_array.push($(this).val());
+               });
+
+               var job_title = $('.job_title').val();
+               var specific_task = $('.specific_task').val();
+               var require_proof = $('.require_proof').val();
+               var worker_need = $('.worker_need').val();
+               var each_worker_earn = $('.each_worker_earn').val();
+               var screen_short = $('.screen_short').val();
+               var est_day = $('.est_day').val();
+
+
+               if (reg_array == null || reg_array == ""){
+                   swal("Please Select Region", "", "warning");
+               }else if (coun_array == null || coun_array == ""){
+                   swal("Please Select Country", "", "warning");
+               }else if (maincat_array == null || maincat_array == ""){
+                   swal("Please Select Main Category", "", "warning");
+               }else if (subcat_array == null || subcat_array == ""){
+                   swal("Please Select Sub Category", "", "warning");
+               }else if (job_title == null || job_title == ""){
+                   swal("Please Enter Job Title", "", "warning");
+               }else if (specific_task == null || specific_task == ""){
+                   swal("Please Enter Specific Task", "", "warning");
+               }else if (require_proof == null || require_proof == ""){
+                   swal("Please Enter Require Proof", "", "warning");
+               }else if (worker_need == null || worker_need == ""){
+                   swal("Please Enter Worker Need", "", "warning");
+               }else if (each_worker_earn == null || each_worker_earn == ""){
+                   swal("Please Enter Each Worker Earn", "", "warning");
+               }else if (screen_short == null || screen_short == ""){
+                   swal("Please Enter Screen Short Required", "", "warning");
+               }else if (est_day == null || est_day == ""){
+                   swal("Please Enter Estimated Day", "", "warning");
+               }else {
+                   $.ajax({
+                       type: 'POST',
+                       url: "{{route('user.post.job.save')}}",
+                       data: formData,
+                       cache: false,
+                       contentType: false,
+                       processData: false,
+                       success: (data) => {
+                           console.log(data);
+                       },
+                       error: function (data) {
+                           console.log(data);
+                           swal("Please Enter Estimated Day", "", "Success");
+                           setTimeout(function () {
+                               window.location.href="{{route('user.find.job')}}"
+                           },2000)
+                       }
+                   });
+               }
+
+
+
+
+           });
 
 
 

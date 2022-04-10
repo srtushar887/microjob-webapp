@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\all_job;
+use App\Models\all_job_country;
 use App\Models\general_setting;
 use App\Models\job_apply;
 use App\Models\job_main_category;
@@ -98,21 +99,65 @@ class UserJobController extends Controller
         $new_job->est_job_cost = $request->est_job_cost;
 
         if ($gen_set->job_auto_post == 1) {
-            $new_job->job_status = 1;
+            $new_job->job_status = 2;
         }else{
-            $new_job->job_status = 0;
+            $new_job->job_status = 1;
         }
 
         $new_job->save();
-        return back()->with('success', 'Job Successfully Created');
-    }
 
+        $data = $request->all();
+
+        if (isset($data['country_name'])) {
+            for ($i=0;$i<count($data['country_name']);$i++){
+
+                $coun_name = region_country::where('id',$data['country_name'][$i])->first();
+
+                $new_coun = new all_job_country();
+                $new_coun->user_id = Auth::user()->id;
+                $new_coun->job_id = $new_job->id;
+                $new_coun->country_id = isset($coun_name) ? $coun_name->id : 0;
+                $new_coun->country_name = isset($coun_name) ? $coun_name->country_name : null;
+                $new_coun->save();
+            }
+        }
+
+
+        $user = User::where('id',Auth::user()->id)->first();
+        $user->balance = $user->balance - $new_job->est_job_cost;
+        $user->save();
+
+
+        return 'done';
+    }
 
 
     public function find_job()
     {
         $all_reg = region_country::distinct()->select('region')->where('region', '!=', '')->get();
         return view('user.job.findJob',compact('all_reg'));
+    }
+
+
+    public function job_find_coun_by_reg(Request $request)
+    {
+        $country = region_country::where('region',$request->reg_fil)->get();
+        return response()->json($country,200);
+    }
+
+    public function job_find_mcat_by_coun(Request $request)
+    {
+        $m_cats = job_main_category::where('region_name',$request->reg_fil)->where('country_id',$request->country_filter)->get();
+        return response()->json($m_cats);
+    }
+
+    public function job_find_scat_by_mcat(Request $request)
+    {
+        $s_cats = job_sub_category::where('region_name',$request->reg_fil)
+            ->where('country_id',$request->country_filter)
+            ->where('main_cat_id',$request->mcat_filter)
+            ->get();
+        return response()->json($s_cats);
     }
 
 
@@ -217,7 +262,33 @@ class UserJobController extends Controller
     public function job_edit($id)
     {
         $job_edit = all_job::where('id',$id)->first();
-        return view('user.job.editJob',compact('job_edit'));
+        $sub_cat = job_sub_category::where('id',$job_edit->sub_category)->first();
+        $gen_settings = general_setting::first();
+        return view('user.job.editJob',compact('job_edit','sub_cat','gen_settings'));
+    }
+
+
+    public function job_update(Request $request)
+    {
+        $job_update = all_job::where('id',$request->job_edit_id)->first();
+
+        if ($request->hasFile('thumbnail')) {
+            $image = $request->file('thumbnail');
+            $imageName = Auth::user()->id . time() . '.png';
+            $directory = 'assets/dashboard/images/jobthumbnail/';
+            $imgUrl = $directory . $imageName;
+            Image::make($image)->save($imgUrl);
+            $job_update->thumbnail = $imgUrl;
+        }
+
+        $job_update->job_title = $request->job_title;
+        $job_update->specific_task = $request->specific_task;
+        $job_update->worker_need = $job_update->worker_need + $request->worker_need;
+        $job_update->est_job_cost = $request->est_job_cost;
+        $job_update->save();
+
+        return back()->with('success','Job Successfully Updated');
+
     }
 
 
@@ -233,6 +304,13 @@ class UserJobController extends Controller
         return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
             ['path' => $request->url(), 'query' => $request->query()]);
 
+    }
+
+
+    public function my_jobs()
+    {
+        $my_jobs = all_job::where('user_id',Auth::user()->id)->orderBy('id','desc')->paginate(10);
+        return view('user.job.myJobs',compact('my_jobs'));
     }
 
 

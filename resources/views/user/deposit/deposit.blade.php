@@ -1,4 +1,7 @@
 @extends('layouts.user')
+@section('title')
+    Deposit
+@endsection
 @section('user')
     <div class="row">
         <div class="col-lg-12">

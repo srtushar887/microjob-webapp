@@ -1,4 +1,7 @@
 @extends('layouts.user')
+@section('title')
+    Transaction
+@endsection
 @section('user')
     <div class="row">
         <div class="col-12">

@@ -34,7 +34,7 @@
                                           name="site_address">{!! $gen->site_address !!}</textarea>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">Is Maintenance</label>
                                 <select class="form-control" name="is_under_main">
                                     <option value="0">select any</option>
@@ -43,7 +43,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">Job Auto Post</label>
                                 <select class="form-control" name="job_auto_post">
                                     <option value="0">select any</option>
@@ -51,8 +51,13 @@
                                     <option value="2" {{$gen->job_auto_post == 2 ? 'selected' :''}}>No</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                                <label for="validationDefault01" class="form-label">Auto Post Date</label>
+                                <input type="number" class="form-control" name="auto_post_date"
+                                       value="{{$gen->auto_post_date}}">
+                            </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">USD Rate</label>
                                 <input type="text" class="form-control" name="usd_rate"
                                        value="{{number_format($gen->usd_rate,2)}}">

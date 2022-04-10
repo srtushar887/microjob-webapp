@@ -31,6 +31,7 @@ class AdminController extends Controller
         $gen->usd_rate = $request->usd_rate;
         $gen->service_charge = $request->service_charge;
         $gen->job_auto_post = $request->job_auto_post;
+        $gen->auto_post_date = $request->auto_post_date;
         $gen->job_post_min_amt = $request->job_post_min_amt;
         $gen->screenshot_price = $request->screenshot_price;
         $gen->site_currency = $request->site_currency;

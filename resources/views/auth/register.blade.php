@@ -67,6 +67,17 @@
                                 <h5 class="text-primary">Welcome Back !</h5>
                                 <p class="text-muted">Sign in to continue to Velzon.</p>
                             </div>
+
+                            @include('layouts.errors')
+                            @if(Session::has('email_error'))
+                                <div class="alert alert-warning alert-border-left alert-dismissible fade show" role="alert">
+                                    <i class="ri-alert-line me-3 align-middle fs-16"></i><strong>Warning</strong>
+                                    - {{Session::get('email_error')}} <br>
+
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
                             <div class="p-2 mt-4">
                                 <form action="{{route('user.custom.register')}}" method="post">
                                     @csrf
@@ -81,7 +92,7 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Phone Number</label>
-                                        <input type="number" name="phone_number" class="form-control" id="username" placeholder="Enter phone number" required>
+                                        <input type="text" name="phone_number" class="form-control" id="username" placeholder="Enter phone number" required>
                                     </div>
 
                                     <div class="mb-3">

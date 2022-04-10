@@ -40,6 +40,9 @@ class Handler extends ExceptionHandler
         });
     }
 
+
+
+
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         $guard = Arr::get($exception->guards(),0);
