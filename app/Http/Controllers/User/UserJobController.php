@@ -22,6 +22,7 @@ class UserJobController extends Controller
 {
     public function post_job()
     {
+
         $all_reg = region_country::distinct()->select('region')->where('region', '!=', '')->get();
         $gen_settings = general_setting::first();
         return view('user.job.postJob',compact('all_reg','gen_settings'));
@@ -55,6 +56,10 @@ class UserJobController extends Controller
     public function post_job_save(Request $request)
     {
         $gen_set = general_setting::first();
+
+        if (Auth::user()->balance < $request->est_job_cost){
+            return response()->json('balance_error',200);
+        }
 
 
         $check_job = all_job::select('id','job_id')->orderBy('id','desc')->count();
@@ -128,7 +133,7 @@ class UserJobController extends Controller
         $user->save();
 
 
-        return 'done';
+        return response()->json('job_created',200);
     }
 
 

@@ -27,7 +27,7 @@
                     <div class="mb-3">
                         <label class="form-label" for="project-title-input">Project Title</label>
                         <input type="text" name="job_title" value="{{$job_edit->job_title}}" class="form-control" id="project-title-input" placeholder="Enter project title">
-                        <input type="hidden" name="job_edit_id" value="{{$job_edit->od}}" class="form-control" id="project-title-input" placeholder="Enter project title">
+                        <input type="hidden" name="job_edit_id" value="{{$job_edit->id}}" class="form-control" id="project-title-input" placeholder="Enter project title">
                     </div>
 
                     <div class="mb-3">

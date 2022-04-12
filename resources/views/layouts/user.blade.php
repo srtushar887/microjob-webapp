@@ -377,7 +377,7 @@
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
                                         <span
-                                            class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
+                                            class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">{{Auth::user()->email}}</span>
                                     </span>
                                 </span>
                         </button>
@@ -523,7 +523,11 @@
 </button>
 <!-- JAVASCRIPT -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/jquery/jquery.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+{{--<script src="{{asset('assets/dashboard/')}}/js/bootstrap.min.js"></script>--}}
+
+{{--<script src="{{asset('assets/dashboard/')}}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>--}}
+{{--<script src="{{asset('assets/dashboard/')}}/js/jquery.min.js"></script>--}}
+
 <script src="{{asset('assets/dashboard/')}}/libs/simplebar/simplebar.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/node-waves/waves.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/feather-icons/feather.min.js"></script>

@@ -283,10 +283,20 @@
                        },
                        error: function (data) {
                            console.log(data);
-                           swal("Please Enter Estimated Day", "", "Success");
-                           setTimeout(function () {
-                               window.location.href="{{route('user.find.job')}}"
-                           },2000)
+                           if (data == 'balance_error'){
+
+                           }
+
+                           if (data == 'job_created'){
+
+
+                           }
+
+
+                            location.reload();
+                           window.location.href="{{route('user.find.job')}}"
+
+
                        }
                    });
                }
