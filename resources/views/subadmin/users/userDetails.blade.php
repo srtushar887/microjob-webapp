@@ -38,13 +38,13 @@
                 <div class="card-header">
                     <ul class="nav nav-tabs-custom rounded card-header-tabs border-bottom-0" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{route('admin.user.details',$user->id)}}" role="tab" aria-selected="true">
+                            <a class="nav-link active" href="{{route('subadmin.user.details',$user->id)}}" role="tab" aria-selected="true">
                                 <i class="fas fa-home"></i>
                                 Personal Details
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"  href="{{route('admin.user.change.password',$user->id)}}" role="tab" aria-selected="false">
+                            <a class="nav-link"  href="{{route('subadmin.user.change.password',$user->id)}}" role="tab" aria-selected="false">
                                 <i class="far fa-user"></i>
                                 Change Password
                             </a>
@@ -54,7 +54,7 @@
                 <div class="card-body p-4">
                     <div class="tab-content">
                         <div class="tab-pane active" id="personalDetails" role="tabpanel">
-                            <form action="{{route('admin.user.profile.update')}}" method="post">
+                            <form action="{{route('subadmin.user.profile.update')}}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-lg-12">

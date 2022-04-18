@@ -220,5 +220,76 @@ Route::prefix('sub-admin')->group(function () {
 Route::group(['middleware' => ['auth:subadmin']], function () {
     Route::prefix('sub-admin')->group(function () {
         Route::get('/', [Controllers\SubAdmin\SubAdminController::class, 'index'])->name('subadmin.dashboard');
+
+        //all jobs
+        Route::get('/all-jobs', [Controllers\SubAdmin\SubAdminJobController::class, 'all_jobs'])->name('subadmin.all.jobs');
+        Route::get('/all-jobs-get', [Controllers\SubAdmin\SubAdminJobController::class, 'all_jobs_get'])->name('subadmin.all.jobs.get');
+        Route::get('/job-details/{id}', [Controllers\SubAdmin\SubAdminJobController::class, 'job_details'])->name('subadmin.job.details');
+        Route::post('/job-details-update', [Controllers\SubAdmin\SubAdminJobController::class, 'job_details_update'])->name('subadmin.job.details.update');
+
+        //pending jobs
+        Route::get('/pending-jobs', [Controllers\SubAdmin\SubAdminJobController::class, 'pending_jobs'])->name('subadmin.pending.jobs');
+        Route::get('/pending-jobs-get', [Controllers\SubAdmin\SubAdminJobController::class, 'pending_jobs_get'])->name('subadmin.pending.jobs.get');
+
+        //pending jobs
+        Route::get('/approved-jobs', [Controllers\SubAdmin\SubAdminJobController::class, 'approved_jobs'])->name('subadmin.approved.jobs');
+        Route::get('/approved-jobs-get', [Controllers\SubAdmin\SubAdminJobController::class, 'approved_jobs_get'])->name('subadmin.approved.jobs.get');
+
+
+        //rejected jobs
+        Route::get('/rejected-jobs', [Controllers\SubAdmin\SubAdminJobController::class, 'rejected_jobs'])->name('subadmin.rejected.jobs');
+        Route::get('/rejected-jobs-get', [Controllers\SubAdmin\SubAdminJobController::class, 'rejected_jobs_get'])->name('subadmin.rejected.jobs.get');
+
+
+
+
+        //deposit
+        Route::get('/all-deposit', [Controllers\SubAdmin\SubAdminDepositController::class, 'all_deposit'])->name('subadmin.all.deposit');
+        Route::get('/all-deposit-get', [Controllers\SubAdmin\SubAdminDepositController::class, 'all_deposit_get'])->name('subadmin.all.deposit.get');
+
+        Route::get('/pending-deposit', [Controllers\SubAdmin\SubAdminDepositController::class, 'pending_deposit'])->name('subadmin.pending.deposit');
+        Route::get('/pending-deposit-get', [Controllers\SubAdmin\SubAdminDepositController::class, 'pending_deposit_get'])->name('subadmin.pending.deposit.get');
+
+        Route::get('/approved-deposit', [Controllers\SubAdmin\SubAdminDepositController::class, 'approved_deposit'])->name('subadmin.approved.deposit');
+        Route::get('/approved-deposit-get', [Controllers\SubAdmin\SubAdminDepositController::class, 'approved_deposit_get'])->name('subadmin.approved.deposit.get');
+
+        Route::get('/rejected-deposit', [Controllers\SubAdmin\SubAdminDepositController::class, 'rejected_deposit'])->name('subadmin.rejected.deposit');
+        Route::get('/rejected-deposit-get', [Controllers\SubAdmin\SubAdminDepositController::class, 'rejected_deposit_get'])->name('subadmin.rejected.deposit.get');
+
+
+        Route::post('/deposit-change-status', [Controllers\SubAdmin\SubAdminDepositController::class, 'deposit_change_status'])->name('subadmin.deposit.status.change');
+        Route::post('/deposit-delete', [Controllers\SubAdmin\SubAdminDepositController::class, 'deposit_delete'])->name('subadmin.deposit.delete');
+
+
+        //withdraw
+        Route::get('/all-withdraw', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'all_withdraw'])->name('subadmin.all.withdraw');
+        Route::get('/all-withdraw-get', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'all_withdraw_get'])->name('subadmin.all.withdraw.get');
+        Route::post('/withdraw-status-update', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'withdraw_status_change'])->name('subadmin.withdraw.status.change');
+        Route::post('/withdraw-delete', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'withdraw_delete'])->name('subadmin.withdraw.delete');
+
+        //pending withdraw
+        Route::get('/pending-withdraw', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'pending_withdraw'])->name('subadmin.pending.withdraw');
+        Route::get('/pending-withdraw-get', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'pending_withdraw_get'])->name('subadmin.pending.withdraw.get');
+
+        //approved withdraw
+        Route::get('/approved-withdraw', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'approved_withdraw'])->name('subadmin.approved.withdraw');
+        Route::get('/approved-withdraw-get', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'approved_withdraw_get'])->name('subadmin.approved.withdraw.get');
+
+        //rejected withdraw
+        Route::get('/rejected-withdraw', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'rejected_withdraw'])->name('subadmin.rejected.withdraw');
+        Route::get('/rejected-withdraw-get', [Controllers\SubAdmin\SubAdminWithdrawController::class, 'rejected_withdraw_get'])->name('subadmin.rejected.withdraw.get');
+
+        //all users
+        Route::get('/all-users', [Controllers\SubAdmin\SubAdminUsersController::class, 'all_users'])->name('subadmin.all.users');
+        Route::get('/all-users-get', [Controllers\SubAdmin\SubAdminUsersController::class, 'all_users_get'])->name('subadmin.get.all.users');
+        Route::get('/user-details/{id}', [Controllers\SubAdmin\SubAdminUsersController::class, 'user_details'])->name('subadmin.user.details');
+        Route::post('/user-details-update', [Controllers\SubAdmin\SubAdminUsersController::class, 'user_details_update'])->name('subadmin.user.profile.update');
+        Route::get('/user-change-password/{id}', [Controllers\SubAdmin\SubAdminUsersController::class, 'user_change_password'])->name('subadmin.user.change.password');
+        Route::post('/user-change-password-update', [Controllers\SubAdmin\SubAdminUsersController::class, 'user_change_password_update'])->name('subadmin.user.change.password.update');
+
+
+
+
+
     });
 });

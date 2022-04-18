@@ -467,16 +467,16 @@
                         <div class="collapse menu-dropdown" id="jonmanagement">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.all.jobs')}}" class="nav-link" data-key="t-crm"> All Jobs </a>
+                                    <a href="{{route('subadmin.all.jobs')}}" class="nav-link" data-key="t-crm"> All Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pending.jobs')}}" class="nav-link" data-key="t-ecommerce"> Pending Jobs </a>
+                                    <a href="{{route('subadmin.pending.jobs')}}" class="nav-link" data-key="t-ecommerce"> Pending Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.approved.jobs')}}" class="nav-link" data-key="t-ecommerce"> Approved Jobs </a>
+                                    <a href="{{route('subadmin.approved.jobs')}}" class="nav-link" data-key="t-ecommerce"> Approved Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.rejected.jobs')}}" class="nav-link" data-key="t-ecommerce"> Rejected Jobs </a>
+                                    <a href="{{route('subadmin.rejected.jobs')}}" class="nav-link" data-key="t-ecommerce"> Rejected Jobs </a>
                                 </li>
                             </ul>
                         </div>
@@ -495,16 +495,16 @@
                         <div class="collapse menu-dropdown" id="deposit">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.all.deposit')}}" class="nav-link" data-key="t-crm"> All Deposit </a>
+                                    <a href="{{route('subadmin.all.deposit')}}" class="nav-link" data-key="t-crm"> All Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pending.deposit')}}" class="nav-link" data-key="t-ecommerce"> Pending Deposit </a>
+                                    <a href="{{route('subadmin.pending.deposit')}}" class="nav-link" data-key="t-ecommerce"> Pending Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.approved.deposit')}}" class="nav-link" data-key="t-ecommerce"> Approved Deposit </a>
+                                    <a href="{{route('subadmin.approved.deposit')}}" class="nav-link" data-key="t-ecommerce"> Approved Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.rejected.deposit')}}" class="nav-link" data-key="t-ecommerce"> Rejected Deposit </a>
+                                    <a href="{{route('subadmin.rejected.deposit')}}" class="nav-link" data-key="t-ecommerce"> Rejected Deposit </a>
                                 </li>
                             </ul>
                         </div>
@@ -523,23 +523,23 @@
                         <div class="collapse menu-dropdown" id="userwithdraw">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All Withdraw </a>
+                                    <a href="{{route('subadmin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pending.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Pending Withdraw </a>
+                                    <a href="{{route('subadmin.pending.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Pending Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.approved.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Approved Withdraw </a>
+                                    <a href="{{route('subadmin.approved.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Approved Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.rejected.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Rejected Withdraw </a>
+                                    <a href="{{route('subadmin.rejected.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Rejected Withdraw </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('admin.all.users')}}">
+                        <a class="nav-link menu-link" href="{{route('subadmin.all.users')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Users</span>
                         </a>
                     </li>

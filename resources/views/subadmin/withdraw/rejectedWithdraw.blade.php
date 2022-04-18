@@ -46,7 +46,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Update Withdraw Status</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{route('admin.withdraw.status.change')}}" method="post">
+                <form action="{{route('subadmin.withdraw.status.change')}}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -76,7 +76,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Delete Withdraw</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{route('admin.withdraw.delete')}}" method="post">
+                <form action="{{route('subadmin.withdraw.delete')}}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -119,7 +119,7 @@
                 $('#allwithdraw').DataTable({
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('admin.rejected.withdraw.get') }}",
+                    "ajax": "{{ route('subadmin.rejected.withdraw.get') }}",
                     columns: [
                         { data: 'transaction_id', name: 'transaction_id',class: 'text-center' },
                         { data: 'user.email', name: 'user.email',class: 'text-center' },

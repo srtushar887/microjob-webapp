@@ -46,7 +46,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Update Deposit Status</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{route('admin.deposit.status.change')}}" method="post">
+                <form action="{{route('subadmin.deposit.status.change')}}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -76,7 +76,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Delete Deposit</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{route('admin.deposit.delete')}}" method="post">
+                <form action="{{route('subadmin.deposit.delete')}}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -119,7 +119,7 @@
                 $('#alldeposit').DataTable({
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('admin.rejected.deposit.get') }}",
+                    "ajax": "{{ route('subadmin.rejected.deposit.get') }}",
                     columns: [
                         { data: 'user.email', name: 'user.email',class: 'text-center' },
                         {

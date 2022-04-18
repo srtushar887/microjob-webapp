@@ -14,7 +14,7 @@
         </div>
     </div>
     <!-- end page title -->
-<form action="{{route('admin.job.details.update')}}" method="post">
+<form action="{{route('subadmin.job.details.update')}}" method="post">
     @csrf
     <div class="row">
         <div class="col-lg-8">

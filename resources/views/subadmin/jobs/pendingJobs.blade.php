@@ -50,7 +50,7 @@
                 $('#alljobs').DataTable({
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('admin.pending.jobs.get') }}",
+                    "ajax": "{{ route('subadmin.pending.jobs.get') }}",
                     columns: [
                         { data: 'user.name', name: 'user.name',class: 'text-center' },
                         { data: 'job_title', name: 'job_title',class: 'text-center' },

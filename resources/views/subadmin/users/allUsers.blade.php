@@ -49,7 +49,7 @@
                 $('#allwithdraw').DataTable({
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('admin.get.all.users') }}",
+                    "ajax": "{{ route('subadmin.get.all.users') }}",
                     columns: [
                         { data: 'name', name: 'name',class: 'text-center' },
                         { data: 'email', name: 'email',class: 'text-center' },
