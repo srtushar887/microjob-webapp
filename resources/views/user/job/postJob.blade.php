@@ -54,48 +54,48 @@
                                     </div>
                                     <ul class="list-inline nav mb-3 location-category">
                                         @foreach($all_reg as $reg)
-                                        <li class="list-inline-item mb-2">
-                                            <button type="button"
-                                                    class="btn btn-sm btn-outline-primary {{$loop->first ? 'active':''}}"
-                                                    data-bs-toggle="tab" data-bs-target="#{{$reg->region}}">
-                                                <div class="form-check-inline">
-                                                    <label class="form-check-label">
-                                                        <input type="radio"
-                                                               value="{{$reg->region}}"
-                                                               class="form-check-input d-none reg_name"
-                                                               {{$loop->first ? 'checked':''}}
-                                                               name="region_name">{{$reg->region}}
-                                                    </label>
-                                                </div>
-                                            </button>
-                                        </li>
+                                            <li class="list-inline-item mb-2">
+                                                <button type="button"
+                                                        class="btn btn-sm btn-outline-primary {{$loop->first ? 'active':''}}"
+                                                        data-bs-toggle="tab" data-bs-target="#{{$reg->region}}">
+                                                    <div class="form-check-inline">
+                                                        <label class="form-check-label">
+                                                            <input type="radio"
+                                                                   value="{{$reg->region}}"
+                                                                   class="form-check-input d-none reg_name"
+                                                                   {{$loop->first ? 'checked':''}}
+                                                                   name="region_name">{{$reg->region}}
+                                                        </label>
+                                                    </div>
+                                                </button>
+                                            </li>
                                         @endforeach
                                     </ul>
                                     <div class="tab-content location-sub-category">
                                         <hr>
                                         <h6 class="mb-3">Select Country</h6>
                                         @foreach($all_reg as $regn)
-                                        <div class="tab-pane show {{$loop->first ? 'show active' : ''}}" id="{{$regn->region}}">
-                                            <?php
-                                            $countrys = \App\Models\region_country::where('region', $regn->region)->get();
-                                            ?>
-                                            <ul class="list-inline">
-                                                @foreach($countrys as $count)
-                                                <li class="list-inline-item mb-3">
-                                                    <button type="button" class="btn btn-sm btn-light">
-                                                        <label class="form-check-label">
-                                                            <input type="checkbox"
-                                                                   class="form-check-input d-none country_name"
-                                                                   value="{{$count->id}}"
-                                                                   name="country_name[]">{{$count->country_name}}
-                                                        </label>
-                                                    </button>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
+                                            <div class="tab-pane show {{$loop->first ? 'show active' : ''}}" id="{{$regn->region}}">
+                                                <?php
+                                                $countrys = \App\Models\region_country::where('region', $regn->region)->get();
+                                                ?>
+                                                <ul class="list-inline">
+                                                    @foreach($countrys as $count)
+                                                        <li class="list-inline-item mb-3">
+                                                            <button type="button" class="btn btn-sm btn-light">
+                                                                <label class="form-check-label">
+                                                                    <input type="checkbox"
+                                                                           class="form-check-input d-none country_name"
+                                                                           value="{{$count->id}}"
+                                                                           name="country_name[]">{{$count->country_name}}
+                                                                </label>
+                                                            </button>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                     @endforeach
-                                        <!-- /for loop -->
+                                    <!-- /for loop -->
 
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@
                                                 <label>Thumbnail Image</label>
                                                 <br>
                                                 <img src="https://discountseries.com/wp-content/uploads/2017/09/default.jpg"
-                                                    style="width: 100%;height: 200px;" id="wizardPicturePreview">
+                                                     style="width: 100%;height: 200px;" id="wizardPicturePreview">
                                                 <input type="file" name="thumbnail" class="form-control" id="fileup">
                                             </div>
                                         </div>

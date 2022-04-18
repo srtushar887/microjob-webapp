@@ -52,6 +52,18 @@ return [
             'driver' => 'token',
             'provider' => 'admins',
         ],
+
+        'subadmin' => [
+            'driver' => 'session',
+            'provider' => 'subadmins',
+        ],
+
+        //this is for admin api
+        'subadmin-api' => [
+            'driver' => 'token',
+            'provider' => 'subadmins',
+        ],
+
     ],
 
     /*
@@ -80,6 +92,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => \App\Models\Admin::class,
+        ],
+
+        'subadmins' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\SubAdmin::class,
         ],
 
         // 'users' => [
@@ -117,6 +134,14 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+
+        'subadmins' => [
+            'provider' => 'subadmins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
     ],
 
     /*

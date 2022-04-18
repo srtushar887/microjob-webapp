@@ -1,4 +1,62 @@
 @extends('layouts.user')
+@section('css')
+    <style>
+        .rating {
+            float:left;
+        }
+
+        /* :not(:checked) is a filter, so that browsers that don’t support :checked don’t
+          follow these rules. Every browser that supports :checked also supports :not(), so
+          it doesn’t make the test unnecessarily selective */
+        .rating:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+            clip:rect(0,0,0,0);
+        }
+
+        .rating:not(:checked) > label {
+            float:right;
+            width:1em;
+            /* padding:0 .1em; */
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:300%;
+            /* line-height:1.2; */
+            color:#ddd;
+        }
+
+        .rating:not(:checked) > label:before {
+            content: '★ ';
+        }
+
+        .rating > input:checked ~ label {
+            color: dodgerblue;
+
+        }
+
+        .rating:not(:checked) > label:hover,
+        .rating:not(:checked) > label:hover ~ label {
+            color: dodgerblue;
+
+        }
+
+        .rating > input:checked + label:hover,
+        .rating > input:checked + label:hover ~ label,
+        .rating > input:checked ~ label:hover,
+        .rating > input:checked ~ label:hover ~ label,
+        .rating > label:hover ~ input:checked ~ label {
+            color: dodgerblue;
+
+        }
+
+        .rating > label:active {
+            position:relative;
+            top:2px;
+            left:2px;
+        }
+    </style>
+    @endsection
 @section('user')
     <div class="row">
         <div class="col-lg-12">
@@ -144,7 +202,75 @@
                                 </tr>
 
 
+
                                 <div class="modal fade" id="inviteMembersModal{{$app_job->id}}" tabindex="-1" aria-labelledby="inviteMembersModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <form action="{{route('user.job.apply.memebers.change.status')}}" method="post">
+                                            @csrf
+                                        <div class="modal-content border-0">
+                                            <div class="modal-header p-3 ps-4 bg-soft-success">
+                                                <h5 class="modal-title" id="inviteMembersModalLabel">Rate This</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body p-4">
+
+                                                <div class="row">
+                                                    <div class="col-md-12 mb-3 border">
+                                                        <img src="{{asset($app_job->prove_one)}}" class="img-fluid d-block w-100" style="height: 400px" alt="">
+                                                    </div>
+                                                    <div class="col-md-12 mb-3 border">
+                                                        <img src="{{asset($app_job->prove_two)}}" class="img-fluid d-block w-100" style="height: 400px" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="live-preview">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item align-top">Basic Rater</li>
+                                                        <li class="list-inline-item">
+                                                            <div class="rating">
+                                                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Meh">5 stars</label>
+                                                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Kinda bad">4 stars</label>
+                                                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Kinda bad">3 stars</label>
+                                                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Sucks big tim">2 stars</label>
+                                                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                    <!-- end table responsive -->
+                                                </div>
+                                                <ul class="list-inline text-center review-btn mt-3">
+                                                    <li class="list-inline-item">
+                                                        <button type="button" class="btn btn-sm btn-outline-dark">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" value="1" class="form-check-input d-none" id="satisfied"
+                                                                       name="hitone">Satisfied
+                                                            </label>
+                                                        </button>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <button type="button" class="btn btn-sm btn-outline-dark">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" value="2" class="form-check-input d-none" id="unsatisfied"
+                                                                       name="hitone">Unsatisfied
+                                                            </label>
+                                                        </button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-light w-xs" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-success w-xs">Apply</button>
+                                            </div>
+                                        </div>
+                                        </form>
+                                        <!-- end modal-content -->
+                                    </div>
+                                </div>
+
+
+
+                                <div class="modal fade" id="inviteMembersModala{{$app_job->id}}" tabindex="-1" aria-labelledby="inviteMembersModalLabel"
                                      aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <form action="{{route('user.job.apply.memebers.change.status')}}" method="post">

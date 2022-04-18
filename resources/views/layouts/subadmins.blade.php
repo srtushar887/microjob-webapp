@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>User | @yield('title')</title>
+    <title>Sub-Admin | @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -28,7 +28,7 @@
 
     <!-- Responsive datatable examples -->
     <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    @yield('css')
+
 </head>
 
 <body>
@@ -373,33 +373,43 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiMcc9W6s78W6i8ZTNMtPrBDg5hvws2htOXfOxTaEPkgLumwbtLQVVIHZtZmSU92XoLXA&usqp=CAU" alt="Header Avatar">
+                                         src="{{asset('assets/dashboard/')}}/images/users/avatar-1.jpg" alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
                                         <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
                                         <span
-                                            class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">{{Auth::user()->email}}</span>
+                                            class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Admin</span>
                                     </span>
                                 </span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
-
-                            <a class="dropdown-item" href="{{route('user.profile')}}"><i
+                            <h6 class="dropdown-header">Welcome Anna!</h6>
+                            <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Profile</span></a>
-
+                            <a class="dropdown-item" href="apps-chat.html"><i
+                                    class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>
+                                <span class="align-middle">Messages</span></a>
+                            <a class="dropdown-item" href="apps-tasks-kanban.html"><i
+                                    class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i>
+                                <span class="align-middle">Taskboard</span></a>
+                            <a class="dropdown-item" href="pages-faqs.html"><i
+                                    class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Help</span></a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Balance : <b>${{number_format(Auth::user()->balance,2)}}</b></span></a>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i
+                                    class="align-middle">Balance : <b>$5971.67</b></span></a>
+                            <a class="dropdown-item" href="pages-profile-settings.html"><span
+                                    class="badge bg-soft-success text-success mt-1 float-end">New</span><i
+                                    class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Settings</span></a>
+                            <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
+                                    class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Lock screen</span></a>
+                            <a class="dropdown-item" href="auth-logout-basic.html"><i
                                     class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle" data-key="t-logout">Logout</span></a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -440,39 +450,97 @@
                 <ul class="navbar-nav" id="navbar-nav">
                     <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('home')}}">
+                        <a class="nav-link menu-link" href="{{route('subadmin.dashboard')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Dashboard</span>
                         </a>
                     </li>
 
+
+
+
+
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('user.find.job')}}">
-                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Find Job</span>
+                        <a class="nav-link menu-link" href="#jonmanagement" data-bs-toggle="collapse"
+                           role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Job Management</span>
                         </a>
+                        <div class="collapse menu-dropdown" id="jonmanagement">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.all.jobs')}}" class="nav-link" data-key="t-crm"> All Jobs </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pending.jobs')}}" class="nav-link" data-key="t-ecommerce"> Pending Jobs </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.approved.jobs')}}" class="nav-link" data-key="t-ecommerce"> Approved Jobs </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.rejected.jobs')}}" class="nav-link" data-key="t-ecommerce"> Rejected Jobs </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('user.post.job')}}">
-                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Post Job</span>
+                        <?php
+                        $count_dep = \App\Models\user_deposit::where('status',0)->count();
+                        ?>
+                        <a class="nav-link menu-link" href="#deposit" data-bs-toggle="collapse"
+                           role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">User Deposit</span>
+                            <span class="badge badge-pill bg-danger" data-key="t-new">{{$count_dep}}</span>
                         </a>
+                        <div class="collapse menu-dropdown" id="deposit">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.all.deposit')}}" class="nav-link" data-key="t-crm"> All Deposit </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pending.deposit')}}" class="nav-link" data-key="t-ecommerce"> Pending Deposit </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.approved.deposit')}}" class="nav-link" data-key="t-ecommerce"> Approved Deposit </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.rejected.deposit')}}" class="nav-link" data-key="t-ecommerce"> Rejected Deposit </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('user.my.jobs')}}">
-                            <i class="ri-honour-line"></i> <span data-key="t-widgets">My Jobs</span>
+                        <?php
+                        $count_with = \App\Models\withdraw::where('status',0)->count();
+                        ?>
+                        <a class="nav-link menu-link" href="#userwithdraw" data-bs-toggle="collapse"
+                           role="button" aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">User Withdraw</span>
+                            <span class="badge badge-pill bg-danger" data-key="t-new">{{$count_with}}</span>
                         </a>
+
+                        <div class="collapse menu-dropdown" id="userwithdraw">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="{{route('admin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All Withdraw </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.pending.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Pending Withdraw </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.approved.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Approved Withdraw </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('admin.rejected.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Rejected Withdraw </a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('user.deposit')}}">
-                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Deposit</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('user.withdraw')}}">
-                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Withdraw</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('user.all.transaction')}}">
-                            <i class="ri-honour-line"></i> <span data-key="t-widgets">All Transaction</span>
+                        <a class="nav-link menu-link" href="{{route('admin.all.users')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Users</span>
                         </a>
                     </li>
 
@@ -492,7 +560,7 @@
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
-                @yield('user')
+                @yield('subadmin')
             </div>
             <!-- container-fluid -->
         </div>
@@ -521,14 +589,15 @@
 <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
     <i class="ri-arrow-up-line"></i>
 </button>
-
+<!-- JAVASCRIPT -->
+<script src="{{asset('assets/dashboard/')}}/js/jquery-1.12.4.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/js/jquery.min.js"></script>
-
 <script src="{{asset('assets/dashboard/')}}/libs/simplebar/simplebar.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/node-waves/waves.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/feather-icons/feather.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/js/pages/plugins/lord-icon-2.1.0.js"></script>
+
+
 
 <!-- Required datatable js -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -537,47 +606,15 @@
 <!-- Responsive examples -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
-
-<script src="{{asset('assets/dashboard/')}}/js/pages/form-wizard.init.js"></script>
-<script src="{{asset('assets/dashboard/')}}/form-widget.js"></script>
-
-{{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
-
-
-<script src="{{asset('assets/dashboard/')}}/libs/rater-js/index.js"></script>
-<!-- rating init -->
-<script src="{{asset('assets/dashboard/')}}/js/pages/rating.init.js"></script>
-
+<script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
 <script>
     jQuery(window).on('load', function () {
         jQuery("#preloader").delay(250).fadeOut(250);
     });
-    $("#satisfied").click(function () {
-        console.log($(this).prop('checked'));
-        if ($(this).prop('checked')) {
-            $(this).closest('button').addClass("btn-info");
-            $('#unsatisfied').closest('button').removeClass("btn-info");
-        } else {
-            $(this).closest('button').removeClass("btn-info");
-        }
-    });
-    $("#unsatisfied").click(function () {
-        console.log($(this).prop('checked'));
-        if ($(this).prop('checked')) {
-            $(this).closest('button').addClass("btn-info");
-            $('#satisfied').closest('button').removeClass("btn-info");
-        } else {
-            $(this).closest('button').removeClass("btn-info");
-        }
-    });
 </script>
 
+{{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
 @yield('js')
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-@include('layouts.message')
-
 </body>
 
 </html>

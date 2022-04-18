@@ -1,4 +1,5 @@
 @section('js')
+
     <script>
         $(document).ready(function () {
             $('.country_name').change(function () {
@@ -280,21 +281,23 @@
                        processData: false,
                        success: (data) => {
                            console.log(data);
-                       },
-                       error: function (data) {
                            console.log(data);
                            if (data == 'balance_error'){
-
+                               swal('You have Insufficient balance','warning');
                            }
 
                            if (data == 'job_created'){
-
+                               swal('Job Successfully Created','success');
+                               setTimeout(function () {
+                                   window.location.href="{{route('user.my.jobs')}}"
+                               },2000)
 
                            }
 
 
-                            location.reload();
-                           window.location.href="{{route('user.find.job')}}"
+                       },
+                       error: function (data) {
+
 
 
                        }

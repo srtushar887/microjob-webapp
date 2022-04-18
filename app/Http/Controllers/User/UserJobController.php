@@ -168,8 +168,30 @@ class UserJobController extends Controller
 
     public function find_job_get_all(Request $request)
     {
-
+        $reg_fil = $request->reg_fil;
+        $country_filter = $request->country_filter;
+        $mcat_filter = $request->mcat_filter;
+        $scat_filter = $request->scat_filter;
+        $search_title = $request->search_title;
         $sql = "SELECT * FROM all_jobs WHERE job_status=1 ";
+
+        if (isset($reg_fil)){
+            $sql .= "AND region_name='$reg_fil' ";
+        }
+
+        if (isset($mcat_filter) && $mcat_filter != 0){
+            $sql .= "AND main_category=$mcat_filter ";
+        }
+
+        if (isset($scat_filter) && $scat_filter != 0){
+            $sql .= "AND sub_category=$scat_filter ";
+        }
+
+        if (isset($search_title) && $search_title != null){
+            $sql .= "AND job_title LIKE '%$search_title%' ";
+        }
+
+
         $sql .= "ORDER BY id desc";
         $query_exe = DB::select($sql);
 
@@ -183,9 +205,33 @@ class UserJobController extends Controller
 
     public function find_job_get_all_next(Request $request)
     {
+        $reg_fil = $request->reg_fil;
+        $country_filter = $request->country_filter;
+        $mcat_filter = $request->mcat_filter;
+        $scat_filter = $request->scat_filter;
+        $search_title = $request->search_title;
         $sql = "SELECT * FROM all_jobs WHERE job_status=1 ";
+
+        if (isset($reg_fil)){
+            $sql .= "AND region_name='$reg_fil' ";
+        }
+
+        if (isset($mcat_filter) && $mcat_filter != 0){
+            $sql .= "AND main_category=$mcat_filter ";
+        }
+
+        if (isset($scat_filter) && $scat_filter != 0){
+            $sql .= "AND sub_category=$scat_filter ";
+        }
+
+        if (isset($search_title) && $search_title != null){
+            $sql .= "AND job_title LIKE '%$search_title%' ";
+        }
+
+
         $sql .= "ORDER BY id desc";
         $query_exe = DB::select($sql);
+
         $all_jobs = $this->arrayPaginator($query_exe, $request);
         return response()->json([
             'notices'=> $all_jobs,
@@ -295,10 +341,6 @@ class UserJobController extends Controller
         return back()->with('success','Job Successfully Updated');
 
     }
-
-
-
-
 
 
     public function arrayPaginator($array, $request)

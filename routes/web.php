@@ -196,7 +196,29 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/user-change-password/{id}', [Controllers\Admin\AdminUsersController::class, 'user_change_password'])->name('admin.user.change.password');
         Route::post('/user-change-password-update', [Controllers\Admin\AdminUsersController::class, 'user_change_password_update'])->name('admin.user.change.password.update');
 
+        //all sub admin
+        Route::get('/all-sub-admins', [Controllers\Admin\AdminSubAdminController::class, 'all_sub_admins'])->name('admin.all.subadmin');
+        Route::get('/all-sub-admins-get', [Controllers\Admin\AdminSubAdminController::class, 'all_sub_admins_get'])->name('admin.get.all.subadmins');
+        Route::post('/sub-admins-save', [Controllers\Admin\AdminSubAdminController::class, 'sub_admins_save'])->name('admin.sub.admin.save');
+        Route::post('/sub-admins-single', [Controllers\Admin\AdminSubAdminController::class, 'sub_admins_single'])->name('admin.sub.admin.get.single');
+        Route::post('/sub-admins-update', [Controllers\Admin\AdminSubAdminController::class, 'sub_admins_update'])->name('admin.sub.admin.update');
+        Route::post('/sub-admins-delete', [Controllers\Admin\AdminSubAdminController::class, 'sub_admins_delete'])->name('admin.sub.admin.delete');
+
+    });
+});
 
 
+
+//========sub admin
+Route::prefix('sub-admin')->group(function () {
+    Route::get('/login', [Controllers\Auth\SubAdminLoginController::class,'showLoginform'])->name('subadmin.login');
+    Route::post('/login', [Controllers\Auth\SubAdminLoginController::class,'login'])->name('subadmin.login.submit');
+    Route::get('/logout', [Controllers\Auth\SubAdminLoginController::class,'logout'])->name('subadmin.logout');
+});
+
+
+Route::group(['middleware' => ['auth:subadmin']], function () {
+    Route::prefix('sub-admin')->group(function () {
+        Route::get('/', [Controllers\SubAdmin\SubAdminController::class, 'index'])->name('subadmin.dashboard');
     });
 });

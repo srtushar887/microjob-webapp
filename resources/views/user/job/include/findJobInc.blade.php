@@ -132,6 +132,7 @@
                 let country_filter = $('.country_filter').val();
                 let mcat_filter = $('.mcat_filter').val();
                 let scat_filter = $('.scat_filter').val();
+                let search_title = $('.search_title').val();
                 $.ajax({
                     type : "POST",
                     url: "{{route('user.find.job.get.all')}}",
@@ -141,6 +142,7 @@
                         'country_filter' : country_filter,
                         'mcat_filter' : mcat_filter,
                         'scat_filter' : scat_filter,
+                        'search_title' : search_title,
                     },
                     success:function(data){
                         console.log(data);
@@ -156,12 +158,22 @@
 
 
         function getData(myurl){
+            let reg_fil = $('.reg_fil').val();
+            let country_filter = $('.country_filter').val();
+            let mcat_filter = $('.mcat_filter').val();
+            let scat_filter = $('.scat_filter').val();
+            let search_title = $('.search_title').val();
             $.ajax(
                 {
                     url: myurl,
                     type: "get",
                     data : {
                         '_token' : "{{csrf_token()}}",
+                        'reg_fil' : reg_fil,
+                        'country_filter' : country_filter,
+                        'mcat_filter' : mcat_filter,
+                        'scat_filter' : scat_filter,
+                        'search_title' : search_title,
                     },
                     datatype: "html"
                 }).done(function(data){

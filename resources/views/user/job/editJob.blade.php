@@ -167,9 +167,37 @@
             <!-- end card -->
 
 
+
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">The job will waiting for Admin review if</h5>
+                </div>
+                <div class="card-body">
+                    <div>
+                        1. <label for="choices-text-input" class="form-label"> you change Title</label> <br>
+                        2. <label for="choices-text-input" class="form-label"> you change Thumbnail</label><br>
+                        3. <label for="choices-text-input" class="form-label"> you change the description</label><br>
+                        4. <label for="choices-text-input" class="form-label"> you change the Required Proof</label>
+                    </div>
+
+
+
+
+                </div>
+                <!-- end card body -->
+            </div>
+
+
             <!-- end card -->
         </div>
         <!-- end col -->
+
+
+
+
+
     </div>
     </form>
     <!-- end row -->

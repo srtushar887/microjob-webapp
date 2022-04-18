@@ -574,6 +574,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.all.subadmin')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Sub Admin</span>
+                        </a>
+                    </li>
+
+
                 </ul>
             </div>
             <!-- Sidebar -->
