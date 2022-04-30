@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,7 @@ Route::get('/cache_clear', function () {
 });
 
 
-Route::get('/', [Controllers\FrontendController::class,'index'])->name('front');
+Route::get('/', [Controllers\FrontendController::class, 'index'])->name('front');
 
 Auth::routes();
 
@@ -111,9 +112,9 @@ Route::group(['middleware' => ['auth']], function () {
 // ===================  admin section
 
 Route::prefix('admin')->group(function () {
-    Route::get('/login', [Controllers\Auth\AdminLoginController::class,'showLoginform'])->name('admin.login');
-    Route::post('/login', [Controllers\Auth\AdminLoginController::class,'login'])->name('admin.login.submit');
-    Route::get('/logout', [Controllers\Auth\AdminLoginController::class,'logout'])->name('admin.logout');
+    Route::get('/login', [Controllers\Auth\AdminLoginController::class, 'showLoginform'])->name('admin.login');
+    Route::post('/login', [Controllers\Auth\AdminLoginController::class, 'login'])->name('admin.login.submit');
+    Route::get('/logout', [Controllers\Auth\AdminLoginController::class, 'logout'])->name('admin.logout');
 });
 
 
@@ -131,6 +132,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/region-country-get', [Controllers\Admin\AdminRegionController::class, 'region_country_get_all'])->name('admin.region.country.get.all');
         Route::post('/country-get', [Controllers\Admin\AdminRegionController::class, 'country_get_all'])->name('admin.country.get.all');
         Route::post('/main-category-by-country', [Controllers\Admin\AdminRegionController::class, 'main_category_by_country'])->name('admin.main.category.by.country');
+        Route::post('/main-category-by-region', [Controllers\Admin\AdminRegionController::class, 'main_category_by_region'])->name('admin.main.category.by.region');
 
 
         //main category
@@ -168,8 +170,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
         //rejected jobs
         Route::get('/rejected-jobs', [Controllers\Admin\AdminJobController::class, 'rejected_jobs'])->name('admin.rejected.jobs');
         Route::get('/rejected-jobs-get', [Controllers\Admin\AdminJobController::class, 'rejected_jobs_get'])->name('admin.rejected.jobs.get');
-
-
 
 
         //payment gateway
@@ -231,12 +231,11 @@ Route::group(['middleware' => ['auth:admin']], function () {
 });
 
 
-
 //========sub admin
 Route::prefix('sub-admin')->group(function () {
-    Route::get('/login', [Controllers\Auth\SubAdminLoginController::class,'showLoginform'])->name('subadmin.login');
-    Route::post('/login', [Controllers\Auth\SubAdminLoginController::class,'login'])->name('subadmin.login.submit');
-    Route::get('/logout', [Controllers\Auth\SubAdminLoginController::class,'logout'])->name('subadmin.logout');
+    Route::get('/login', [Controllers\Auth\SubAdminLoginController::class, 'showLoginform'])->name('subadmin.login');
+    Route::post('/login', [Controllers\Auth\SubAdminLoginController::class, 'login'])->name('subadmin.login.submit');
+    Route::get('/logout', [Controllers\Auth\SubAdminLoginController::class, 'logout'])->name('subadmin.logout');
 });
 
 
@@ -262,8 +261,6 @@ Route::group(['middleware' => ['auth:subadmin']], function () {
         //rejected jobs
         Route::get('/rejected-jobs', [Controllers\SubAdmin\SubAdminJobController::class, 'rejected_jobs'])->name('subadmin.rejected.jobs');
         Route::get('/rejected-jobs-get', [Controllers\SubAdmin\SubAdminJobController::class, 'rejected_jobs_get'])->name('subadmin.rejected.jobs.get');
-
-
 
 
         //deposit
@@ -309,9 +306,6 @@ Route::group(['middleware' => ['auth:subadmin']], function () {
         Route::post('/user-details-update', [Controllers\SubAdmin\SubAdminUsersController::class, 'user_details_update'])->name('subadmin.user.profile.update');
         Route::get('/user-change-password/{id}', [Controllers\SubAdmin\SubAdminUsersController::class, 'user_change_password'])->name('subadmin.user.change.password');
         Route::post('/user-change-password-update', [Controllers\SubAdmin\SubAdminUsersController::class, 'user_change_password_update'])->name('subadmin.user.change.password.update');
-
-
-
 
 
     });

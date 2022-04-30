@@ -14,37 +14,37 @@ class CustomLoginController extends Controller
 {
     public function user_custom_register(Request $request)
     {
-        $this->validate($request,[
-           'name'=>'required',
-           'email'=>'required',
-           'phone_number'=>'required',
-           'password'=>'required|min:8',
-           'confirm_password'=>'required',
-        ],[
-            'name.required'=>'Please Enter Your Name',
-            'email.required'=>'Please Enter Your Email',
-            'phone_number.required'=>'Please Enter Your Phone Number',
-            'password.required'=>'Please Enter Your Password',
-            'confirm_password.required'=>'Please Enter Your Confirm Password',
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'password' => 'required|min:8',
+            'confirm_password' => 'required',
+        ], [
+            'name.required' => 'Please Enter Your Name',
+            'email.required' => 'Please Enter Your Email',
+            'phone_number.required' => 'Please Enter Your Phone Number',
+            'password.required' => 'Please Enter Your Password',
+            'confirm_password.required' => 'Please Enter Your Confirm Password',
         ]);
 
 
-        $check_user = User::orderBy('id','desc')->first();
+        $check_user = User::orderBy('id', 'desc')->first();
         if ($check_user) {
-            $user_id = rand(000,999).$check_user->id;
-        }else{
-            $user_id = rand(000,999).rand(0,9);
+            $user_id = rand(000, 999) . $check_user->id;
+        } else {
+            $user_id = rand(000, 999) . rand(0, 9);
         }
 
-        $check_email = User::where('email',$request->email)->first();
-        if ($check_email){
-            return back()->with('email_error','Email Already Exists');
+        $check_email = User::where('email', $request->email)->first();
+        if ($check_email) {
+            return back()->with('email_error', 'Email Already Exists');
             exit();
         }
 
-        $check_phone = User::where('phone_number',$request->phone_number)->first();
-        if ($check_phone){
-            return back()->with('phone_error','Phone Number Already Exists');
+        $check_phone = User::where('phone_number', $request->phone_number)->first();
+        if ($check_phone) {
+            return back()->with('phone_error', 'Phone Number Already Exists');
             exit();
         }
 
@@ -58,20 +58,20 @@ class CustomLoginController extends Controller
         $new_user->password = Hash::make($request->password);
         $new_user->account_status = 1;
         $new_user->ver_code = null;
-        $new_user->ver_link = time().$user_id.rand(00000,99999).uniqid();
+        $new_user->ver_link = time() . $user_id . rand(00000, 99999) . uniqid();
         $new_user->save();
 
 
-//        $to = $new_user->email;
-//        $url = route('user.activate.account', $new_user->ver_link);
-//        $msg = [
-//            'name' => $new_user->name,
-//            'url' => $url
-//        ];
-//        Mail::to($to)->send(new AccActiveEmail($msg));
+        $to = $new_user->email;
+        $url = route('user.activate.account', $new_user->ver_link);
+        $msg = [
+            'name' => $new_user->name,
+            'url' => $url
+        ];
+        Mail::to($to)->send(new AccActiveEmail($msg));
 
 
-        return redirect(route('login'))->with('register_success','We have send activation link to your email. Please activate your account.');
+        return redirect(route('login'))->with('register_success', 'We have send activation link to your email. Please activate your account.');
 
     }
 
@@ -84,8 +84,12 @@ class CustomLoginController extends Controller
         ]);
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             return redirect(route('user.dashboard'));
-        }else{
-            return redirect(route('login'))->with('user_login_error','Invalid Credentials');
+        } elseif (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            return redirect(route('admin.dashboard'));
+        } elseif (Auth::guard('subadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            return redirect(route('subadmin.dashboard'));
+        } else {
+            return redirect(route('login'))->with('user_login_error', 'Invalid Credentials');
         }
     }
 

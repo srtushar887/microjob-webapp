@@ -87,6 +87,24 @@
                                        value="{{$gen->site_currency}}">
                             </div>
 
+                            <div class="col-md-12">
+                                <label for="validationDefault01" class="form-label">Default Job Message</label>
+                                <textarea class="form-control" id="job-msg" cols="4" rows="4"
+                                          name="default_job_msg">{!! $gen->default_job_msg !!}</textarea>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="validationDefault01" class="form-label">Default Deposit Message</label>
+                                <textarea class="form-control" id="dep-msg" cols="4" rows="4"
+                                          name="default_dep_msg">{!! $gen->default_dep_msg !!}</textarea>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="validationDefault01" class="form-label">Default Withdraw Message</label>
+                                <textarea class="form-control" id="wit-msg" cols="4" rows="4"
+                                          name="default_with_msg">{!! $gen->default_with_msg !!}</textarea>
+                            </div>
+
 
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Submit</button>
@@ -95,10 +113,20 @@
                     </div>
 
 
-
-
                 </div>
             </div>
         </div> <!-- end col -->
     </div>
+@endsection
+
+@section('js')
+    <script src="//cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+
+
+    <script>
+        CKEDITOR.replace('job-msg');
+        CKEDITOR.replace('dep-msg');
+        CKEDITOR.replace('wit-msg');
+    </script>
+
 @endsection

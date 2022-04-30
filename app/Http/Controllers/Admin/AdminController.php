@@ -16,7 +16,7 @@ class AdminController extends Controller
     public function general_settings()
     {
         $gen = general_setting::first();
-        return view('admin.page.generalSettings',compact('gen'));
+        return view('admin.page.generalSettings', compact('gen'));
     }
 
 
@@ -35,6 +35,9 @@ class AdminController extends Controller
         $gen->job_post_min_amt = $request->job_post_min_amt;
         $gen->screenshot_price = $request->screenshot_price;
         $gen->site_currency = $request->site_currency;
+        $gen->default_job_msg = $request->default_job_msg;
+        $gen->default_dep_msg = $request->default_dep_msg;
+        $gen->default_with_msg = $request->default_with_msg;
         $gen->save();
         return back()->with('success', 'General Settings Successfully Updated');
     }

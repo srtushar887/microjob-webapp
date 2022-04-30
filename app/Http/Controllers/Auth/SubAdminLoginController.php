@@ -10,25 +10,25 @@ class SubAdminLoginController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest:subadmin',['except'=>['logout']]);
+        $this->middleware('guest:subadmin', ['except' => ['logout']]);
     }
 
 
     public function showLoginform()
     {
-        return view('auth.subadmin.subAdminLogin');
+        return redirect(route('login'));
+//        return view('auth.login');
     }
-
 
 
     //this is login function for admin which is given email and password to get data form database
     public function login(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'email' => 'required',
             'password' => 'required|min:8'
         ]);
-        if(Auth::guard('subadmin')->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
+        if (Auth::guard('subadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             return redirect(route('subadmin.dashboard'));
         }
 
@@ -37,11 +37,10 @@ class SubAdminLoginController extends Controller
     }
 
 
-
     //this funsion for admin logout which i customized to cpy form loginController
     public function logout()
     {
         Auth::guard('subadmin')->logout();
-        return redirect(route('admin.login'));
+        return redirect(route('login'));
     }
 }

@@ -41,9 +41,11 @@ class AdminRegionController extends Controller
     }
 
 
-
-
-
+    public function main_category_by_region(Request $request)
+    {
+        $main_cats = job_main_category::where('region_name', $request->reg_name)->get();
+        return response()->json($main_cats, 200);
+    }
 
 
 }

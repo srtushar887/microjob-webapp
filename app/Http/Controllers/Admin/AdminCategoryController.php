@@ -15,7 +15,7 @@ class AdminCategoryController extends Controller
     public function main_category()
     {
         $all_reg = region_country::all();
-        return view('admin.category.mainCategory',compact('all_reg'));
+        return view('admin.category.mainCategory', compact('all_reg'));
     }
 
 
@@ -28,15 +28,6 @@ class AdminCategoryController extends Controller
                 <button id="' . $all_main_cats->id . '" onclick="editmaincat(this.id)" type="button" class="btn btn-sm btn-light editcatmd" data-bs-toggle="modal" data-bs-target="#editmaincategory">Edit</button>
                 <button id="' . $all_main_cats->id . '" onclick="deletemaincat(this.id)"  type="button" class="btn btn-sm btn-light editcatmd" data-bs-toggle="modal" data-bs-target="#deletemaincategory">Delete</button>
                 ';
-            })
-            ->editColumn('country_id', function ($all_main_cats) {
-                $country = region_country::select('id', 'country_name')->where('id', $all_main_cats->country_id)->first();
-                if ($country) {
-                    return $country->country_name;
-                } else {
-                    return '';
-                }
-
             })
             ->editColumn('created_at', function ($all_main_cats) {
                 return Carbon::parse($all_main_cats->created_at)->format('d-F-Y');
@@ -84,12 +75,11 @@ class AdminCategoryController extends Controller
     }
 
 
-
     //sub category
     public function sub_category()
     {
         $all_reg = region_country::all();
-        return view('admin.category.subCategory',compact('all_reg'));
+        return view('admin.category.subCategory', compact('all_reg'));
     }
 
     public function sub_category_get_maincat(Request $request)
@@ -174,11 +164,6 @@ class AdminCategoryController extends Controller
         }
         return response()->json('done', 200);
     }
-
-
-
-
-
 
 
 }
