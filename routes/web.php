@@ -13,6 +13,20 @@ use App\Http\Controllers;
 |
 */
 
+Route::get('/cache_clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+
+
+//    header("Cache-Control: no-cache, must-revalidate");
+//    header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+//    header("Content-Type: application/xml; charset=utf-8");
+
+});
+
+
 Route::get('/', [Controllers\FrontendController::class,'index'])->name('front');
 
 Auth::routes();
@@ -26,6 +40,15 @@ Route::get('/user-active-account/{link}', [App\Http\Controllers\ActivationContro
 
 Route::post('/user-custom-register', [Controllers\Auth\CustomLoginController::class, 'user_custom_register'])->name('user.custom.register');
 Route::post('/user-custom-login', [Controllers\Auth\CustomLoginController::class, 'user_custom_login'])->name('user.login.submit');
+
+
+//forgot password
+Route::get('/forgot-password', [Controllers\ActivationController::class, 'forgot_password'])->name('forgot.password');
+Route::post('/forgot-password-submit', [Controllers\ActivationController::class, 'forgot_password_submit'])->name('forgot.password.submit');
+Route::get('/forgot-password-verify', [Controllers\ActivationController::class, 'forgot_password_verify_code'])->name('forgot.password.verify.code');
+Route::post('/forgot-password-verify-code-check', [Controllers\ActivationController::class, 'forgot_password_verify_code_check'])->name('forgot.password.verify.code.submit');
+Route::get('/forgot-password-change-password/{link}', [Controllers\ActivationController::class, 'forgot_password_change_password'])->name('forgot.password.change.pass');
+Route::post('/forgot-password-change-password-save', [Controllers\ActivationController::class, 'forgot_password_change_password_save'])->name('forgot.password.change.pass.save');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::prefix('user')->group(function () {

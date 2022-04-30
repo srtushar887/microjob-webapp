@@ -11,6 +11,8 @@ use App\Models\job_main_category;
 use App\Models\job_sub_category;
 use App\Models\region_country;
 use App\Models\User;
+use App\Models\user_activity;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +24,6 @@ class UserJobController extends Controller
 {
     public function post_job()
     {
-
         $all_reg = region_country::distinct()->select('region')->where('region', '!=', '')->get();
         $gen_settings = general_setting::first();
         return view('user.job.postJob',compact('all_reg','gen_settings'));
@@ -133,6 +134,14 @@ class UserJobController extends Controller
         $user->save();
 
 
+        $act = new user_activity();
+        $act->user_id = $user->id;
+        $act->activity = "Created New Job. JOB ID : ".$new_job->job_id;
+        $act->created_date = Carbon::now()->format('Y-m-d');
+        $act->save();
+
+
+
         return response()->json('job_created',200);
     }
 
@@ -187,13 +196,17 @@ class UserJobController extends Controller
             $sql .= "AND sub_category=$scat_filter ";
         }
 
-        if (isset($search_title) && $search_title != null){
-            $sql .= "AND job_title LIKE '%$search_title%' ";
+        if (isset($search_title)){
+            if ($search_title != null || $search_title != ''){
+                $sql .= "AND job_title LIKE '%$search_title%' ";
+            }
+
         }
 
 
         $sql .= "ORDER BY id desc";
         $query_exe = DB::select($sql);
+
 
         $all_jobs = $this->arrayPaginator($query_exe, $request);
         return response()->json([
@@ -259,6 +272,14 @@ class UserJobController extends Controller
         $new_job_apply->status = 0;
         $new_job_apply->is_submit = 0;
         $new_job_apply->save();
+
+
+        $act = new user_activity();
+        $act->user_id = Auth::user()->id;
+        $act->activity = "Applied New Job";
+        $act->created_date = Carbon::now()->format('Y-m-d');
+        $act->save();
+
         return back()->with('success','Job Successfully Applied');
     }
 
@@ -288,6 +309,13 @@ class UserJobController extends Controller
         $apply_submit->status = 1;
         $apply_submit->is_submit = 1;
         $apply_submit->save();
+
+
+        $act = new user_activity();
+        $act->user_id = Auth::user()->id;
+        $act->activity = "Submit Job";
+        $act->created_date = Carbon::now()->format('Y-m-d');
+        $act->save();
 
         return back()->with('success','Prove Submitted Successful');
     }
@@ -337,6 +365,13 @@ class UserJobController extends Controller
         $job_update->worker_need = $job_update->worker_need + $request->worker_need;
         $job_update->est_job_cost = $request->est_job_cost;
         $job_update->save();
+
+
+        $act = new user_activity();
+        $act->user_id = Auth::user()->id;
+        $act->activity = "Job Updated. JOB ID : ".$job_update->job_id;
+        $act->created_date = Carbon::now()->format('Y-m-d');
+        $act->save();
 
         return back()->with('success','Job Successfully Updated');
 

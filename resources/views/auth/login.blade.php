@@ -6,7 +6,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Sign In</title>
+    <title>Login | Dolightjob</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -66,17 +66,60 @@
                                 <h5 class="text-primary">Welcome Back !</h5>
                                 <p class="text-muted">Sign in to continue to Velzon.</p>
                             </div>
+                            @if(Session::has('email_verify_success'))
+                                <div class="alert alert-primary alert-border-left alert-dismissible fade show" role="alert">
+                                    <i class="ri-user-smile-line me-3 align-middle fs-16"></i><strong>Success</strong>
+                                    - {{Session::get('email_verify_success')}}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if(Session::has('register_success'))
+                                <div class="alert alert-primary alert-border-left alert-dismissible fade show" role="alert">
+                                    <i class="ri-user-smile-line me-3 align-middle fs-16"></i><strong>Success</strong>
+                                    - {{Session::get('register_success')}}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if(Session::has('email_verify_error'))
+                                <div class="alert alert-warning alert-border-left alert-dismissible fade show" role="alert">
+                                    <i class="ri-alert-line me-3 align-middle fs-16"></i><strong>Warning</strong>
+                                    - {{Session::get('email_verify_error')}} <br>
+
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
+
+                            @if(Session::has('user_login_error'))
+                                <div class="alert alert-warning alert-border-left alert-dismissible fade show" role="alert">
+                                    <i class="ri-alert-line me-3 align-middle fs-16"></i><strong>Warning</strong>
+                                    - {{Session::get('user_login_error')}} <br>
+
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
+                            @if(Session::has('fpass_success'))
+                                <div class="alert alert-primary alert-border-left alert-dismissible fade show" role="alert">
+                                    <i class="ri-user-smile-line me-3 align-middle fs-16"></i><strong>Success</strong>
+                                    - {{Session::get('fpass_success')}}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
+
                             <div class="p-2 mt-4">
                                 <form action="{{route('user.login.submit')}}" method="post">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Email</label>
-                                        <input type="text" name="email" class="form-control" id="username" placeholder="Enter email" required>
+                                        <input type="email" name="email" class="form-control" id="username" placeholder="Enter email" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <div class="float-end">
-                                            <a href="auth-pass-reset-basic.html" class="text-muted">Forgot password?</a>
+                                            <a href="{{route('forgot.password')}}" class="text-muted">Forgot password?</a>
                                         </div>
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
@@ -91,7 +134,7 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <button class="btn btn-success w-100" type="submit">Sign In</button>
+                                        <button class="btn btn-success w-100" type="submit">Login</button>
                                     </div>
 
                                 </form>
@@ -102,7 +145,7 @@
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Don't have an account ? <a href="{{route('register')}}" class="fw-semibold text-primary text-decoration-underline"> Signup </a> </p>
+                        <p class="mb-0">Don't have an account ? <a href="{{route('register')}}" class="fw-semibold text-primary text-decoration-underline"> Register </a> </p>
                     </div>
 
                 </div>
@@ -119,7 +162,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> Velzon. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                        <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> dolightjob. Developed by <i class="mdi mdi-heart text-danger"></i> SR Tusher</p>
                     </div>
                 </div>
             </div>

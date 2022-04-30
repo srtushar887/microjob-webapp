@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\gateway;
 use App\Models\general_setting;
 use App\Models\transaction;
+use App\Models\user_activity;
 use App\Models\withdraw;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -47,6 +49,15 @@ class UserWindrawController extends Controller
         $new_trans->status = 0;
         $new_trans->type = 2;
         $new_trans->save();
+
+
+        $act = new user_activity();
+        $act->user_id = Auth::user()->id;
+        $act->activity = "Withdraw Request Send".$new_trans->amount.'. '."TRX ID : ".$new_trans->transaction_id;
+        $act->created_date = Carbon::now()->format('Y-m-d');
+        $act->save();
+
+
         return back()->with('success','Withdraw Request Send Successfully');
     }
 

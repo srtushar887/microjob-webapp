@@ -44,7 +44,7 @@ class CustomLoginController extends Controller
 
         $check_phone = User::where('phone_number',$request->phone_number)->first();
         if ($check_phone){
-            return back()->with('email_error','Phone Already Exists');
+            return back()->with('phone_error','Phone Number Already Exists');
             exit();
         }
 
@@ -62,13 +62,13 @@ class CustomLoginController extends Controller
         $new_user->save();
 
 
-        $to = $new_user->email;
-        $url = route('user.activate.account', $new_user->ver_link);
-        $msg = [
-            'name' => $new_user->name,
-            'url' => $url
-        ];
-        Mail::to($to)->send(new AccActiveEmail($msg));
+//        $to = $new_user->email;
+//        $url = route('user.activate.account', $new_user->ver_link);
+//        $msg = [
+//            'name' => $new_user->name,
+//            'url' => $url
+//        ];
+//        Mail::to($to)->send(new AccActiveEmail($msg));
 
 
         return redirect(route('login'))->with('register_success','We have send activation link to your email. Please activate your account.');
@@ -84,9 +84,9 @@ class CustomLoginController extends Controller
         ]);
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             return redirect(route('user.dashboard'));
+        }else{
+            return redirect(route('login'))->with('user_login_error','Invalid Credentials');
         }
-
-        return redirect()->back();
     }
 
 }

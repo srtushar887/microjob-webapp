@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $faker = Faker::create();
-        foreach (range(1,100) as $index){
+        foreach (range(1,2000) as $index){
 //            $user = new User();
 //            $user->user_ref_id = rand(0000000,9999999);
 //            $user->balance = rand(0000,4444);

@@ -521,14 +521,13 @@
 <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
     <i class="ri-arrow-up-line"></i>
 </button>
-
+<script src="{{asset('assets/dashboard/')}}/js/jquery-1.12.4.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/js/jquery.min.js"></script>
-
 <script src="{{asset('assets/dashboard/')}}/libs/simplebar/simplebar.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/node-waves/waves.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/feather-icons/feather.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/js/pages/plugins/lord-icon-2.1.0.js"></script>
+
 
 <!-- Required datatable js -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -537,7 +536,7 @@
 <!-- Responsive examples -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-
+<script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
 
 <script src="{{asset('assets/dashboard/')}}/js/pages/form-wizard.init.js"></script>
 <script src="{{asset('assets/dashboard/')}}/form-widget.js"></script>
@@ -545,9 +544,9 @@
 {{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
 
 
-<script src="{{asset('assets/dashboard/')}}/libs/rater-js/index.js"></script>
+{{--<script src="{{asset('assets/dashboard/')}}/libs/rater-js/index.js"></script>--}}
 <!-- rating init -->
-<script src="{{asset('assets/dashboard/')}}/js/pages/rating.init.js"></script>
+{{--<script src="{{asset('assets/dashboard/')}}/js/pages/rating.init.js"></script>--}}
 
 <script>
     jQuery(window).on('load', function () {

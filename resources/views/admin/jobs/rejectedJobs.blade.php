@@ -52,7 +52,7 @@
                     "serverSide": true,
                     "ajax": "{{ route('admin.rejected.jobs.get') }}",
                     columns: [
-                        { data: 'user.name', name: 'user.name',class: 'text-center' },
+                        { data: 'user', name: 'user',class: 'text-center' },
                         { data: 'job_title', name: 'job_title',class: 'text-center' },
                         { data: 'est_job_cost', name: 'est_job_cost',class: 'text-center' },
                         {

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\transaction;
 use App\Models\User;
 use App\Models\user_deposit;
+use App\Models\user_notification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -125,6 +126,17 @@ class AdminDepositController extends Controller
             $user->balance = $user->balance + $user_deposit->amount;
             $user->save();
 
+
+            $new_notification = new user_notification();
+            $new_notification->user_id = $user->id;
+            $new_notification->title = "Your deposit has been approved";
+            $new_notification->description = $request->notification_details;
+            $new_notification->type = 2;
+            $new_notification->status = 1;
+            $new_notification->save();
+
+
+
             return back()->with('success','Deposit Successfully Approved');
 
         }elseif ($request->status == 2){
@@ -137,6 +149,15 @@ class AdminDepositController extends Controller
                 $dep_tran->status = 2;
                 $dep_tran->save();
             }
+
+
+            $new_notification = new user_notification();
+            $new_notification->user_id = $user_deposit->user_id;
+            $new_notification->title = "Your deposit has been rejected";
+            $new_notification->description = $request->notification_details;
+            $new_notification->type = 2;
+            $new_notification->status = 1;
+            $new_notification->save();
 
             return back()->with('success','Deposit Successfully Rejected');
         }else{

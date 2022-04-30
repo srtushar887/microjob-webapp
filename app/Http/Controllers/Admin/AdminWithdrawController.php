@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\transaction;
 use App\Models\user_deposit;
+use App\Models\user_notification;
 use App\Models\withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -46,6 +47,16 @@ class AdminWithdrawController extends Controller
             $user_tran->status = 1;
             $user_tran->save();
 
+
+            $new_notification = new user_notification();
+            $new_notification->user_id = $user_tran->user_id;
+            $new_notification->title = "Your withdraw request has been approved";
+            $new_notification->description = $request->notification_details;
+            $new_notification->type = 3;
+            $new_notification->status = 1;
+            $new_notification->save();
+
+
             return back()->with('success','User Withdraw Successfully Approved');
         }elseif ($type == 2){
             $user_with = withdraw::where('id',$request->edit_with_id)->first();
@@ -55,6 +66,14 @@ class AdminWithdrawController extends Controller
             $user_tran = transaction::where('user_id',$user_with->user_id)->where('with_id',$user_with->id)->first();
             $user_tran->status = 2;
             $user_tran->save();
+
+            $new_notification = new user_notification();
+            $new_notification->user_id = $user_tran->user_id;
+            $new_notification->title = "Your withdraw request has been rejected";
+            $new_notification->description = $request->notification_details;
+            $new_notification->type = 3;
+            $new_notification->status = 1;
+            $new_notification->save();
 
             return back()->with('success','User Withdraw Successfully Rejected');
         }else{

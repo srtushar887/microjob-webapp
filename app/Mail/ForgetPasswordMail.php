@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class AccActiveEmail extends Mailable
+class ForgetPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -29,8 +29,8 @@ class AccActiveEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.accActiveMail')
-            ->subject('Access Account')
+        return $this->view('mails.forgetPassMail')
+            ->subject('Forget Password')
             ->from("support@dolightjob.net");
     }
 }

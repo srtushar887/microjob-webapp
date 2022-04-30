@@ -116,11 +116,15 @@
                                 </select>
                             </div>
                         </div>
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="col-lg-12">
+
+                        <div class="col-lg-12" style="margin-top: 20px;">
+                            <div>
+                                <label for="datepicker-deadline-input" class="form-label">Description</label>
+                                <textarea type="text" cols="7" rows="7" class="form-control" name="notification_details" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12" style="margin-top: 20px;">
                             <button class="btn btn-block btn-primary" style="width: 100%">Submit</button>
                         </div>
 
