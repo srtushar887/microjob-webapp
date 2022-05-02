@@ -11,13 +11,19 @@ class AdminGatewayController extends Controller
     public function payment_gateway()
     {
         $gateway = gateway::all();
-        return view('admin.gateway.paymentGateway',compact('gateway'));
+        return view('admin.gateway.paymentGateway', compact('gateway'));
+    }
+
+    public function payment_gateway_edit($id)
+    {
+        $gateway_edit = gateway::where('id', $id)->first();
+        return view('admin.gateway.paymentGatewayEdit', compact('gateway_edit'));
     }
 
 
     public function payment_gateway_update(Request $request)
     {
-        $update_gateway = gateway::where('id',$request->gateway_edit)->first();
+        $update_gateway = gateway::where('id', $request->gateway_edit)->first();
         $update_gateway->gateway_name = $request->gateway_name;
         $update_gateway->gateway_number = $request->gateway_number;
         $update_gateway->gateway_note = $request->gateway_note;
@@ -25,7 +31,7 @@ class AdminGatewayController extends Controller
         $update_gateway->max_price = $request->max_price;
         $update_gateway->is_active = $request->is_active;
         $update_gateway->save();
-        return back()->with('success','Payment Gateway Successfully Updated');
+        return back()->with('success', 'Payment Gateway Successfully Updated');
     }
 
 }

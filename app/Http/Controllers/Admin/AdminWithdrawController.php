@@ -23,7 +23,7 @@ class AdminWithdrawController extends Controller
     {
         $all_deposit = withdraw::with('user')->get();
         return DataTables::of($all_deposit)
-            ->addColumn('action',function ($all_deposit){
+            ->addColumn('action', function ($all_deposit) {
                 return '
                 <button id="' . $all_deposit->id . '" onclick="editwith(this.id)" type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#editwithmodal">Edit</button>
                 <button id="' . $all_deposit->id . '" onclick="deletewithdraw(this.id)"  type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#deletewithmodal">Delete</button>
@@ -39,11 +39,12 @@ class AdminWithdrawController extends Controller
     {
         $type = $request->status;
         if ($type == 1) {
-            $user_with = withdraw::where('id',$request->edit_with_id)->first();
+            $user_with = withdraw::where('id', $request->edit_with_id)->first();
             $user_with->status = 1;
+            $user_with->with_comment = $request->with_comment;
             $user_with->save();
 
-            $user_tran = transaction::where('user_id',$user_with->user_id)->where('with_id',$user_with->id)->first();
+            $user_tran = transaction::where('user_id', $user_with->user_id)->where('with_id', $user_with->id)->first();
             $user_tran->status = 1;
             $user_tran->save();
 
@@ -51,47 +52,49 @@ class AdminWithdrawController extends Controller
             $new_notification = new user_notification();
             $new_notification->user_id = $user_tran->user_id;
             $new_notification->title = "Your withdraw request has been approved";
-            $new_notification->description = $request->notification_details;
+            $new_notification->description = $request->with_comment;
             $new_notification->type = 3;
             $new_notification->status = 1;
+            $new_notification->is_view = 1;
             $new_notification->save();
 
 
-            return back()->with('success','User Withdraw Successfully Approved');
-        }elseif ($type == 2){
-            $user_with = withdraw::where('id',$request->edit_with_id)->first();
+            return back()->with('success', 'User Withdraw Successfully Approved');
+        } elseif ($type == 2) {
+            $user_with = withdraw::where('id', $request->edit_with_id)->first();
             $user_with->status = 2;
             $user_with->save();
 
-            $user_tran = transaction::where('user_id',$user_with->user_id)->where('with_id',$user_with->id)->first();
+            $user_tran = transaction::where('user_id', $user_with->user_id)->where('with_id', $user_with->id)->first();
             $user_tran->status = 2;
             $user_tran->save();
 
             $new_notification = new user_notification();
             $new_notification->user_id = $user_tran->user_id;
             $new_notification->title = "Your withdraw request has been rejected";
-            $new_notification->description = $request->notification_details;
+            $new_notification->description = $request->with_comment;
             $new_notification->type = 3;
             $new_notification->status = 1;
+            $new_notification->is_view = 1;
             $new_notification->save();
 
-            return back()->with('success','User Withdraw Successfully Rejected');
-        }else{
-            return back()->with('alert','User Withdraw Not Found');
+            return back()->with('success', 'User Withdraw Successfully Rejected');
+        } else {
+            return back()->with('alert', 'User Withdraw Not Found');
         }
     }
 
 
     public function withdraw_delete(Request $request)
     {
-        $with_del = withdraw::where('id',$request->delete_with_id)->first();
+        $with_del = withdraw::where('id', $request->delete_with_id)->first();
 
-        $user_tran = transaction::where('user_id',$with_del->user_id)->where('with_id',$with_del->id)->first();
+        $user_tran = transaction::where('user_id', $with_del->user_id)->where('with_id', $with_del->id)->first();
         if ($user_tran) {
             $user_tran->delete();
         }
         $with_del->delete();
-        return back()->with('success','User Withdraw Successfully Deleted');
+        return back()->with('success', 'User Withdraw Successfully Deleted');
 
     }
 
@@ -104,9 +107,9 @@ class AdminWithdrawController extends Controller
 
     public function pending_withdraw_get()
     {
-        $all_deposit = withdraw::where('status',0)->with('user')->get();
+        $all_deposit = withdraw::where('status', 0)->with('user')->get();
         return DataTables::of($all_deposit)
-            ->addColumn('action',function ($all_deposit){
+            ->addColumn('action', function ($all_deposit) {
                 return '
                 <button id="' . $all_deposit->id . '" onclick="editwith(this.id)" type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#editwithmodal">Edit</button>
                 <button id="' . $all_deposit->id . '" onclick="deletewithdraw(this.id)"  type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#deletewithmodal">Delete</button>
@@ -126,9 +129,9 @@ class AdminWithdrawController extends Controller
 
     public function approved_withdraw_get()
     {
-        $all_deposit = withdraw::where('status',1)->with('user')->get();
+        $all_deposit = withdraw::where('status', 1)->with('user')->get();
         return DataTables::of($all_deposit)
-            ->addColumn('action',function ($all_deposit){
+            ->addColumn('action', function ($all_deposit) {
                 return '
                 <button id="' . $all_deposit->id . '" onclick="editwith(this.id)" type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#editwithmodal">Edit</button>
                 <button id="' . $all_deposit->id . '" onclick="deletewithdraw(this.id)"  type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#deletewithmodal">Delete</button>
@@ -148,9 +151,9 @@ class AdminWithdrawController extends Controller
 
     public function rejected_withdraw_get()
     {
-        $all_deposit = withdraw::where('status',2)->with('user')->get();
+        $all_deposit = withdraw::where('status', 2)->with('user')->get();
         return DataTables::of($all_deposit)
-            ->addColumn('action',function ($all_deposit){
+            ->addColumn('action', function ($all_deposit) {
                 return '
                 <button id="' . $all_deposit->id . '" onclick="editwith(this.id)" type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#editwithmodal">Edit</button>
                 <button id="' . $all_deposit->id . '" onclick="deletewithdraw(this.id)"  type="button" class="btn btn-sm btn-light " data-bs-toggle="modal" data-bs-target="#deletewithmodal">Delete</button>

@@ -2,32 +2,34 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>User | @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesbrand" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/favicon.ico">
-
 
 
     <!-- Layout config Js -->
     <script src="{{asset('assets/dashboard/')}}/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css"/>
     <!-- custom Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/dashboard/')}}/css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/dashboard/')}}/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- DataTables -->
-    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+          rel="stylesheet" type="text/css"/>
 
     <!-- Responsive datatable examples -->
-    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link
+        href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+        rel="stylesheet" type="text/css"/>
     @yield('css')
 </head>
 
@@ -358,7 +360,8 @@
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
                                      aria-labelledby="alerts-tab">
                                     <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                        <img src="{{asset('assets/dashboard/')}}/images/svg/bell.svg" class="img-fluid" alt="user-pic">
+                                        <img src="{{asset('assets/dashboard/')}}/images/svg/bell.svg" class="img-fluid"
+                                             alt="user-pic">
                                     </div>
                                     <div class="text-center pb-5 mt-2">
                                         <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications
@@ -373,9 +376,11 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiMcc9W6s78W6i8ZTNMtPrBDg5hvws2htOXfOxTaEPkgLumwbtLQVVIHZtZmSU92XoLXA&usqp=CAU" alt="Header Avatar">
+                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiMcc9W6s78W6i8ZTNMtPrBDg5hvws2htOXfOxTaEPkgLumwbtLQVVIHZtZmSU92XoLXA&usqp=CAU"
+                                         alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
+                                        <span
+                                            class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
                                         <span
                                             class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">{{Auth::user()->email}}</span>
                                     </span>
@@ -425,7 +430,8 @@
                         <img src="{{asset('assets/dashboard/')}}/images/logo-sm.png" alt="" height="22">
                     </span>
                 <span class="logo-lg">
-                        <img src="{{asset('assets/dashboard/')}}/images/logo-light.png" alt="" height="17">
+                          <img src="{{asset('assets/dashboard/')}}/images/logo.png" alt=""
+                               style="height: 46px;background-color: whitesmoke">
                     </span>
             </a>
             <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -476,6 +482,11 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('user.all.notification')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Notifications</span>
+                        </a>
+                    </li>
 
 
                 </ul>
@@ -503,7 +514,8 @@
                     <div class="col-sm-6">
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> © Velzon.
+                        </script>
+                        © Velzon.
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
@@ -534,8 +546,10 @@
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Responsive examples -->
-<script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script
+    src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script
+    src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
 
 <script src="{{asset('assets/dashboard/')}}/js/pages/form-wizard.init.js"></script>

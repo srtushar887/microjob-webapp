@@ -5,24 +5,24 @@
 <!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Mar 2022 03:49:04 GMT -->
 <head>
 
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Login | Dolightjob</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesbrand" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/favicon.ico">
 
     <!-- Layout config Js -->
     <script src="{{asset('assets/dashboard/')}}/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css"/>
     <!-- custom Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
@@ -31,11 +31,12 @@
 
 <div class="auth-page-wrapper pt-5">
     <!-- auth page bg -->
-    <div class="auth-one-bg-position auth-one-bg"  id="auth-particles">
+    <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
         <div class="bg-overlay"></div>
 
         <div class="shape">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 viewBox="0 0 1440 120">
                 <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
             </svg>
         </div>
@@ -48,8 +49,9 @@
                 <div class="col-lg-12">
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
                         <div>
-                            <a href="index.html" class="d-inline-block auth-logo">
-                                <img src="{{asset('assets/dashboard/')}}/images/logo-light.png" alt="" height="20">
+                            <a href="{{route('login')}}" class="d-inline-block auth-logo">
+                                <img src="{{asset('assets/dashboard/')}}/images/logo.png" alt=""
+                                     style="height: 50px;background-color: whitesmoke">
                             </a>
                         </div>
                     </div>
@@ -64,48 +66,58 @@
                         <div class="card-body p-4">
                             <div class="text-center mt-2">
                                 <h5 class="text-primary">Welcome Back !</h5>
-                                <p class="text-muted">Sign in to continue to Velzon.</p>
+                                <p class="text-muted">Sign in to continue to Dolightjob.</p>
                             </div>
                             @if(Session::has('email_verify_success'))
-                                <div class="alert alert-primary alert-border-left alert-dismissible fade show" role="alert">
+                                <div class="alert alert-primary alert-border-left alert-dismissible fade show"
+                                     role="alert">
                                     <i class="ri-user-smile-line me-3 align-middle fs-16"></i><strong>Success</strong>
                                     - {{Session::get('email_verify_success')}}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
                             @if(Session::has('register_success'))
-                                <div class="alert alert-primary alert-border-left alert-dismissible fade show" role="alert">
+                                <div class="alert alert-primary alert-border-left alert-dismissible fade show"
+                                     role="alert">
                                     <i class="ri-user-smile-line me-3 align-middle fs-16"></i><strong>Success</strong>
                                     - {{Session::get('register_success')}}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
                             @if(Session::has('email_verify_error'))
-                                <div class="alert alert-warning alert-border-left alert-dismissible fade show" role="alert">
+                                <div class="alert alert-warning alert-border-left alert-dismissible fade show"
+                                     role="alert">
                                     <i class="ri-alert-line me-3 align-middle fs-16"></i><strong>Warning</strong>
                                     - {{Session::get('email_verify_error')}} <br>
 
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
 
                             @if(Session::has('user_login_error'))
-                                <div class="alert alert-warning alert-border-left alert-dismissible fade show" role="alert">
+                                <div class="alert alert-warning alert-border-left alert-dismissible fade show"
+                                     role="alert">
                                     <i class="ri-alert-line me-3 align-middle fs-16"></i><strong>Warning</strong>
                                     - {{Session::get('user_login_error')}} <br>
 
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
                             @if(Session::has('fpass_success'))
-                                <div class="alert alert-primary alert-border-left alert-dismissible fade show" role="alert">
+                                <div class="alert alert-primary alert-border-left alert-dismissible fade show"
+                                     role="alert">
                                     <i class="ri-user-smile-line me-3 align-middle fs-16"></i><strong>Success</strong>
                                     - {{Session::get('fpass_success')}}
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
@@ -114,22 +126,29 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Email</label>
-                                        <input type="email" name="email" class="form-control" id="username" placeholder="Enter email" required>
+                                        <input type="email" name="email" class="form-control" id="username"
+                                               placeholder="Enter email" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <div class="float-end">
-                                            <a href="{{route('forgot.password')}}" class="text-muted">Forgot password?</a>
+                                            <a href="{{route('forgot.password')}}" class="text-muted">Forgot
+                                                password?</a>
                                         </div>
                                         <label class="form-label" for="password-input">Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
-                                            <input type="password" name="password" class="form-control pe-5" placeholder="Enter password" id="password-input" required>
-                                            <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                            <input type="password" name="password" class="form-control pe-5"
+                                                   placeholder="Enter password" id="password-input" required>
+                                            <button
+                                                class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
+                                                type="button" id="password-addon"><i
+                                                    class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                     </div>
 
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="auth-remember-check">
+                                        <input class="form-check-input" type="checkbox" value=""
+                                               id="auth-remember-check">
                                         <label class="form-check-label" for="auth-remember-check">Remember me</label>
                                     </div>
 
@@ -145,7 +164,9 @@
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Don't have an account ? <a href="{{route('register')}}" class="fw-semibold text-primary text-decoration-underline"> Register </a> </p>
+                        <p class="mb-0">Don't have an account ? <a href="{{route('register')}}"
+                                                                   class="fw-semibold text-primary text-decoration-underline">
+                                Register </a></p>
                     </div>
 
                 </div>
@@ -162,7 +183,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> dolightjob. Developed by <i class="mdi mdi-heart text-danger"></i> SR Tusher</p>
+                        <p class="mb-0 text-muted">&copy;
+                            <script>document.write(new Date().getFullYear())</script>
+                            dolightjob. Developed by <i class="mdi mdi-heart text-danger"></i> SR Tusher
+                        </p>
                     </div>
                 </div>
             </div>

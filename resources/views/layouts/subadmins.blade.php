@@ -2,32 +2,34 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Sub-Admin | @yield('title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesbrand" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/favicon.ico">
-
 
 
     <!-- Layout config Js -->
     <script src="{{asset('assets/dashboard/')}}/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css"/>
     <!-- custom Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/dashboard/')}}/css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/dashboard/')}}/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- DataTables -->
-    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+          rel="stylesheet" type="text/css"/>
 
     <!-- Responsive datatable examples -->
-    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link
+        href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+        rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -358,7 +360,8 @@
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
                                      aria-labelledby="alerts-tab">
                                     <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                        <img src="{{asset('assets/dashboard/')}}/images/svg/bell.svg" class="img-fluid" alt="user-pic">
+                                        <img src="{{asset('assets/dashboard/')}}/images/svg/bell.svg" class="img-fluid"
+                                             alt="user-pic">
                                     </div>
                                     <div class="text-center pb-5 mt-2">
                                         <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications
@@ -373,9 +376,11 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                         src="{{asset('assets/dashboard/')}}/images/users/avatar-1.jpg" alt="Header Avatar">
+                                         src="{{asset('assets/dashboard/')}}/images/users/avatar-1.jpg"
+                                         alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
+                                        <span
+                                            class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
                                         <span
                                             class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Admin</span>
                                     </span>
@@ -456,9 +461,6 @@
                     </li>
 
 
-
-
-
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="#jonmanagement" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -467,16 +469,20 @@
                         <div class="collapse menu-dropdown" id="jonmanagement">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.all.jobs')}}" class="nav-link" data-key="t-crm"> All Jobs </a>
+                                    <a href="{{route('subadmin.all.jobs')}}" class="nav-link" data-key="t-crm"> All
+                                        Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.pending.jobs')}}" class="nav-link" data-key="t-ecommerce"> Pending Jobs </a>
+                                    <a href="{{route('subadmin.pending.jobs')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Pending Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.approved.jobs')}}" class="nav-link" data-key="t-ecommerce"> Approved Jobs </a>
+                                    <a href="{{route('subadmin.approved.jobs')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Approved Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.rejected.jobs')}}" class="nav-link" data-key="t-ecommerce"> Rejected Jobs </a>
+                                    <a href="{{route('subadmin.rejected.jobs')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Rejected Jobs </a>
                                 </li>
                             </ul>
                         </div>
@@ -485,7 +491,7 @@
 
                     <li class="nav-item">
                         <?php
-                        $count_dep = \App\Models\user_deposit::where('status',0)->count();
+                        $count_dep = \App\Models\user_deposit::where('status', 0)->count();
                         ?>
                         <a class="nav-link menu-link" href="#deposit" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -495,16 +501,20 @@
                         <div class="collapse menu-dropdown" id="deposit">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.all.deposit')}}" class="nav-link" data-key="t-crm"> All Deposit </a>
+                                    <a href="{{route('subadmin.all.deposit')}}" class="nav-link" data-key="t-crm"> All
+                                        Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.pending.deposit')}}" class="nav-link" data-key="t-ecommerce"> Pending Deposit </a>
+                                    <a href="{{route('subadmin.pending.deposit')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Pending Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.approved.deposit')}}" class="nav-link" data-key="t-ecommerce"> Approved Deposit </a>
+                                    <a href="{{route('subadmin.approved.deposit')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Approved Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.rejected.deposit')}}" class="nav-link" data-key="t-ecommerce"> Rejected Deposit </a>
+                                    <a href="{{route('subadmin.rejected.deposit')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Rejected Deposit </a>
                                 </li>
                             </ul>
                         </div>
@@ -512,7 +522,7 @@
 
                     <li class="nav-item">
                         <?php
-                        $count_with = \App\Models\withdraw::where('status',0)->count();
+                        $count_with = \App\Models\withdraw::where('status', 0)->count();
                         ?>
                         <a class="nav-link menu-link" href="#userwithdraw" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -523,16 +533,20 @@
                         <div class="collapse menu-dropdown" id="userwithdraw">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All Withdraw </a>
+                                    <a href="{{route('subadmin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All
+                                        Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.pending.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Pending Withdraw </a>
+                                    <a href="{{route('subadmin.pending.withdraw')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Pending Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.approved.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Approved Withdraw </a>
+                                    <a href="{{route('subadmin.approved.withdraw')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Approved Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('subadmin.rejected.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Rejected Withdraw </a>
+                                    <a href="{{route('subadmin.rejected.withdraw')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Rejected Withdraw </a>
                                 </li>
                             </ul>
                         </div>
@@ -543,7 +557,6 @@
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Users</span>
                         </a>
                     </li>
-
 
 
                 </ul>
@@ -571,7 +584,8 @@
                     <div class="col-sm-6">
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> © Velzon.
+                        </script>
+                        © Velzon.
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
@@ -598,14 +612,15 @@
 <script src="{{asset('assets/dashboard/')}}/js/pages/plugins/lord-icon-2.1.0.js"></script>
 
 
-
 <!-- Required datatable js -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Responsive examples -->
-<script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script
+    src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script
+    src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
 <script>
     jQuery(window).on('load', function () {
@@ -615,6 +630,10 @@
 
 {{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
 @yield('js')
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('layouts.message')
+
 </body>
 
 </html>

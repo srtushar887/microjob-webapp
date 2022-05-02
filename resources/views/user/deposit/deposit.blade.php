@@ -37,16 +37,18 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="validationDefault01" class="form-label">Amount</label>
+                                <label for="validationDefault01" class="form-label">Amount of Deposit (USD)</label>
                                 <input type="text" class="form-control amount" name="amount" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationDefault01" class="form-label">USD Rate</label>
-                                <input type="text" class="form-control usd_rate" name="usd_rate" value="{{$gen_settings->usd_rate}}" readonly>
+                                <input type="text" class="form-control usd_rate" name="usd_rate"
+                                       value="{{$gen_settings->usd_rate}}" readonly>
                             </div>
                             <div class="col-md-4">
-                                <label for="validationDefault01" class="form-label">Total USD</label>
-                                <input type="text" class="form-control total_usd" name="total_usd" value="0.00" readonly>
+                                <label for="validationDefault01" class="form-label">BDT Rate</label>
+                                <input type="text" class="form-control total_usd" name="total_usd" value="0.00"
+                                       readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="validationDefault01" class="form-label">Sender Number</label>
@@ -63,8 +65,6 @@
                             </div>
                         </form>
                     </div>
-
-
 
 
                 </div>
@@ -95,28 +95,28 @@
                             </thead>
                             <tbody>
                             @foreach($all_deposit as $dep)
-                            <tr>
-                                <td>{{$dep->transaction_id}}</td>
-                                <td>Deposit</td>
-                                <td>{{$dep->amount}}</td>
-                                <td>
-                                    {{\Carbon\Carbon::parse($dep->created_at)->format('Y-m-d')}}
-                                </td>
-                                <td>
-                                    @if ($dep->status == 0)
+                                <tr>
+                                    <td>{{$dep->transaction_id}}</td>
+                                    <td>Deposit</td>
+                                    <td>{{$dep->amount}}</td>
+                                    <td>
+                                        {{\Carbon\Carbon::parse($dep->created_at)->format('Y-m-d')}}
+                                    </td>
+                                    <td>
+                                        @if ($dep->status == 0)
 
-                                        <span class="badge bg-warning">Pending</span>
-                                    @elseif($dep->status == 1)
+                                            <span class="badge bg-warning">Pending</span>
+                                        @elseif($dep->status == 1)
 
-                                        <span class="badge bg-success">Approved</span>
-                                    @elseif($dep->status == 2)
+                                            <span class="badge bg-success">Approved</span>
+                                        @elseif($dep->status == 2)
 
-                                        <span class="badge bg-danger">Rejected</span>
-                                    @else
-                                        Not Set
-                                    @endif
-                                </td>
-                            </tr>
+                                            <span class="badge bg-danger">Rejected</span>
+                                        @else
+                                            Not Set
+                                        @endif
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody><!-- end tbody -->
                         </table><!-- end table -->
@@ -138,20 +138,20 @@
                 let dep_id = $(this).val();
 
                 $.ajax({
-                    type : "POST",
+                    type: "POST",
                     url: "{{route('user.deposit.get.gateway.details')}}",
-                    data : {
-                        '_token' : "{{csrf_token()}}",
-                        'dep_id' : dep_id,
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'dep_id': dep_id,
                     },
-                    success:function(data){
+                    success: function (data) {
                         console.log(data);
-                        if (data){
+                        if (data) {
                             $('.gateway_note').empty();
                             let details = `<p class="gateway_note">${data.gateway_note}</p>`;
                             $('.gateway_note').replaceWith(details);
                             $('.details_info').show();
-                        }else {
+                        } else {
                             $('.details_info').hide();
                         }
 
@@ -165,7 +165,6 @@
                 let usd_rate = $('.usd_rate').val();
                 let to_usd = am * usd_rate;
                 $('.total_usd').val(to_usd);
-
 
 
             })

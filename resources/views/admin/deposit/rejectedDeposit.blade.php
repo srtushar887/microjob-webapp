@@ -39,7 +39,8 @@
 
 
 
-    <div class="modal fade" id="editdepositmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="editdepositmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -57,10 +58,16 @@
                             </select>
                             <input type="hidden" class="form-control edit_dep_id" name="edit_dep_id">
                         </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Comment</label>
+                            <textarea class="form-control" cols="5" rows="5"
+                                      name="deposit_comment">{!! $gen->default_dep_msg !!}</textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" >Update</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
@@ -69,7 +76,8 @@
 
 
 
-    <div class="modal fade" id="deletedepositmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="deletedepositmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -105,8 +113,7 @@
             $('.delete_dep_id').val(id);
         }
 
-        function editdepsoit(id)
-        {
+        function editdepsoit(id) {
             $('.edit_dep_id').val(id);
         }
 
@@ -114,51 +121,50 @@
         $(document).ready(function () {
 
 
-            let getAllDeposit = () =>{
+            let getAllDeposit = () => {
                 $('#alldeposit').DataTable().destroy();
                 $('#alldeposit').DataTable({
                     "processing": true,
                     "serverSide": true,
                     "ajax": "{{ route('admin.rejected.deposit.get') }}",
                     columns: [
-                        { data: 'user.email', name: 'user.email',class: 'text-center' },
+                        {data: 'user.email', name: 'user.email', class: 'text-center'},
                         {
-                            data:'gateway_id',class: 'text-center',
-                            render:function (data) {
-                                if(data == 1){
+                            data: 'gateway_id', class: 'text-center',
+                            render: function (data) {
+                                if (data == 1) {
                                     return 'Bkash';
-                                }else if(data == 2){
+                                } else if (data == 2) {
                                     return 'Rocket';
-                                }else {
+                                } else {
                                     return 'not set'
                                 }
                             }
                         },
-                        { data: 'sender_number', name: 'sender_number',class: 'text-center' },
-                        { data: 'transaction_number', name: 'transaction_number',class: 'text-center' },
-                        { data: 'amount', name: 'amount',class: 'text-center' },
+                        {data: 'sender_number', name: 'sender_number', class: 'text-center'},
+                        {data: 'transaction_number', name: 'transaction_number', class: 'text-center'},
+                        {data: 'amount', name: 'amount', class: 'text-center'},
                         {
-                            data:'status',class: 'text-center',
-                            render:function (data) {
-                                if(data == 0){
+                            data: 'status', class: 'text-center',
+                            render: function (data) {
+                                if (data == 0) {
                                     return 'Pending';
-                                }else if(data == 1){
+                                } else if (data == 1) {
                                     return 'Completed';
-                                }else if(data == 2){
+                                } else if (data == 2) {
                                     return 'Rejected';
-                                }else {
+                                } else {
                                     return 'not set'
                                 }
                             }
                         },
-                        { data: 'created_at', name: 'created_at',class: 'text-center' },
-                        {data: 'action', name: 'action', orderable: false, searchable: false,class: 'text-center'},
+                        {data: 'created_at', name: 'created_at', class: 'text-center'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'},
                     ]
                 });
             };
 
             getAllDeposit();
-
 
 
         })

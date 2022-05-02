@@ -7,10 +7,11 @@
         <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title mb-0">Find Job</h4>
+                    <h4 class="card-title mb-0">Create New Job</h4>
                 </div><!-- end card header -->
                 <div class="card-body form-steps">
-                    <form action="{{route('user.post.job.save')}}" method="post" enctype="multipart/form-data" id="post_job">
+                    <form action="{{route('user.post.job.save')}}" method="post" enctype="multipart/form-data"
+                          id="post_job">
                         @csrf
                         <div id="custom-progress-bar" class="progress-nav mb-4">
                             <div class="progress" style="height: 1px;">
@@ -21,25 +22,29 @@
                                 <li class="nav-item">
                                     <button class="nav-link rounded-pill active"
                                             data-progressbar="custom-progress-bar" data-bs-toggle="pill"
-                                            data-bs-target="#pills-gen-info" type="button">1</button>
+                                            data-bs-target="#pills-gen-info" type="button">1
+                                    </button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link rounded-pill"
                                             data-progressbar="custom-progress-bar" id="pills-info-desc-tab"
                                             data-bs-toggle="pill" data-bs-target="#pills-info-desc"
-                                            type="button">2</button>
+                                            type="button">2
+                                    </button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link rounded-pill"
                                             data-progressbar="custom-progress-bar" id="pills-success-tab"
                                             data-bs-toggle="pill" data-bs-target="#pills-success"
-                                            type="button">3</button>
+                                            type="button">3
+                                    </button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="nav-link rounded-pill"
                                             data-progressbar="custom-progress-bar" id="budget"
                                             data-bs-toggle="pill" data-bs-target="#budget-setting"
-                                            type="button">4</button>
+                                            type="button">4
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -75,7 +80,8 @@
                                         <hr>
                                         <h6 class="mb-3">Select Country</h6>
                                         @foreach($all_reg as $regn)
-                                            <div class="tab-pane show {{$loop->first ? 'show active' : ''}}" id="{{$regn->region}}">
+                                            <div class="tab-pane show {{$loop->first ? 'show active' : ''}}"
+                                                 id="{{$regn->region}}">
                                                 <?php
                                                 $countrys = \App\Models\region_country::where('region', $regn->region)->get();
                                                 ?>
@@ -157,14 +163,16 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Job Title <span
                                                         class="text-danger">*</span></label>
-                                                <input type="text" name="job_title" class="form-control job_title"  required>
+                                                <input type="text" name="job_title" class="form-control job_title"
+                                                       required>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label>What specific tasks need to be Completed? <span
                                                         class="text-danger">*</span></label>
-                                                <textarea class="form-control specific_task" name="specific_task" cols="7" rows="7"
+                                                <textarea class="form-control specific_task" name="specific_task"
+                                                          cols="7" rows="7"
                                                           placeholder="Write here..." required></textarea>
                                             </div>
                                         </div>
@@ -172,7 +180,8 @@
                                             <div class="mb-3">
                                                 <label>Required proof the job was Completed <span
                                                         class="text-danger">*</span></label>
-                                                <textarea class="form-control require_proof" name="require_proof" cols="7" rows="7"
+                                                <textarea class="form-control require_proof" name="require_proof"
+                                                          cols="7" rows="7"
                                                           placeholder="Write here..." required></textarea>
                                             </div>
                                         </div>
@@ -180,8 +189,9 @@
                                             <div class="mb-3">
                                                 <label>Thumbnail Image</label>
                                                 <br>
-                                                <img src="https://discountseries.com/wp-content/uploads/2017/09/default.jpg"
-                                                     style="width: 100%;height: 200px;" id="wizardPicturePreview">
+                                                <img
+                                                    src="https://discountseries.com/wp-content/uploads/2017/09/default.jpg"
+                                                    style="width: 100%;height: 200px;" id="wizardPicturePreview">
                                                 <input type="file" name="thumbnail" class="form-control" id="fileup">
                                             </div>
                                         </div>
@@ -203,7 +213,8 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Worker Need <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" name="worker_need" class="form-control worker_need" value="1"
+                                                    <input type="text" name="worker_need"
+                                                           class="form-control worker_need" value="1"
                                                            placeholder="Enter here..." required>
                                                 </div>
                                             </div>
@@ -221,7 +232,8 @@
                                                 <div class="mb-3">
                                                     <label>Require Screenshots <span
                                                             class="text-danger">*</span></label>
-                                                    <input type="text" name="screenshot" class="form-control screen_short" value="1"
+                                                    <input type="text" name="screenshot"
+                                                           class="form-control screen_short" value="1"
                                                            placeholder="Enter here..." required>
                                                 </div>
                                             </div>
@@ -242,23 +254,29 @@
                                                     Cost</h5>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text">$</span>
-                                                    <input type="text" name="est_job_cost" class="form-control est_job_cost"
+                                                    <input type="text" name="est_job_cost"
+                                                           class="form-control est_job_cost"
                                                            placeholder="Enter here..." readonly>
                                                 </div>
-                                                <p class="text-danger text-center">My Balance {{$gen_settings->site_currency}} {{number_format(Auth::user()->balance,2)}}</p>
-                                                <p class="text-danger text-center">Minimum spend {{$gen_settings->site_currency}} {{number_format($gen_settings->job_post_min_amt,2)}}</p>
+                                                <p class="text-danger text-center">My
+                                                    Balance {{$gen_settings->site_currency}} {{number_format(Auth::user()->balance,2)}}</p>
+                                                <p class="text-danger text-center">Minimum
+                                                    spend {{$gen_settings->site_currency}} {{number_format($gen_settings->job_post_min_amt,2)}}</p>
                                                 <div class="text-center">
                                                     <button type="button"
                                                             class="btn btn-sm btn-warning">Please
-                                                        Deposit</button>
+                                                        Deposit
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="text-end">
-                                    <button type="button" class="btn btn-primary submit_job" id="submit_job" data-bs-toggle="modal"
-                                            data-bs-target="#success-msg">Submit</button>
+                                    <button type="button" class="btn btn-primary submit_job" id="submit_job"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#success-msg">Submit
+                                    </button>
                                 </div>
                             </div>
                         </div>

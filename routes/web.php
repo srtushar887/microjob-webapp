@@ -100,6 +100,9 @@ Route::group(['middleware' => ['auth']], function () {
         //transaction
         Route::get('/transaction', [Controllers\User\UserTransactionController::class, 'all_transaction'])->name('user.all.transaction');
 
+        //notifications
+        Route::get('/notifications', [Controllers\User\UserNotificationsController::class, 'notifications'])->name('user.all.notification');
+
         //profile
         Route::get('/my-profile', [Controllers\User\UserController::class, 'my_profile'])->name('user.profile');
         Route::post('/my-profile-update', [Controllers\User\UserController::class, 'my_profile_update'])->name('user.profile.update');
@@ -174,6 +177,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
 
         //payment gateway
         Route::get('/payment-gateway', [Controllers\Admin\AdminGatewayController::class, 'payment_gateway'])->name('admin.payment.gateway');
+        Route::get('/payment-gateway-edit/{id}', [Controllers\Admin\AdminGatewayController::class, 'payment_gateway_edit'])->name('admin.payment.gateway.edit');
         Route::post('/payment-gateway-update', [Controllers\Admin\AdminGatewayController::class, 'payment_gateway_update'])->name('admin.payment.gateway.update');
 
         //deposit

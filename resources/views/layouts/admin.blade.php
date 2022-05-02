@@ -2,32 +2,34 @@
 <html lang="en" data-layout="vertical" data-topbar="light" data-sidebar="dark" data-sidebar-size="lg">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesbrand" name="author"/>
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/favicon.ico">
-
 
 
     <!-- Layout config Js -->
     <script src="{{asset('assets/dashboard/')}}/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css"/>
     <!-- custom Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/dashboard/')}}/css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('assets/dashboard/')}}/css/custom.css" rel="stylesheet" type="text/css"/>
     <!-- DataTables -->
-    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css"
+          rel="stylesheet" type="text/css"/>
 
     <!-- Responsive datatable examples -->
-    <link href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link
+        href="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"
+        rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -45,7 +47,7 @@
                                     <img src="{{asset('assets/dashboard/')}}/images/logo-sm.png" alt="" height="22">
                                 </span>
                             <span class="logo-lg">
-                                    <img src="{{asset('assets/dashboard/')}}/images/logo-dark.png" alt="" height="17">
+                                    <img src="{{asset('assets/dashboard/')}}/images/logo.png" alt="" height="17">
                                 </span>
                         </a>
                         <a href="index.html" class="logo logo-light">
@@ -53,10 +55,19 @@
                                     <img src="{{asset('assets/dashboard/')}}/images/logo-sm.png" alt="" height="22">
                                 </span>
                             <span class="logo-lg">
-                                    <img src="{{asset('assets/dashboard/')}}/images/logo-light.png" alt="" height="17">
+                                    <img src="{{asset('assets/dashboard/')}}/images/logo.png" alt="" height="17">
                                 </span>
                         </a>
                     </div>
+
+                    <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger"
+                            id="topnav-hamburger-icon">
+                    <span class="hamburger-icon">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                    </button>
 
 
                 </div>
@@ -358,7 +369,8 @@
                                 <div class="tab-pane fade p-4" id="alerts-tab" role="tabpanel"
                                      aria-labelledby="alerts-tab">
                                     <div class="w-25 w-sm-50 pt-3 mx-auto">
-                                        <img src="{{asset('assets/dashboard/')}}/images/svg/bell.svg" class="img-fluid" alt="user-pic">
+                                        <img src="{{asset('assets/dashboard/')}}/images/svg/bell.svg" class="img-fluid"
+                                             alt="user-pic">
                                     </div>
                                     <div class="text-center pb-5 mt-2">
                                         <h6 class="fs-18 fw-semibold lh-base">Hey! You have no any notifications
@@ -373,9 +385,11 @@
                                 aria-haspopup="true" aria-expanded="false">
                                 <span class="d-flex align-items-center">
                                     <img class="rounded-circle header-profile-user"
-                                         src="{{asset('assets/dashboard/')}}/images/users/avatar-1.jpg" alt="Header Avatar">
+                                         src="{{asset('assets/dashboard/')}}/images/users/avatar-1.jpg"
+                                         alt="Header Avatar">
                                     <span class="text-start ms-xl-2">
-                                        <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
+                                        <span
+                                            class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
                                         <span
                                             class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Admin</span>
                                     </span>
@@ -384,30 +398,17 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
                             <h6 class="dropdown-header">Welcome Anna!</h6>
-                            <a class="dropdown-item" href="pages-profile.html"><i
-                                    class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Profile</span></a>
-                            <a class="dropdown-item" href="apps-chat.html"><i
-                                    class="mdi mdi-message-text-outline text-muted fs-16 align-middle me-1"></i>
-                                <span class="align-middle">Messages</span></a>
-                            <a class="dropdown-item" href="apps-tasks-kanban.html"><i
-                                    class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i>
-                                <span class="align-middle">Taskboard</span></a>
-                            <a class="dropdown-item" href="pages-faqs.html"><i
-                                    class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Help</span></a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Balance : <b>$5971.67</b></span></a>
-                            <a class="dropdown-item" href="pages-profile-settings.html"><span
-                                    class="badge bg-soft-success text-success mt-1 float-end">New</span><i
-                                    class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Settings</span></a>
                             <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
                                     class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Lock screen</span></a>
-                            <a class="dropdown-item" href="auth-logout-basic.html"><i
+                                    class="align-middle">Profile</span></a>
+                            <a class="dropdown-item" href="auth-lockscreen-basic.html"><i
+                                    class="mdi mdi-lock text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Change Password</span></a>
+                            <a class="dropdown-item" href="{{route('admin.logout')}}"><i
                                     class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle" data-key="t-logout">Logout</span></a>
                         </div>
@@ -426,7 +427,7 @@
                         <img src="{{asset('assets/dashboard/')}}/images/logo-sm.png" alt="" height="22">
                     </span>
                 <span class="logo-lg">
-                        <img src="{{asset('assets/dashboard/')}}/images/logo-dark.png" alt="" height="17">
+                        <img src="{{asset('assets/dashboard/')}}/images/logo.png" alt="" height="17">
                     </span>
             </a>
             <!-- Light Logo-->
@@ -435,7 +436,8 @@
                         <img src="{{asset('assets/dashboard/')}}/images/logo-sm.png" alt="" height="22">
                     </span>
                 <span class="logo-lg">
-                        <img src="{{asset('assets/dashboard/')}}/images/logo-light.png" alt="" height="17">
+                        <img src="{{asset('assets/dashboard/')}}/images/logo.png" alt=""
+                             style="height: 46px;background-color: whitesmoke">
                     </span>
             </a>
             <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -474,10 +476,12 @@
                         <div class="collapse menu-dropdown" id="sidebarDashboards">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.job.main.category')}}" class="nav-link" data-key="t-crm"> Main Category </a>
+                                    <a href="{{route('admin.job.main.category')}}" class="nav-link" data-key="t-crm">
+                                        Main Category </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.job.sub.category')}}" class="nav-link" data-key="t-ecommerce"> Sub Category </a>
+                                    <a href="{{route('admin.job.sub.category')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Sub Category </a>
                                 </li>
                             </ul>
                         </div>
@@ -485,23 +489,31 @@
 
 
                     <li class="nav-item">
+                        <?php
+                        $count_job = \App\Models\all_job::where('job_status', 1)->count();
+                        ?>
                         <a class="nav-link menu-link" href="#jonmanagement" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Job Management</span>
+                            <span class="badge badge-pill bg-danger" data-key="t-new">{{$count_job}}</span>
                         </a>
                         <div class="collapse menu-dropdown" id="jonmanagement">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.all.jobs')}}" class="nav-link" data-key="t-crm"> All Jobs </a>
+                                    <a href="{{route('admin.all.jobs')}}" class="nav-link" data-key="t-crm"> All
+                                        Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pending.jobs')}}" class="nav-link" data-key="t-ecommerce"> Pending Jobs </a>
+                                    <a href="{{route('admin.pending.jobs')}}" class="nav-link" data-key="t-ecommerce">
+                                        Pending Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.approved.jobs')}}" class="nav-link" data-key="t-ecommerce"> Approved Jobs </a>
+                                    <a href="{{route('admin.approved.jobs')}}" class="nav-link" data-key="t-ecommerce">
+                                        Approved Jobs </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.rejected.jobs')}}" class="nav-link" data-key="t-ecommerce"> Rejected Jobs </a>
+                                    <a href="{{route('admin.rejected.jobs')}}" class="nav-link" data-key="t-ecommerce">
+                                        Rejected Jobs </a>
                                 </li>
                             </ul>
                         </div>
@@ -515,7 +527,7 @@
 
                     <li class="nav-item">
                         <?php
-                        $count_dep = \App\Models\user_deposit::where('status',0)->count();
+                        $count_dep = \App\Models\user_deposit::where('status', 0)->count();
                         ?>
                         <a class="nav-link menu-link" href="#deposit" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -525,16 +537,20 @@
                         <div class="collapse menu-dropdown" id="deposit">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.all.deposit')}}" class="nav-link" data-key="t-crm"> All Deposit </a>
+                                    <a href="{{route('admin.all.deposit')}}" class="nav-link" data-key="t-crm"> All
+                                        Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pending.deposit')}}" class="nav-link" data-key="t-ecommerce"> Pending Deposit </a>
+                                    <a href="{{route('admin.pending.deposit')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Pending Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.approved.deposit')}}" class="nav-link" data-key="t-ecommerce"> Approved Deposit </a>
+                                    <a href="{{route('admin.approved.deposit')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Approved Deposit </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.rejected.deposit')}}" class="nav-link" data-key="t-ecommerce"> Rejected Deposit </a>
+                                    <a href="{{route('admin.rejected.deposit')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Rejected Deposit </a>
                                 </li>
                             </ul>
                         </div>
@@ -542,7 +558,7 @@
 
                     <li class="nav-item">
                         <?php
-                            $count_with = \App\Models\withdraw::where('status',0)->count();
+                        $count_with = \App\Models\withdraw::where('status', 0)->count();
                         ?>
                         <a class="nav-link menu-link" href="#userwithdraw" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
@@ -553,16 +569,20 @@
                         <div class="collapse menu-dropdown" id="userwithdraw">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All Withdraw </a>
+                                    <a href="{{route('admin.all.withdraw')}}" class="nav-link" data-key="t-crm"> All
+                                        Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.pending.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Pending Withdraw </a>
+                                    <a href="{{route('admin.pending.withdraw')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Pending Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.approved.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Approved Withdraw </a>
+                                    <a href="{{route('admin.approved.withdraw')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Approved Withdraw </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('admin.rejected.withdraw')}}" class="nav-link" data-key="t-ecommerce"> Rejected Withdraw </a>
+                                    <a href="{{route('admin.rejected.withdraw')}}" class="nav-link"
+                                       data-key="t-ecommerce"> Rejected Withdraw </a>
                                 </li>
                             </ul>
                         </div>
@@ -606,7 +626,8 @@
                     <div class="col-sm-6">
                         <script>
                             document.write(new Date().getFullYear())
-                        </script> © Velzon.
+                        </script>
+                        © Velzon.
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
@@ -631,17 +652,22 @@
 <script src="{{asset('assets/dashboard/')}}/libs/node-waves/waves.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/libs/feather-icons/feather.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/js/pages/plugins/lord-icon-2.1.0.js"></script>
+<script src="{{asset('assets/dashboard/')}}/js/plugins.js"></script>
 
 
-
+<!--Swiper slider js-->
+<script src="{{asset('assets/dashboard/')}}/libs/swiper/swiper-bundle.min.js"></script>
+<script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
 <!-- Required datatable js -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 
 <!-- Responsive examples -->
-<script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
+<script
+    src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script
+    src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
 <script>
     jQuery(window).on('load', function () {
         jQuery("#preloader").delay(250).fadeOut(250);
@@ -650,6 +676,10 @@
 
 {{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
 @yield('js')
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+@include('layouts.message')
+
 </body>
 
 </html>

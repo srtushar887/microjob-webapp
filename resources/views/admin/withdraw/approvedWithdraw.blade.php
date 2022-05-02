@@ -39,7 +39,8 @@
 
 
 
-    <div class="modal fade" id="editwithmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="editwithmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -57,10 +58,16 @@
                             </select>
                             <input type="hidden" class="form-control edit_with_id" name="edit_with_id">
                         </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Comment</label>
+                            <textarea class="form-control" cols="5" rows="5"
+                                      name="with_comment">{!! $gen->default_dep_msg !!}</textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" >Update</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
@@ -69,7 +76,8 @@
 
 
 
-    <div class="modal fade" id="deletewithmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="deletewithmodal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -105,8 +113,7 @@
             $('.delete_with_id').val(id);
         }
 
-        function editwith(id)
-        {
+        function editwith(id) {
             $('.edit_with_id').val(id);
         }
 
@@ -114,51 +121,50 @@
         $(document).ready(function () {
 
 
-            let getAllWithdraw = () =>{
+            let getAllWithdraw = () => {
                 $('#allwithdraw').DataTable().destroy();
                 $('#allwithdraw').DataTable({
                     "processing": true,
                     "serverSide": true,
                     "ajax": "{{ route('admin.approved.withdraw.get') }}",
                     columns: [
-                        { data: 'transaction_id', name: 'transaction_id',class: 'text-center' },
-                        { data: 'user.email', name: 'user.email',class: 'text-center' },
+                        {data: 'transaction_id', name: 'transaction_id', class: 'text-center'},
+                        {data: 'user.email', name: 'user.email', class: 'text-center'},
                         {
-                            data:'withdraw_type',class: 'text-center',
-                            render:function (data) {
-                                if(data == 1){
+                            data: 'withdraw_type', class: 'text-center',
+                            render: function (data) {
+                                if (data == 1) {
                                     return 'Bkash';
-                                }else if(data == 2){
+                                } else if (data == 2) {
                                     return 'Rocket';
-                                }else {
+                                } else {
                                     return 'not set'
                                 }
                             }
                         },
-                        { data: 'receiver_number', name: 'receiver_number',class: 'text-center' },
-                        { data: 'amount', name: 'amount',class: 'text-center' },
+                        {data: 'receiver_number', name: 'receiver_number', class: 'text-center'},
+                        {data: 'amount', name: 'amount', class: 'text-center'},
                         {
-                            data:'status',class: 'text-center',
-                            render:function (data) {
-                                if(data == 0){
+                            data: 'status', class: 'text-center',
+                            render: function (data) {
+                                if (data == 0) {
                                     return 'Pending';
-                                }else if(data == 1){
+                                } else if (data == 1) {
                                     return 'Completed';
-                                }else if(data == 2){
+                                } else if (data == 2) {
                                     return 'Rejected';
-                                }else {
+                                } else {
                                     return 'not set'
                                 }
                             }
                         },
-                        { data: 'created_at', name: 'created_at',class: 'text-center' },
-                        {data: 'action', name: 'action', orderable: false, searchable: false,class: 'text-center'},
+                        {data: 'created_at', name: 'created_at', class: 'text-center'},
+                        {data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'},
                     ]
                 });
             };
 
             getAllWithdraw();
-
 
 
         })
