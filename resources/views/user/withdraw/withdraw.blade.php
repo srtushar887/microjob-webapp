@@ -42,11 +42,13 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="validationDefault01" class="form-label">USD Rate</label>
-                                <input type="text" class="form-control usd_rate" name="usd_rate" value="{{$gen_settings->usd_rate}}" readonly>
+                                <input type="text" class="form-control usd_rate" name="usd_rate"
+                                       value="{{$gen_settings->usd_rate}}" readonly>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationDefault01" class="form-label">Total USD</label>
-                                <input type="text" class="form-control total_usd" name="total_usd" value="0.00" readonly>
+                                <input type="text" class="form-control total_usd" name="total_usd" value="0.00"
+                                       readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="validationDefault01" class="form-label">Receiver Number</label>
@@ -59,8 +61,6 @@
                             </div>
                         </form>
                     </div>
-
-
 
 
                 </div>
@@ -92,7 +92,7 @@
                                 <tr>
                                     <td>{{$with->transaction_id}}</td>
                                     <td>Withdraw</td>
-                                    <td>{{$with->amount}}</td>
+                                    <td>{{$gnl->site_currency}} {{number_format($with->amount,2)}}</td>
                                     <td>
                                         {{\Carbon\Carbon::parse($with->created_at)->format('Y-m-d')}}
                                     </td>
@@ -133,20 +133,20 @@
                 let dep_id = $(this).val();
 
                 $.ajax({
-                    type : "POST",
+                    type: "POST",
                     url: "{{route('user.deposit.get.gateway.details')}}",
-                    data : {
-                        '_token' : "{{csrf_token()}}",
-                        'dep_id' : dep_id,
+                    data: {
+                        '_token': "{{csrf_token()}}",
+                        'dep_id': dep_id,
                     },
-                    success:function(data){
+                    success: function (data) {
                         console.log(data);
-                        if (data){
+                        if (data) {
                             $('.gateway_note').empty();
                             let details = `<p class="gateway_note">${data.gateway_note}</p>`;
                             $('.gateway_note').replaceWith(details);
                             $('.details_info').show();
-                        }else {
+                        } else {
                             $('.details_info').hide();
                         }
 
@@ -160,7 +160,6 @@
                 let usd_rate = $('.usd_rate').val();
                 let to_usd = am * usd_rate;
                 $('.total_usd').val(to_usd);
-
 
 
             })

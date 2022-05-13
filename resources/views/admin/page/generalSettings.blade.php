@@ -124,9 +124,9 @@
 
 
     <script>
-        CKEDITOR.replace('job-msg');
-        CKEDITOR.replace('dep-msg');
-        CKEDITOR.replace('wit-msg');
+        // CKEDITOR.replace('job-msg');
+        // CKEDITOR.replace('dep-msg');
+        // CKEDITOR.replace('wit-msg');
     </script>
 
 @endsection

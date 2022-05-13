@@ -98,7 +98,7 @@
                                 <tr>
                                     <td>{{$dep->transaction_id}}</td>
                                     <td>Deposit</td>
-                                    <td>{{$dep->amount}}</td>
+                                    <td>{{$gnl->site_currency}} {{number_format($dep->amount,2)}}</td>
                                     <td>
                                         {{\Carbon\Carbon::parse($dep->created_at)->format('Y-m-d')}}
                                     </td>

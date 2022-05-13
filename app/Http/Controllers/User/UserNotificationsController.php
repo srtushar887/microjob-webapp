@@ -16,4 +16,14 @@ class UserNotificationsController extends Controller
             ->paginate(15);
         return view('user.notification.notificationList', compact('notifications'));
     }
+
+
+    public function notifications_status_change(Request $request)
+    {
+        $notification = user_notification::where('id', $request->user_noti_id)->first();
+        $notification->is_view = 2;
+        $notification->save();
+        return back()->with('success', 'Notification Marked as Read');
+    }
+
 }

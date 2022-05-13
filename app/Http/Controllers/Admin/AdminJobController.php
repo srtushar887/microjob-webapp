@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\all_job;
+use App\Models\general_setting;
 use App\Models\User;
 use App\Models\user_notification;
 use Carbon\Carbon;
@@ -43,7 +44,8 @@ class AdminJobController extends Controller
     public function job_details($id)
     {
         $job_edit = all_job::where('id', $id)->first();
-        return view('admin.jobs.jobDetails', compact('job_edit'));
+        $gen = general_setting::first();
+        return view('admin.jobs.jobDetails', compact('job_edit', 'gen'));
     }
 
     public function job_details_update(Request $request)

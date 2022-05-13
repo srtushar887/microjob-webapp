@@ -52,10 +52,48 @@
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-light " data-bs-toggle="modal"
-                                                data-bs-target="#editdepositmodal">View
+                                                data-bs-target="#viewnotification{{$noti->id}}">View
                                         </button>
                                     </td>
                                 </tr>
+
+
+
+                                <div class="modal fade" id="viewnotification{{$noti->id}}" data-bs-backdrop="static"
+                                     data-bs-keyboard="false" tabindex="-1"
+                                     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <form action="{{route('user.all.notification.update.status')}}" method="post">
+                                            @csrf
+
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Notification
+                                                        Details</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>{!! $noti->description !!}</label>
+                                                        <input type="hidden" class="form-control " name="user_noti_id"
+                                                               value="{{$noti->id}}">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary" id="deleteMainCat">
+                                                        Mark as Read
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
                             @endforeach
 
                             </tbody><!-- end tbody -->

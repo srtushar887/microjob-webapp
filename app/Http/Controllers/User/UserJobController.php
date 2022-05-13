@@ -5,9 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\all_job;
 use App\Models\all_job_country;
+use App\Models\apply_member_report;
 use App\Models\general_setting;
 use App\Models\job_apply;
 use App\Models\job_main_category;
+use App\Models\job_report;
 use App\Models\job_sub_category;
 use App\Models\region_country;
 use App\Models\User;
@@ -26,25 +28,19 @@ class UserJobController extends Controller
     {
         $all_reg = region_country::distinct()->select('region')->where('region', '!=', '')->get();
         $gen_settings = general_setting::first();
-        return view('user.job.postJob',compact('all_reg','gen_settings'));
+        return view('user.job.postJob', compact('all_reg', 'gen_settings'));
     }
 
     public function post_job_get_all_main_cat(Request $request)
     {
-        if ($request->coun_id != null) {
-            $main_cats = job_main_category::where('region_name', $request->reg_name)->whereIn('country_id', $request->coun_id)->get();
-        } else {
-            $main_cats = [];
-        }
+        $main_cats = job_main_category::where('region_name', $request->reg_name)->get();
 
         return response()->json($main_cats, 200);
     }
 
     public function post_job_get_all_sub_cat(Request $request)
     {
-        $sub_cats = job_sub_category::where('region_name', $request->reg_name)
-            ->whereIn('country_id', $request->coun_id)
-            ->where('main_cat_id', $request->main_cat)->get();
+        $sub_cats = job_sub_category::where('main_cat_id', $request->main_cat)->get();
         return response()->json($sub_cats);
     }
 
@@ -58,23 +54,23 @@ class UserJobController extends Controller
     {
         $gen_set = general_setting::first();
 
-        if (Auth::user()->balance < $request->est_job_cost){
-            return response()->json('balance_error',200);
+        if (Auth::user()->balance < $request->est_job_cost) {
+            return response()->json('balance_error', 200);
         }
 
 
-        $check_job = all_job::select('id','job_id')->orderBy('id','desc')->count();
+        $check_job = all_job::select('id', 'job_id')->orderBy('id', 'desc')->count();
         $job_count = $check_job + 1;
 
         if ($job_count < 10) {
-            $job_id = '0000'.$job_count;
-        }elseif ($job_count >= 10 && $job_count <= 99){
-            $job_id = '000'.$job_count;
-        }elseif ($job_count >= 100 && $job_count <= 999){
-            $job_id = '00'.$job_count;
-        }elseif ($job_count >= 1000 && $job_count <= 9999){
-            $job_id = '0'.$job_count;
-        }else{
+            $job_id = '0000' . $job_count;
+        } elseif ($job_count >= 10 && $job_count <= 99) {
+            $job_id = '000' . $job_count;
+        } elseif ($job_count >= 100 && $job_count <= 999) {
+            $job_id = '00' . $job_count;
+        } elseif ($job_count >= 1000 && $job_count <= 9999) {
+            $job_id = '0' . $job_count;
+        } else {
             $job_id = $job_count;
         }
 
@@ -106,7 +102,7 @@ class UserJobController extends Controller
 
         if ($gen_set->job_auto_post == 1) {
             $new_job->job_status = 2;
-        }else{
+        } else {
             $new_job->job_status = 1;
         }
 
@@ -115,9 +111,9 @@ class UserJobController extends Controller
         $data = $request->all();
 
         if (isset($data['country_name'])) {
-            for ($i=0;$i<count($data['country_name']);$i++){
+            for ($i = 0; $i < count($data['country_name']); $i++) {
 
-                $coun_name = region_country::where('id',$data['country_name'][$i])->first();
+                $coun_name = region_country::where('id', $data['country_name'][$i])->first();
 
                 $new_coun = new all_job_country();
                 $new_coun->user_id = Auth::user()->id;
@@ -129,47 +125,45 @@ class UserJobController extends Controller
         }
 
 
-        $user = User::where('id',Auth::user()->id)->first();
+        $user = User::where('id', Auth::user()->id)->first();
         $user->balance = $user->balance - $new_job->est_job_cost;
         $user->save();
 
 
         $act = new user_activity();
         $act->user_id = $user->id;
-        $act->activity = "Created New Job. JOB ID : ".$new_job->job_id;
+        $act->activity = "Created New Job. JOB ID : " . $new_job->job_id;
         $act->created_date = Carbon::now()->format('Y-m-d');
         $act->save();
 
 
-
-        return response()->json('job_created',200);
+        return response()->json('job_created', 200);
     }
 
 
     public function find_job()
     {
         $all_reg = region_country::distinct()->select('region')->where('region', '!=', '')->get();
-        return view('user.job.findJob',compact('all_reg'));
+        return view('user.job.findJob', compact('all_reg'));
     }
 
 
     public function job_find_coun_by_reg(Request $request)
     {
-        $country = region_country::where('region',$request->reg_fil)->get();
-        return response()->json($country,200);
+        $country = region_country::where('region', $request->reg_fil)->get();
+        return response()->json($country, 200);
     }
 
-    public function job_find_mcat_by_coun(Request $request)
+    public function job_find_mcat_by_reg(Request $request)
     {
-        $m_cats = job_main_category::where('region_name',$request->reg_fil)->where('country_id',$request->country_filter)->get();
+        $m_cats = job_main_category::where('region_name', $request->reg_fil)->get();
         return response()->json($m_cats);
     }
 
     public function job_find_scat_by_mcat(Request $request)
     {
-        $s_cats = job_sub_category::where('region_name',$request->reg_fil)
-            ->where('country_id',$request->country_filter)
-            ->where('main_cat_id',$request->mcat_filter)
+        $s_cats = job_sub_category::where('region_name', $request->reg_fil)
+            ->where('main_cat_id', $request->mcat_filter)
             ->get();
         return response()->json($s_cats);
     }
@@ -182,22 +176,22 @@ class UserJobController extends Controller
         $mcat_filter = $request->mcat_filter;
         $scat_filter = $request->scat_filter;
         $search_title = $request->search_title;
-        $sql = "SELECT * FROM all_jobs WHERE job_status=1 ";
+        $sql = "SELECT * FROM all_jobs WHERE job_status=2 ";
 
-        if (isset($reg_fil)){
+        if (isset($reg_fil)) {
             $sql .= "AND region_name='$reg_fil' ";
         }
 
-        if (isset($mcat_filter) && $mcat_filter != 0){
+        if (isset($mcat_filter) && $mcat_filter != 0) {
             $sql .= "AND main_category=$mcat_filter ";
         }
 
-        if (isset($scat_filter) && $scat_filter != 0){
+        if (isset($scat_filter) && $scat_filter != 0) {
             $sql .= "AND sub_category=$scat_filter ";
         }
 
-        if (isset($search_title)){
-            if ($search_title != null || $search_title != ''){
+        if (isset($search_title)) {
+            if ($search_title != null || $search_title != '') {
                 $sql .= "AND job_title LIKE '%$search_title%' ";
             }
 
@@ -210,9 +204,9 @@ class UserJobController extends Controller
 
         $all_jobs = $this->arrayPaginator($query_exe, $request);
         return response()->json([
-            'notices'=> $all_jobs,
-            'view' =>View::make('user.job.include.findJobTbl',compact('all_jobs'))->render(),
-            'pagination'=> (string) $all_jobs->links()
+            'notices' => $all_jobs,
+            'view' => View::make('user.job.include.findJobTbl', compact('all_jobs'))->render(),
+            'pagination' => (string)$all_jobs->links()
         ]);
     }
 
@@ -225,19 +219,19 @@ class UserJobController extends Controller
         $search_title = $request->search_title;
         $sql = "SELECT * FROM all_jobs WHERE job_status=1 ";
 
-        if (isset($reg_fil)){
+        if (isset($reg_fil)) {
             $sql .= "AND region_name='$reg_fil' ";
         }
 
-        if (isset($mcat_filter) && $mcat_filter != 0){
+        if (isset($mcat_filter) && $mcat_filter != 0) {
             $sql .= "AND main_category=$mcat_filter ";
         }
 
-        if (isset($scat_filter) && $scat_filter != 0){
+        if (isset($scat_filter) && $scat_filter != 0) {
             $sql .= "AND sub_category=$scat_filter ";
         }
 
-        if (isset($search_title) && $search_title != null){
+        if (isset($search_title) && $search_title != null) {
             $sql .= "AND job_title LIKE '%$search_title%' ";
         }
 
@@ -247,30 +241,49 @@ class UserJobController extends Controller
 
         $all_jobs = $this->arrayPaginator($query_exe, $request);
         return response()->json([
-            'notices'=> $all_jobs,
-            'view' =>View::make('user.job.include.findJobTbl',compact('all_jobs'))->render(),
-            'pagination'=> (string) $all_jobs->links()
+            'notices' => $all_jobs,
+            'view' => View::make('user.job.include.findJobTbl', compact('all_jobs'))->render(),
+            'pagination' => (string)$all_jobs->links()
         ]);
     }
 
 
     public function job_details($id)
     {
-        $job_details = all_job::where('id',$id)->first();
-        $applied_user = job_apply::select('id','user_id','job_id')->where('job_id',$id)->get();
-        return view('user.job.jobDetails',compact('job_details','applied_user'));
+        $job_details = all_job::where('id', $id)->first();
+        $applied_user = job_apply::select('id', 'user_id', 'job_id')->where('job_id', $id)->get();
+        return view('user.job.jobDetails', compact('job_details', 'applied_user'));
+    }
+
+
+    public function job_report_submit(Request $request)
+    {
+        $new_report = new job_report();
+        $new_report->user_id = Auth::user()->id;
+        $new_report->job_id = $request->job_id;
+        $new_report->report_summery = $request->report_summery;
+        $new_report->save();
+        return back()->with('success', 'Job Report Submited Successfully');
     }
 
 
     public function job_apply($id)
     {
+        $gen_set = general_setting::first();
+
         $new_job_apply = new job_apply();
         $new_job_apply->user_id = Auth::user()->id;
         $new_job_apply->job_id = $id;
-        $new_job_apply->task_name = "TASK ".rand(000,999).$id.rand(00,99).Auth::user()->id.rand(000,999);
+        $new_job_apply->task_name = "TASK-" . time();
         $new_job_apply->end_time = null;
         $new_job_apply->status = 0;
         $new_job_apply->is_submit = 0;
+        if ($gen_set->auto_post_date == 1) {
+            $new_job_apply->auto_approve_date = Carbon::now()->addDay($gen_set->auto_post_date);
+        } else {
+            $new_job_apply->auto_approve_date = Carbon::now()->addDays($gen_set->auto_post_date);
+        }
+
         $new_job_apply->save();
 
 
@@ -280,12 +293,12 @@ class UserJobController extends Controller
         $act->created_date = Carbon::now()->format('Y-m-d');
         $act->save();
 
-        return back()->with('success','Job Successfully Applied');
+        return back()->with('success', 'Job Successfully Applied');
     }
 
     public function job_apply_submit(Request $request)
     {
-        $apply_submit = job_apply::where('id',$request->apply_id)->first();
+        $apply_submit = job_apply::where('id', $request->apply_id)->first();
 
         if ($request->hasFile('prove_one')) {
             $image = $request->file('prove_one');
@@ -317,39 +330,70 @@ class UserJobController extends Controller
         $act->created_date = Carbon::now()->format('Y-m-d');
         $act->save();
 
-        return back()->with('success','Prove Submitted Successful');
+        return back()->with('success', 'Prove Submitted Successful');
     }
 
 
     public function job_apply_members($id)
     {
-        $job_details = all_job::where('id',$id)->first();
-        $apply_jobs = job_apply::where('job_id',$id)->orderBy('id','desc')->paginate(10);
-        return view('user.job.jobApplyMembers',compact('job_details','apply_jobs'));
+        $job_details = all_job::where('id', $id)->first();
+        $apply_jobs = job_apply::where('job_id', $id)->orderBy('id', 'desc')->paginate(10);
+        return view('user.job.jobApplyMembers', compact('job_details', 'apply_jobs'));
     }
 
     public function job_apply_members_change_status(Request $request)
     {
-        $job_apply = job_apply::where('id',$request->apply_id)->first();
-        $job_apply->status = $request->status;
+
+
+        $job_apply = job_apply::where('id', $request->apply_id)->first();
+        $job_apply->is_sat = $request->is_sat;
+        if ($request->is_sat == 2) {
+            $job_apply->un_satic_comment = $request->un_satic_comment;
+        } else {
+            $request->un_satic_comment = null;
+        }
+
+        $job_apply->rating = $request->rating;
+        if ($request->is_sat == 1) {
+            $job_apply->status = 2;
+        } else {
+            $job_apply->status = 3;
+        }
+
         $job_apply->save();
-        return back()->with('success','Job Apply Status Changed Successfully');
+
+
+        return back()->with('success', 'Job Apply Status Changed Successfully');
     }
 
+    public function job_apply_members_report(Request $request)
+    {
+        $appy_data = job_apply::where('id', $request->report_apply_id)->first();
+
+        $new_report = new apply_member_report();
+        $new_report->user_id = Auth::user()->id;
+        $new_report->applied_user_id = $appy_data->user_id;
+        $new_report->apply_id = $request->report_apply_id;
+        $new_report->report_desc = $request->report_desc;
+        $new_report->save();
+
+        return back()->with('success', 'Report Submitted Successfully');
+
+    }
 
 
     public function job_edit($id)
     {
-        $job_edit = all_job::where('id',$id)->first();
-        $sub_cat = job_sub_category::where('id',$job_edit->sub_category)->first();
+        $job_edit = all_job::where('id', $id)->first();
+        $sub_cat = job_sub_category::where('id', $job_edit->sub_category)->first();
         $gen_settings = general_setting::first();
-        return view('user.job.editJob',compact('job_edit','sub_cat','gen_settings'));
+        return view('user.job.editJob', compact('job_edit', 'sub_cat', 'gen_settings'));
     }
 
 
     public function job_update(Request $request)
     {
-        $job_update = all_job::where('id',$request->job_edit_id)->first();
+        $job_update = all_job::where('id', $request->job_edit_id)->first();
 
         if ($request->hasFile('thumbnail')) {
             $image = $request->file('thumbnail');
@@ -369,11 +413,11 @@ class UserJobController extends Controller
 
         $act = new user_activity();
         $act->user_id = Auth::user()->id;
-        $act->activity = "Job Updated. JOB ID : ".$job_update->job_id;
+        $act->activity = "Job Updated. JOB ID : " . $job_update->job_id;
         $act->created_date = Carbon::now()->format('Y-m-d');
         $act->save();
 
-        return back()->with('success','Job Successfully Updated');
+        return back()->with('success', 'Job Successfully Updated');
 
     }
 
@@ -391,13 +435,9 @@ class UserJobController extends Controller
 
     public function my_jobs()
     {
-        $my_jobs = all_job::where('user_id',Auth::user()->id)->orderBy('id','desc')->paginate(10);
-        return view('user.job.myJobs',compact('my_jobs'));
+        $my_jobs = all_job::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+        return view('user.job.myJobs', compact('my_jobs'));
     }
-
-
-
-
 
 
 }

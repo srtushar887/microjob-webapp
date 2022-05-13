@@ -71,10 +71,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/find-job-get-all', [Controllers\User\UserJobController::class, 'find_job_get_all'])->name('user.find.job.get.all');
         Route::get('/find-job-get-all', [Controllers\User\UserJobController::class, 'find_job_get_all_next']);
         Route::get('/job-details/{id}', [Controllers\User\UserJobController::class, 'job_details'])->name('user.find.job.details');
+        Route::post('/job-report-submit', [Controllers\User\UserJobController::class, 'job_report_submit'])->name('user.report.job');
 
         //user find job filter
         Route::post('/job-find-coun-by-reg', [Controllers\User\UserJobController::class, 'job_find_coun_by_reg'])->name('user.job.find.coun.by.reg');
-        Route::post('/job-find-mcat-by-coun', [Controllers\User\UserJobController::class, 'job_find_mcat_by_coun'])->name('user.job.find.mcat.by.coun');
+        Route::post('/job-find-mcat-by-reg', [Controllers\User\UserJobController::class, 'job_find_mcat_by_reg'])->name('user.job.find.mcat.by.reg');
         Route::post('/job-find-scat-by-mcat', [Controllers\User\UserJobController::class, 'job_find_scat_by_mcat'])->name('user.job.find.scat.by.mcat');
 
         //apply job
@@ -84,6 +85,7 @@ Route::group(['middleware' => ['auth']], function () {
         //apply members
         Route::get('/job-apply-members/{id}', [Controllers\User\UserJobController::class, 'job_apply_members'])->name('user.job.apply.memebers');
         Route::post('/job-apply-members-change-status', [Controllers\User\UserJobController::class, 'job_apply_members_change_status'])->name('user.job.apply.memebers.change.status');
+        Route::post('/job-apply-members-report', [Controllers\User\UserJobController::class, 'job_apply_members_report'])->name('user.job.apply.memebers.submit.report');
 
         //my jobs
         Route::get('/my-jobs', [Controllers\User\UserJobController::class, 'my_jobs'])->name('user.my.jobs');
@@ -102,6 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         //notifications
         Route::get('/notifications', [Controllers\User\UserNotificationsController::class, 'notifications'])->name('user.all.notification');
+        Route::post('/notifications-status-change', [Controllers\User\UserNotificationsController::class, 'notifications_status_change'])->name('user.all.notification.update.status');
 
         //profile
         Route::get('/my-profile', [Controllers\User\UserController::class, 'my_profile'])->name('user.profile');
@@ -230,6 +233,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/sub-admins-single', [Controllers\Admin\AdminSubAdminController::class, 'sub_admins_single'])->name('admin.sub.admin.get.single');
         Route::post('/sub-admins-update', [Controllers\Admin\AdminSubAdminController::class, 'sub_admins_update'])->name('admin.sub.admin.update');
         Route::post('/sub-admins-delete', [Controllers\Admin\AdminSubAdminController::class, 'sub_admins_delete'])->name('admin.sub.admin.delete');
+
+        //job report
+        Route::get('/job-report', [Controllers\Admin\AdminReportController::class, 'job_report'])->name('admin.job.report');
+        Route::get('/job-report-get', [Controllers\Admin\AdminReportController::class, 'job_report_get'])->name('admin.job.report.get');
+
+        //job task report
+        Route::get('/job-task-report', [Controllers\Admin\AdminReportController::class, 'job_task_report'])->name('admin.job.task.report');
 
     });
 });

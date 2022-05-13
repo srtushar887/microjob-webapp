@@ -3,6 +3,7 @@
     Find Job
 @endsection
 @section('user')
+    <div class="loading">Loading</div>
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
@@ -17,15 +18,8 @@
             <select class="form-select form-select-sm reg_fil">
                 <option value="">Select Any</option>
                 @foreach($all_reg as $reg)
-                <option value="{{$reg->region}}">{{$reg->region}}</option>
+                    <option value="{{$reg->region}}">{{$reg->region}}</option>
                 @endforeach
-            </select>
-        </div>
-        <div class="me-2 mb-3">
-            <label>Country</label>
-            <select class="form-select form-select-sm country_filter">
-                <option value="">Select Any</option>
-                <option>Asia</option>
             </select>
         </div>
         <div class="me-2 mb-3">

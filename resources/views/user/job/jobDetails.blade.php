@@ -1,5 +1,6 @@
 @extends('layouts.user')
 @section('user')
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card mt-n4 mx-n4">
@@ -23,12 +24,15 @@
                                                 <div>Job ID : <span class="fw-medium">{{$job_details->id}}</span>
                                                 </div>
                                                 <div class="vr"></div>
-                                                <div>Create Date : <span class="fw-medium">{{\Carbon\Carbon::parse($job_details->created_at)->toFormattedDateString()}}</span></div>
+                                                <div>Create Date : <span
+                                                        class="fw-medium">{{\Carbon\Carbon::parse($job_details->created_at)->toFormattedDateString()}}</span>
+                                                </div>
                                                 <div class="vr"></div>
-                                                <div>Time : <span class="fw-medium">{{$job_details->est_day}} Days</span></div>
+                                                <div>Time : <span
+                                                        class="fw-medium">{{$job_details->est_day}} Days</span></div>
                                                 <div class="vr"></div>
                                                 <?php
-                                                    $cat_name = \App\Models\job_main_category::where('id',$job_details->main_category)->first();
+                                                $cat_name = \App\Models\job_main_category::where('id', $job_details->main_category)->first();
                                                 ?>
                                                 <div>Category : <span class="fw-medium">
                                                         @if ($cat_name)
@@ -37,7 +41,7 @@
                                                     </span></div>
                                                 <div class="vr"></div>
                                                 <?php
-                                                $sub_cat_name = \App\Models\job_sub_category::where('id',$job_details->sub_category)->first();
+                                                $sub_cat_name = \App\Models\job_sub_category::where('id', $job_details->sub_category)->first();
                                                 ?>
                                                 <div>Sub Category : <span class="fw-medium">
                                                         @if ($sub_cat_name)
@@ -74,7 +78,8 @@
                             </li>
                             @if ($job_details->user_id == Auth::user()->id)
                                 <li class="nav-item">
-                                    <a class="nav-link fw-semibold" href="{{route('user.job.apply.memebers',$job_details->id)}}">
+                                    <a class="nav-link fw-semibold"
+                                       href="{{route('user.job.apply.memebers',$job_details->id)}}">
                                         Applied Member
                                     </a>
                                 </li>
@@ -115,63 +120,68 @@
                         </div>
                         <!-- end card -->
                         <?php
-                        $check_apply = \App\Models\job_apply::select('id','job_id','user_id','is_submit')->where('job_id',$job_details->id)->where('user_id',Auth::user()->id)->first();
+                        $check_apply = \App\Models\job_apply::select('id', 'job_id', 'user_id', 'is_submit')->where('job_id', $job_details->id)->where('user_id', Auth::user()->id)->first();
                         ?>
                         @if ($check_apply)
-                        <div class="card">
-                            <div class="card-header align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Submit Required Work
-                                    Proof</h4>
-                            </div><!-- end card header -->
-                            <div class="card-body">
-                                @if ($check_apply->is_submit == 0)
-                                    <div class="mb-3">
-                                        <form action="{{route('user.job.apply.submit')}}" method="post" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="mb-3">
-                                                <p>প্রশ্ন : আপনি ভিডিও টি কত মিনিট দেখেছেন তা বলতে হবে
-                                                    ভিডিও শুরুতে একটি স্কিন শর্ট এবং সম্পূর্ন ভিডিও দেখে
-                                                    আরেক টি স্কিন শর্ট দিন</p>
-                                                <textarea class="form-control" rows="5" name="answer"
-                                                          placeholder="Answer client required information"></textarea>
-                                            </div>
-                                            <div class="mb-3">
-                                                <p>#1 Upload Screenshot Prove</p>
-                                                <input type="file" name="prove_one" class="form-control">
-                                                <input type="hidden" name="apply_id" value="{{$check_apply->id}}" class="form-control">
-                                            </div>
-                                            <div class="mb-3">
-                                                <p>#2 Upload Screenshot Prove</p>
-                                                <input type="file" name="prove_two" class="form-control">
-                                            </div>
-                                            <div>
-                                                @if ($check_apply->is_submit == 0)
-                                                    <button type="submit"
-                                                            class="btn btn-success" style="width: 100%">Submit</button>
-                                                @else
-                                                    <button type="button"
-                                                            class="btn btn-success" disabled>Already Submited</button>
-                                                @endif
+                            <div class="card">
+                                <div class="card-header align-items-center d-flex">
+                                    <h4 class="card-title mb-0 flex-grow-1">Submit Required Work
+                                        Proof</h4>
+                                </div><!-- end card header -->
+                                <div class="card-body">
+                                    @if ($check_apply->is_submit == 0)
+                                        <div class="mb-3">
+                                            <form action="{{route('user.job.apply.submit')}}" method="post"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="mb-3">
+                                                    <p>প্রশ্ন : আপনি ভিডিও টি কত মিনিট দেখেছেন তা বলতে হবে
+                                                        ভিডিও শুরুতে একটি স্কিন শর্ট এবং সম্পূর্ন ভিডিও দেখে
+                                                        আরেক টি স্কিন শর্ট দিন</p>
+                                                    <textarea class="form-control" rows="5" name="answer"
+                                                              placeholder="Answer client required information"></textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p>#1 Upload Screenshot Prove</p>
+                                                    <input type="file" name="prove_one" class="form-control">
+                                                    <input type="hidden" name="apply_id" value="{{$check_apply->id}}"
+                                                           class="form-control">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <p>#2 Upload Screenshot Prove</p>
+                                                    <input type="file" name="prove_two" class="form-control">
+                                                </div>
+                                                <div>
+                                                    @if ($check_apply->is_submit == 0)
+                                                        <button type="submit"
+                                                                class="btn btn-success" style="width: 100%">Submit
+                                                        </button>
+                                                    @else
+                                                        <button type="button"
+                                                                class="btn btn-success" disabled>Already Submited
+                                                        </button>
+                                                    @endif
 
-                                            </div>
-                                        </form>
-                                    </div>
-                                @else
-                                    <div class="mb-3">
-                                        <form action="{{route('user.job.apply.submit')}}" method="post" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="mb-3">
-                                                <p>YOU HAVE SUBMITTED JOB REQUIRED PROOF</p>
-                                            </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="mb-3">
+                                            <form action="{{route('user.job.apply.submit')}}" method="post"
+                                                  enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="mb-3">
+                                                    <p>YOU HAVE SUBMITTED JOB REQUIRED PROOF</p>
+                                                </div>
 
-                                        </form>
-                                    </div>
-                                @endif
+                                            </form>
+                                        </div>
+                                    @endif
 
+                                </div>
+                                <!-- end card body -->
                             </div>
-                            <!-- end card body -->
-                        </div>
-                    @endif
+                        @endif
                         <!-- end card -->
                     </div>
                     <!-- ene col -->
@@ -179,14 +189,29 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title mb-4">Apply This Job</h5>
+                                <?php
+                                $jobs_apply_count = \App\Models\job_apply::where('job_id', $job_details->id)
+                                    ->where('is_submit', '!=', null)
+                                    ->where('status', '!=', 3)
+                                    ->count();
+                                
+                                ?>
                                 @if ($job_details->user_id == Auth::user()->id)
-                                    <button type="button" class="btn btn-success d-block w-100" disabled>You Can't Apply This Job</button>
+                                    <button type="button" class="btn btn-success d-block w-100" disabled>You Can't Apply
+                                        This Job
+                                    </button>
                                 @elseif ($check_apply)
-                                    <button type="button" class="btn btn-success d-block w-100" disabled>Already Applied</button>
+                                    <button type="button" class="btn btn-success d-block w-100" disabled>Already
+                                        Applied
+                                    </button>
+                                @elseif($jobs_apply_count >= $job_details->worker_need)
+                                    <button type="button" class="btn btn-success d-block w-100" disabled>Job Closed
+                                    </button>
                                 @else
                                     <a href="{{route('user.job.apply',$job_details->id)}}">
                                         <button type="button" class="btn btn-primary d-block w-100">Apply
-                                            Now</button>
+                                            Now
+                                        </button>
                                     </a>
                                 @endif
                             </div>
@@ -202,35 +227,92 @@
                                 <div data-simplebar style="height: 235px;" class="mx-n3 px-3">
                                     @foreach ($applied_user as $app_users)
                                         <?php
-                                        $user_name = \App\Models\User::select('id','name')->where('id',$app_users->user_id)->first();
+                                        $user_name = \App\Models\User::select('id', 'name')->where('id', $app_users->user_id)->first();
                                         ?>
-                                    <div class="vstack gap-3">
-                                        <div class="d-flex align-items-center">
-                                            <div class="avatar-xs flex-shrink-0 me-3">
-                                                <img src="{{asset('assets/dashboard/')}}/images/users/avatar-2.jpg" alt=""
-                                                     class="img-fluid rounded-circle">
-                                            </div>
-                                            <div class="flex-grow-1">
+                                        <div class="vstack gap-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-xs flex-shrink-0 me-3">
+                                                    <img src="{{asset('assets/dashboard/')}}/images/users/avatar-2.jpg"
+                                                         alt=""
+                                                         class="img-fluid rounded-circle">
+                                                </div>
+                                                <div class="flex-grow-1">
                                                     <h5 class="fs-13 mb-0"><a
-                                                                              class="text-body d-block">{{$user_name->name}}</a>
+                                                            class="text-body d-block">{{$user_name->name}}</a>
                                                     </h5>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
+                                        </div>
                                         <br>
-                                @endforeach
+                                    @endforeach
 
                                 </div>
 
                             </div>
                             <!-- end card body -->
                         </div>
+
+                        @if ($job_details->user_id != Auth::user()->id)
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-4">Report This Job</h5>
+
+
+                                    <button type="button" class="btn btn-primary d-block w-100" data-bs-toggle="modal"
+                                            data-bs-target="#report">
+                                        Report Now
+                                    </button>
+
+                                </div>
+
+
+                                <div class="modal fade" id="report" data-bs-backdrop="static"
+                                     data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                                     aria-hidden="true">
+                                    <form action="{{route('user.report.job')}}" method="post">
+                                        @csrf
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Report</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label>Summery</label>
+                                                        <textarea class="form-control" cols="5" rows="5"
+                                                                  name="report_summery" required></textarea>
+                                                        <input type="hidden" value="{{$job_details->id}}"
+                                                               name="job_id">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+
+                        @endif
                         <!-- end card -->
                     </div>
+
+
                     <!-- end col -->
                 </div>
             </div>
+
+
         </div>
         <!-- end col -->
     </div>

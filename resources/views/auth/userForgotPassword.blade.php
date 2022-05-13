@@ -5,24 +5,24 @@
 <!-- Mirrored from themesbrand.com/velzon/html/default/auth-signin-basic.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Mar 2022 03:49:04 GMT -->
 <head>
 
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Login | Dolightjob</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
+    <meta content="Themesbrand" name="author"/>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/faviconnew.png">
 
     <!-- Layout config Js -->
     <script src="{{asset('assets/dashboard/')}}/js/layout.js"></script>
     <!-- Bootstrap Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <!-- Icons Css -->
-    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/icons.min.css" rel="stylesheet" type="text/css"/>
     <!-- App Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/app.min.css" rel="stylesheet" type="text/css"/>
     <!-- custom Css-->
-    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/dashboard/')}}/css/custom.min.css" rel="stylesheet" type="text/css"/>
 
 
 </head>
@@ -31,11 +31,12 @@
 
 <div class="auth-page-wrapper pt-5">
     <!-- auth page bg -->
-    <div class="auth-one-bg-position auth-one-bg"  id="auth-particles">
+    <div class="auth-one-bg-position auth-one-bg" id="auth-particles">
         <div class="bg-overlay"></div>
 
         <div class="shape">
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 viewBox="0 0 1440 120">
                 <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
             </svg>
         </div>
@@ -48,8 +49,9 @@
                 <div class="col-lg-12">
                     <div class="text-center mt-sm-5 mb-4 text-white-50">
                         <div>
-                            <a href="index.html" class="d-inline-block auth-logo">
-                                <img src="{{asset('assets/dashboard/')}}/images/logo-light.png" alt="" height="20">
+                            <a href="{{route('login')}}" class="d-inline-block auth-logo">
+                                <img src="{{asset('assets/dashboard/')}}/images/logo.png" alt=""
+                                     style="height: 50px;background-color: whitesmoke">
                             </a>
                         </div>
                     </div>
@@ -66,11 +68,13 @@
                                 <h5 class="text-primary">Reset Your Password</h5>
                             </div>
                             @if(Session::has('email_error'))
-                                <div class="alert alert-warning alert-border-left alert-dismissible fade show" role="alert">
+                                <div class="alert alert-warning alert-border-left alert-dismissible fade show"
+                                     role="alert">
                                     <i class="ri-alert-line me-3 align-middle fs-16"></i><strong>Warning</strong>
                                     - {{Session::get('email_error')}} <br>
 
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                 </div>
                             @endif
 
@@ -80,9 +84,9 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Email</label>
-                                        <input type="email" name="email" class="form-control" id="username" placeholder="Enter email" required>
+                                        <input type="email" name="email" class="form-control" id="username"
+                                               placeholder="Enter email" required>
                                     </div>
-
 
 
                                     <div class="mt-4">
@@ -97,7 +101,9 @@
                     <!-- end card -->
 
                     <div class="mt-4 text-center">
-                        <p class="mb-0">Don't have an account ? <a href="{{route('register')}}" class="fw-semibold text-primary text-decoration-underline"> Register </a> </p>
+                        <p class="mb-0"><a href="{{route('login')}}"
+                                           class="fw-semibold text-primary text-decoration-underline">Back to Login </a>
+                        </p>
                     </div>
 
                 </div>
@@ -114,7 +120,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center">
-                        <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> dolightjob. Developed by <i class="mdi mdi-heart text-danger"></i> SR Tusher</p>
+                        <p class="mb-0 text-muted">&copy;
+                            <script>document.write(new Date().getFullYear())</script>
+                            dolightjob. Developed by <i class="mdi mdi-heart text-danger"></i> SR Tusher
+                        </p>
                     </div>
                 </div>
             </div>

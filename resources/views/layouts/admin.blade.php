@@ -8,7 +8,7 @@
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
     <meta content="Themesbrand" name="author"/>
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/favicon.ico">
+    <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/faviconnew.png">
 
 
     <!-- Layout config Js -->
@@ -452,31 +452,36 @@
                 <ul class="navbar-nav" id="navbar-nav">
                     <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('admin.dashboard')}}">
+                        <a class="nav-link menu-link {{ Request::path() == 'admin' ? 'active' : '' }}"
+                           href="{{route('admin.dashboard')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('admin.general.settings')}}">
+                        <a class="nav-link menu-link {{ Request::path() == 'admin/general-settings' ? 'active' : '' }}"
+                           href="{{route('admin.general.settings')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">General Setting</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('admin.region.country')}}">
+                        <a class="nav-link menu-link {{ Request::path() == 'admin/region-country' ? 'active' : '' }}"
+                           href="{{route('admin.region.country')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Region & Country</span>
                         </a>
                     </li>
 
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarDashboards" data-bs-toggle="collapse"
+                        <a class="nav-link menu-link {{ Request::path() == 'admin/main-category' ? 'active' : '' }}"
+                           href="#sidebarDashboards" data-bs-toggle="collapse"
                            role="button" aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Job Category</span>
                         </a>
-                        <div class="collapse menu-dropdown" id="sidebarDashboards">
+                        <div class="collapse menu-dropdown " id="sidebarDashboards">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.job.main.category')}}" class="nav-link" data-key="t-crm">
+                                    <a href="{{route('admin.job.main.category')}}" class="nav-link"
+                                       data-key="t-crm">
                                         Main Category </a>
                                 </li>
                                 <li class="nav-item">
@@ -597,6 +602,19 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{route('admin.all.subadmin')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">Sub Admin</span>
+                        </a>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.job.report')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Job Report</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.job.task.report')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Job Task Report</span>
                         </a>
                     </li>
 

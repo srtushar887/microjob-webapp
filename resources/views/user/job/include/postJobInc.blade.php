@@ -2,34 +2,85 @@
 
     <script>
         $(document).ready(function () {
-            $('.country_name').change(function () {
-                let reg_name = $("input[name='region_name']:checked").val();
-                let coun_id = [];
 
-                $('.country_name').each(function () {
-                    if ($(this).prop('checked') == true) {
-                        coun_id.push($(this).val())
+
+            $('.regg_name').click(function () {
+                $('.regg_name').each(function () {
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
                     }
                 });
 
+                $('.reg_name').each(function () {
+                    $(this).prop('checked', true);
+                });
+                $(this).addClass('active');
+                $(this).closest('.regg_name').find("input[name='region_name']").prop('checked', true);
+                let a = $(this).closest('.regg_name').find("input[name='region_name']").val();
 
+
+            });
+
+
+            let reg_name = $("input[name='region_name']:checked").val();
+
+            $.ajax({
+                type: "POST",
+                url: "{{route('user.post.job.get.all.main.category')}}",
+                data: {
+                    '_token': "{{csrf_token()}}",
+                    'reg_name': reg_name,
+                },
+                success: function (data) {
+                    $('.main_cats').empty();
+                    $.each(data, function (index, value) {
+                        $('.main_cats').append(
+                            `
+                             <li class="list-inline-item mb-2 m_cat_name" data-id="${value.id}">
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-primary m_cat_btn" data-id="${value.id}"
+                                                    data-bs-toggle="tab" data-bs-target="#assignment">
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label">
+                                                        <input type="radio"
+                                                               class="form-check-input d-none main_cat_name" value="${value.id}"
+                                                               name="main_category">${value.category_name}
+                                                    </label>
+                                                </div>
+                                            </button>
+                                        </li>
+                            `
+                        );
+                    });
+
+                    $('.main_cat_name').each(function (tab, index) {
+                        if (index == 0) {
+                            tab.removeClass('active');
+                        }
+                    });
+
+
+                }
+            });
+
+
+            $(document).on('click', '.regg_name', function () {
+                let reg_name_change = $(this).data('id');
                 $.ajax({
                     type: "POST",
                     url: "{{route('user.post.job.get.all.main.category')}}",
                     data: {
                         '_token': "{{csrf_token()}}",
-                        'reg_name': reg_name,
-                        'coun_id': coun_id
+                        'reg_name': reg_name_change,
                     },
                     success: function (data) {
-                        console.log(data)
                         $('.main_cats').empty();
                         $.each(data, function (index, value) {
                             $('.main_cats').append(
                                 `
-                             <li class="list-inline-item mb-2">
+                             <li class="list-inline-item mb-2 m_cat_name" data-id="${value.id}">
                                             <button type="button"
-                                                    class="btn btn-sm btn-outline-primary"
+                                                    class="btn btn-sm btn-outline-primary m_cat_btn" data-id="${value.id}"
                                                     data-bs-toggle="tab" data-bs-target="#assignment">
                                                 <div class="form-check-inline">
                                                     <label class="form-check-label">
@@ -53,46 +104,40 @@
 
                     }
                 });
+            })
 
 
-            });
-
-
-
-
-            $(document).on('change', '.main_cat_name', function () {
+            $(document).on('click', '.m_cat_name', function () {
                 let reg_name = $("input[name='region_name']:checked").val();
-                let coun_id = [];
+                // let main_cat = $("input[name='main_category']:checked").val();
+                let main_cat = $(this).data('id');
 
-                $('.country_name').each(function () {
-                    if ($(this).prop('checked') == true) {
-                        coun_id.push($(this).val())
+
+                $('.m_cat_name').each(function () {
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
                     }
                 });
-                let main_cat = $("input[name='main_category']:checked").val();
 
-
-                console.log(reg_name);
-                console.log(coun_id);
-                console.log(main_cat);
-
-
+                $('.main_cat_name').each(function () {
+                    $(this).prop('checked', false);
+                });
+                $(this).addClass('active');
+                $(this).closest('.m_cat_name').find("input[name='main_category']").prop('checked', true);
+                $(this).closest('.m_cat_name').find("input[name='main_category']").val();
                 $.ajax({
                     type: "POST",
                     url: "{{route('user.post.job.get.all.sub.category')}}",
                     data: {
                         '_token': "{{csrf_token()}}",
-                        'reg_name': reg_name,
-                        'coun_id': coun_id,
                         'main_cat': main_cat,
                     },
                     success: function (data) {
-                        console.log(data)
                         $('.sub_cats').empty();
                         $.each(data, function (index, value) {
                             $('.sub_cats').append(
                                 `
-                            <li class="list-inline-item mb-3">
+                            <li class="list-inline-item mb-3 s_cat_name" data-id="${value.id}">
                                                     <button type="button" class="btn btn-sm btn-light">
                                                         <label class="form-check-label">
                                                             <input type="radio"
@@ -118,26 +163,37 @@
             });
 
 
-
-
             $(document).on('click', '.job-sub-category button', function () {
                 $(".job-sub-category button").removeClass("active");
                 $(this).addClass("active");
             });
 
 
-
-            $(document).on('change', '.sub_cat_name', function () {
+            $(document).on('click', '.s_cat_name', function () {
                 let sub_cat_id = $("input[name='sub_category']:checked").val();
+                let s_cat_id = $(this).data('id');
+
+                $('.s_cat_name').each(function () {
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
+                    }
+                });
+
+                $('.sub_cat_name').each(function () {
+                    $(this).prop('checked', false);
+                });
+                $(this).addClass('active');
+                $(this).closest('.s_cat_name').find("input[name='sub_category']").prop('checked', true);
+                let scat = $(this).closest('.s_cat_name').find("input[name='sub_category']").val();
+
                 $.ajax({
                     type: "POST",
                     url: "{{route('user.post.job.get.sub.category.price')}}",
                     data: {
                         '_token': "{{csrf_token()}}",
-                        'sub_cat_id': sub_cat_id,
+                        'sub_cat_id': s_cat_id,
                     },
                     success: function (data) {
-                        console.log(data)
                         $('.cat_amount').val(data.category_price);
                         $('.each_worker_earn').val(data.category_price);
                         showTotalAmount();
@@ -190,7 +246,6 @@
             };
 
 
-
             $("#fileup").change(function () {
                 $('#wizardPicturePreview').attr('src', '');
                 readURL(this);
@@ -211,105 +266,96 @@
                 $('#post_job').submit();
             })
 
-           $(document).on('submit','#post_job',function (e) {
-               e.preventDefault();
-               var formData = new FormData(this);
+
+            $(document).on('submit', '#post_job', function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+
+                let rame = $('.reg_name').val();
 
 
-               var reg_array = [];
-               $('.reg_name:checked').each(function () {
-                   reg_array.push($(this).val());
-               });
-
-               var coun_array = [];
-               $('.country_name:checked').each(function () {
-                   coun_array.push($(this).val());
-               });
-
-               console.log(reg_array)
+                let reg_name = $(".regg_name.active").data('id');
 
 
-
-               var maincat_array = [];
-               $('.main_cat_name:checked').each(function () {
-                   maincat_array.push($(this).val());
-               });
-
-               var subcat_array = [];
-               $('.sub_cat_name:checked').each(function () {
-                   subcat_array.push($(this).val());
-               });
-
-               var job_title = $('.job_title').val();
-               var specific_task = $('.specific_task').val();
-               var require_proof = $('.require_proof').val();
-               var worker_need = $('.worker_need').val();
-               var each_worker_earn = $('.each_worker_earn').val();
-               var screen_short = $('.screen_short').val();
-               var est_day = $('.est_day').val();
+                // var main_cat = $(".m_cat_name").find(".active");
+                var main_cat = $(".m_cat_name.active").data('id');
+                var scat_cat = $(".s_cat_name.active").data('id');
 
 
-               if (reg_array == null || reg_array == ""){
-                   swal("Please Select Region", "", "warning");
-               }else if (coun_array == null || coun_array == ""){
-                   swal("Please Select Country", "", "warning");
-               }else if (maincat_array == null || maincat_array == ""){
-                   swal("Please Select Main Category", "", "warning");
-               }else if (subcat_array == null || subcat_array == ""){
-                   swal("Please Select Sub Category", "", "warning");
-               }else if (job_title == null || job_title == ""){
-                   swal("Please Enter Job Title", "", "warning");
-               }else if (specific_task == null || specific_task == ""){
-                   swal("Please Enter Specific Task", "", "warning");
-               }else if (require_proof == null || require_proof == ""){
-                   swal("Please Enter Require Proof", "", "warning");
-               }else if (worker_need == null || worker_need == ""){
-                   swal("Please Enter Worker Need", "", "warning");
-               }else if (each_worker_earn == null || each_worker_earn == ""){
-                   swal("Please Enter Each Worker Earn", "", "warning");
-               }else if (screen_short == null || screen_short == ""){
-                   swal("Please Enter Screen Short Required", "", "warning");
-               }else if (est_day == null || est_day == ""){
-                   swal("Please Enter Estimated Day", "", "warning");
-               }else {
-                   $.ajax({
-                       type: 'POST',
-                       url: "{{route('user.post.job.save')}}",
-                       data: formData,
-                       cache: false,
-                       contentType: false,
-                       processData: false,
-                       success: (data) => {
-                           console.log(data);
-                           console.log(data);
-                           if (data == 'balance_error'){
-                               swal('You have Insufficient balance','warning');
-                           }
-
-                           if (data == 'job_created'){
-                               swal('Job Successfully Created','success');
-                               setTimeout(function () {
-                                   window.location.href="{{route('user.my.jobs')}}"
-                               },2000)
-
-                           }
+                var coun_array = [];
+                $('.country_name:checked').each(function () {
+                    coun_array.push($(this).val());
+                });
 
 
-                       },
-                       error: function (data) {
+                var subcat_array = [];
+                $('.sub_cat_name:checked').each(function () {
+                    subcat_array.push($(this).val());
+                });
+
+                var job_title = $('.job_title').val();
+                var specific_task = $('.specific_task').val();
+                var require_proof = $('.require_proof').val();
+                var worker_need = $('.worker_need').val();
+                var each_worker_earn = $('.each_worker_earn').val();
+                var screen_short = $('.screen_short').val();
+                var est_day = $('.est_day').val();
 
 
+                if (reg_name == null || reg_name == "") {
+                    swal("Please Select Region", "", "warning");
+                } else if (coun_array == null || coun_array == "") {
+                    swal("Please Select Country", "", "warning");
+                } else if (main_cat == null || main_cat == "") {
+                    swal("Please Select Main Category", "", "warning");
+                } else if (scat_cat == null || scat_cat == "") {
+                    swal("Please Select Sub Category", "", "warning");
+                } else if (job_title == null || job_title == "") {
+                    swal("Please Enter Job Title", "", "warning");
+                } else if (specific_task == null || specific_task == "") {
+                    swal("Please Enter Specific Task", "", "warning");
+                } else if (require_proof == null || require_proof == "") {
+                    swal("Please Enter Require Proof", "", "warning");
+                } else if (worker_need == null || worker_need == "") {
+                    swal("Please Enter Worker Need", "", "warning");
+                } else if (each_worker_earn == null || each_worker_earn == "") {
+                    swal("Please Enter Each Worker Earn", "", "warning");
+                } else if (screen_short == null || screen_short == "") {
+                    swal("Please Enter Screen Short Required", "", "warning");
+                } else if (est_day == null || est_day == "") {
+                    swal("Please Enter Estimated Day", "", "warning");
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{route('user.post.job.save')}}",
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: (data) => {
+                            if (data == 'balance_error') {
+                                swal('You have Insufficient balance', 'warning');
+                            }
 
-                       }
-                   });
-               }
+                            if (data == 'job_created') {
+                                swal('Job Successfully Created', 'success');
+                                setTimeout(function () {
+                                    window.location.href = "{{route('user.my.jobs')}}"
+                                }, 2000)
+
+                            }
 
 
+                        },
+                        error: function (data) {
 
 
-           });
+                        }
+                    });
+                }
 
 
+            });
 
 
         })
