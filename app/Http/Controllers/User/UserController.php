@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\all_job;
 use App\Models\User;
 use App\Models\user_activity;
+use App\Models\user_deposit;
+use App\Models\withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,27 +25,45 @@ class UserController extends Controller
         //First get the platform?
         if (preg_match('/linux/i', $user_agent)) {
             $platform = 'linux';
-        }
-        elseif (preg_match('/macintosh|mac os x/i', $user_agent)) {
+        } elseif (preg_match('/macintosh|mac os x/i', $user_agent)) {
             $platform = 'mac';
-        }
-        elseif (preg_match('/windows|win32/i', $user_agent)) {
+        } elseif (preg_match('/windows|win32/i', $user_agent)) {
             $platform = 'windows';
         }
 
 //        return $request->ip();
-        return view('user.index');
+
+
+        $total_jobs = all_job::select('id', 'user_id')->where('user_id', Auth::user()->id)->count();
+        $pen_jobs = all_job::select('id', 'user_id')->where('user_id', Auth::user()->id)->where('job_status', 1)->count();
+        $app_jobs = all_job::select('id', 'user_id', 'job_status')->where('user_id', Auth::user()->id)->where('job_status', 2)->count();
+        $rej_jobs = all_job::select('id', 'user_id', 'job_status')->where('user_id', Auth::user()->id)->where('job_status', 4)->count();
+        $to_dep = user_deposit::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->sum('amount');
+        $pen_dep = user_deposit::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->where('status', 0)->sum('amount');
+        $app_dep = user_deposit::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->where('status', 1)->sum('amount');
+        $rej_dep = user_deposit::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->where('status', 2)->sum('amount');
+        $tot_wid = withdraw::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->sum('amount');
+        $pen_wid = withdraw::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->where('status', 0)->sum('amount');
+        $app_wid = withdraw::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->where('status', 1)->sum('amount');
+        $rej_wid = withdraw::select('id', 'user_id', 'amount', 'status')->where('user_id', Auth::user()->id)->where('status', 2)->sum('amount');
+        $recent_jobs = all_job::select('id', 'user_id', 'job_title', 'est_job_cost', 'created_at')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
+        $recent_dep = user_deposit::select('id', 'user_id', 'amount', 'status', 'created_at')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
+        $recent_with = withdraw::select('id', 'user_id', 'amount', 'status', 'created_at')->where('user_id', Auth::user()->id)->orderBy('id', 'desc')->take(5)->get();
+
+
+        return view('user.index', compact('total_jobs', 'pen_jobs', 'app_jobs', 'rej_jobs', 'to_dep', 'pen_dep', 'app_dep', 'rej_dep', 'tot_wid', 'pen_wid',
+            'app_wid', 'rej_wid', 'recent_jobs', 'recent_dep', 'recent_with'));
     }
 
     public function my_profile()
     {
-        $user = User::where('id',Auth::user()->id)->first();
-        return view('user.page.myProfile',compact('user'));
+        $user = User::where('id', Auth::user()->id)->first();
+        return view('user.page.myProfile', compact('user'));
     }
 
     public function my_profile_update(Request $request)
     {
-        $update_profile = User::where('id',Auth::user()->id)->first();
+        $update_profile = User::where('id', Auth::user()->id)->first();
         $update_profile->name = $request->name;
         $update_profile->phone_number = $request->phone_number;
         $update_profile->website = $request->website;
@@ -59,26 +80,26 @@ class UserController extends Controller
         $act->created_date = Carbon::now()->format('Y-m-d');
         $act->save();
 
-        return back()->with('success','Profile Successfully Updated');
+        return back()->with('success', 'Profile Successfully Updated');
     }
 
     public function change_password()
     {
-        $user = User::where('id',Auth::user()->id)->first();
-        return view('user.page.changePassword',compact('user'));
+        $user = User::where('id', Auth::user()->id)->first();
+        return view('user.page.changePassword', compact('user'));
     }
 
     public function change_password_update(Request $request)
     {
-        $npass=$request->n_pass;
-        $cpass=$request->c_pass;
+        $npass = $request->n_pass;
+        $cpass = $request->c_pass;
 
-        if ($npass != $cpass){
-            return back()->with('alert','Password Not Match');
-        }elseif (strlen($npass) < 8 || strlen( $cpass) < 8){
-            return back()->with('alert','Password should be min 8 char');
-        }else{
-            $user = User::where('id',Auth::user()->id)->first();
+        if ($npass != $cpass) {
+            return back()->with('alert', 'Password Not Match');
+        } elseif (strlen($npass) < 8 || strlen($cpass) < 8) {
+            return back()->with('alert', 'Password should be min 8 char');
+        } else {
+            $user = User::where('id', Auth::user()->id)->first();
             $user->password = Hash::make($npass);
             $user->save();
 
@@ -89,11 +110,10 @@ class UserController extends Controller
             $act->save();
 
 
-            return back()->with('success','Password Successfully Changed');
+            return back()->with('success', 'Password Successfully Changed');
         }
 
     }
-
 
 
 }

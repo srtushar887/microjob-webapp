@@ -86,6 +86,10 @@ class UserJobController extends Controller
             $new_job->thumbnail = $imgUrl;
         }
 
+
+        $charge = ($request->est_job_cost * $gen_set->service_charge) / 100;
+
+
         $new_job->user_id = Auth::user()->id;
         $new_job->job_id = $job_id;
         $new_job->region_name = $request->region_name;
@@ -99,6 +103,7 @@ class UserJobController extends Controller
         $new_job->screenshot = $request->screenshot;
         $new_job->est_day = $request->est_day;
         $new_job->est_job_cost = $request->est_job_cost;
+        $new_job->admin_income = $charge;
 
         if ($gen_set->job_auto_post == 1) {
             $new_job->job_status = 2;

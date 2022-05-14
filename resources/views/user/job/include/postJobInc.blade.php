@@ -333,6 +333,7 @@
                         contentType: false,
                         processData: false,
                         success: (data) => {
+                            console.log(data)
                             if (data == 'balance_error') {
                                 swal('You have Insufficient balance', 'warning');
                             }
