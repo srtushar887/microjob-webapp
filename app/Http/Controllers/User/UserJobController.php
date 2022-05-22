@@ -367,6 +367,13 @@ class UserJobController extends Controller
 
         $job_apply->save();
 
+        if ($request->is_sat == 1) {
+            $job = all_job::where('id', $job_apply->job_id)->first();
+            $user = User::where('id', $job_apply->user_id)->first();
+            $user->earning_bal = $user->earning_bal + $job->each_worker_earn;
+            $user->save();
+        }
+
 
         return back()->with('success', 'Job Apply Status Changed Successfully');
     }
@@ -427,6 +434,13 @@ class UserJobController extends Controller
     }
 
 
+    public function my_jobs()
+    {
+        $my_jobs = all_job::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+        return view('user.job.myJobs', compact('my_jobs'));
+    }
+
+
     public function arrayPaginator($array, $request)
     {
         $page = $request->get('page', 1);
@@ -435,13 +449,6 @@ class UserJobController extends Controller
         return new LengthAwarePaginator(array_slice($array, $offset, $perPage, true), count($array), $perPage, $page,
             ['path' => $request->url(), 'query' => $request->query()]);
 
-    }
-
-
-    public function my_jobs()
-    {
-        $my_jobs = all_job::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
-        return view('user.job.myJobs', compact('my_jobs'));
     }
 
 

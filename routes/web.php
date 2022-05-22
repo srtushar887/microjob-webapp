@@ -102,6 +102,10 @@ Route::group(['middleware' => ['auth']], function () {
         //transaction
         Route::get('/transaction', [Controllers\User\UserTransactionController::class, 'all_transaction'])->name('user.all.transaction');
 
+        //transfer balance
+        Route::get('/transfer-balance', [Controllers\User\UserTransactionController::class, 'transfer_balance'])->name('user.transfer.balance');
+        Route::post('/transfer-balance-save', [Controllers\User\UserTransactionController::class, 'transfer_balance_save'])->name('user.transfer.balance.save');
+
         //notifications
         Route::get('/notifications', [Controllers\User\UserNotificationsController::class, 'notifications'])->name('user.all.notification');
         Route::post('/notifications-status-change', [Controllers\User\UserNotificationsController::class, 'notifications_status_change'])->name('user.all.notification.update.status');

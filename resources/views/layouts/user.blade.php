@@ -529,6 +529,11 @@
                             <a class="dropdown-item" href="pages-profile.html"><i
                                     class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
                                     class="align-middle">Balance : <b>{{$gnl->site_currency}} {{number_format(Auth::user()->balance,2)}}</b></span></a>
+
+                            <a class="dropdown-item" href="pages-profile.html"><i
+                                    class="mdi mdi-wallet text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Earning Balance : <b>{{$gnl->site_currency}} {{number_format(Auth::user()->earning_bal,2)}}</b></span></a>
+
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i
@@ -612,6 +617,11 @@
                     <li class="nav-item">
                         <a class="nav-link menu-link" href="{{route('user.all.transaction')}}">
                             <i class="ri-honour-line"></i> <span data-key="t-widgets">All Transaction</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('user.transfer.balance')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Transfer</span>
                         </a>
                     </li>
 
