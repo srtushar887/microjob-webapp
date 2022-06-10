@@ -51,7 +51,7 @@ Route::post('/forgot-password-verify-code-check', [Controllers\ActivationControl
 Route::get('/forgot-password-change-password/{link}', [Controllers\ActivationController::class, 'forgot_password_change_password'])->name('forgot.password.change.pass');
 Route::post('/forgot-password-change-password-save', [Controllers\ActivationController::class, 'forgot_password_change_password_save'])->name('forgot.password.change.pass.save');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['auth', 'uverify']], function () {
     Route::prefix('user')->group(function () {
         Route::get('/dashboard', [Controllers\User\UserController::class, 'index'])->name('user.dashboard');
 
@@ -243,7 +243,11 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/job-report-get', [Controllers\Admin\AdminReportController::class, 'job_report_get'])->name('admin.job.report.get');
 
         //job task report
-        Route::get('/job-task-report', [Controllers\Admin\AdminReportController::class, 'job_task_report'])->name('admin.job.task.report');
+        Route::get('/user-report', [Controllers\Admin\AdminReportController::class, 'job_task_report'])->name('admin.user.report');
+
+        //user ip
+        Route::get('/user-ip', [Controllers\Admin\AdminUserIpController::class, 'user_ip'])->name('admin.user.ip');
+        Route::get('/user-ip-details/{id}', [Controllers\Admin\AdminUserIpController::class, 'user_ip_details'])->name('admin.user.ip.view.details');
 
     });
 });

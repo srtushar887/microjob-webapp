@@ -137,10 +137,10 @@
                                         <label class="form-label" for="password-input">Confirm Password</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">
                                             <input type="password" name="confirm_password" class="form-control pe-5"
-                                                   placeholder="Enter Confirm password" id="password-input" required>
+                                                   placeholder="Enter Confirm password" id="password-input2" required>
                                             <button
                                                 class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
-                                                type="button" id="password-addon"><i
+                                                type="button" id="password-addon2"><i
                                                     class="ri-eye-fill align-middle"></i></button>
                                         </div>
                                     </div>

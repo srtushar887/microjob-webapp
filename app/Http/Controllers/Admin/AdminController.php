@@ -33,8 +33,11 @@ class AdminController extends Controller
         $recent_dep = user_deposit::select('id', 'user_id', 'amount', 'status', 'created_at')->orderBy('id', 'desc')->take(5)->get();
         $recent_with = withdraw::select('id', 'user_id', 'amount', 'status', 'created_at')->orderBy('id', 'desc')->take(5)->get();
         $er_bal_trns = user_transfer_balance::sum('transfer_amount');
+        $t_user_dep_bal = User::sum('balance');
+        $t_user_ear_bal = User::sum('earning_bal');
         return view('admin.index', compact('total_users', 'total_jobs', 'total_approved_jobs', 'total_pending_jobs', 'total_rej_jobs', 'total_dep', 'total_app_dep',
-            'total_pen_dep', 'total_rej_dep', 'total_with', 'total_app_with', 'total_pen_with', 'total_rej_with', 'recent_users', 'recent_jobs', 'recent_dep', 'recent_with', 'er_bal_trns'));
+            'total_pen_dep', 'total_rej_dep', 'total_with', 'total_app_with', 'total_pen_with', 'total_rej_with', 'recent_users', 'recent_jobs', 'recent_dep', 'recent_with', 'er_bal_trns', 't_user_dep_bal',
+            't_user_ear_bal'));
     }
 
     public function general_settings()

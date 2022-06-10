@@ -21,7 +21,7 @@ class AdminJobController extends Controller
 
     public function all_jobs_get()
     {
-        $all_jobs = all_job::all();
+        $all_jobs = all_job::latest()->get();
         return DataTables::of($all_jobs)
             ->addColumn('action', function ($all_jobs) {
                 return '<a href="' . route('admin.job.details', $all_jobs->id) . '"><button type="button" class="btn btn-sm btn-light ">View</button></a> ';

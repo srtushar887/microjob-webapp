@@ -279,7 +279,7 @@ class UserJobController extends Controller
         $new_job_apply = new job_apply();
         $new_job_apply->user_id = Auth::user()->id;
         $new_job_apply->job_id = $id;
-        $new_job_apply->task_name = "TASK-" . time();
+        $new_job_apply->task_name = "TASK-" . Auth::user()->id . time();
         $new_job_apply->end_time = null;
         $new_job_apply->status = 0;
         $new_job_apply->is_submit = 0;

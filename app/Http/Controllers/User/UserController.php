@@ -12,15 +12,29 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Jenssegers\Agent\Agent;
 
 class UserController extends Controller
 {
     public function index(Request $request)
     {
+
+//        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+//            //ip from share internet
+//            $ip = $_SERVER['HTTP_CLIENT_IP'];
+//        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+//            //ip pass from proxy
+//            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+//        } else {
+//            $ip = $_SERVER['REMOTE_ADDR'];
+//        }
+//        return $ip;
+
+
         $user_agent = $request->userAgent();
 
         $bname = 'Unknown';
-        $platform = 'Unknown';
+
 
         //First get the platform?
         if (preg_match('/linux/i', $user_agent)) {
@@ -29,9 +43,16 @@ class UserController extends Controller
             $platform = 'mac';
         } elseif (preg_match('/windows|win32/i', $user_agent)) {
             $platform = 'windows';
+        } else {
+            $platform = 'Unknown';
         }
 
 //        return $request->ip();
+
+
+//        $agent = new Agent();
+//        $result1 = $agent->version($platform);
+//        return $result1;
 
 
         $total_jobs = all_job::select('id', 'user_id')->where('user_id', Auth::user()->id)->count();

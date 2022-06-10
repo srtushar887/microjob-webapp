@@ -83,7 +83,7 @@ class CustomLoginController extends Controller
             'password' => 'required|min:8'
         ]);
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect(route('user.dashboard'));
+            return redirect(route('home'));
         } elseif (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             return redirect(route('admin.dashboard'));
         } elseif (Auth::guard('subadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {

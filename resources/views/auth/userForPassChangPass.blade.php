@@ -6,7 +6,7 @@
 <head>
 
     <meta charset="utf-8"/>
-    <title>Login | Dolightjob</title>
+    <title>Reset Password | Dolightjob</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description"/>
     <meta content="Themesbrand" name="author"/>
@@ -84,15 +84,33 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="username" class="form-label">New Password</label>
-                                        <input type="password" name="npass" class="form-control" id="username"
-                                               placeholder="Enter new password" required>
+
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
+                                            <input type="password" name="npass" class="form-control pe-5"
+                                                   placeholder="Enter new password" id="password-input" required>
+                                            <button
+                                                class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
+                                                type="button" id="password-addon"><i
+                                                    class="ri-eye-fill align-middle"></i></button>
+                                        </div>
+
+
                                         <input type="hidden" name="vlink" value="{{$link}}" required>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Confirm Password</label>
-                                        <input type="password" name="cpass" class="form-control" id="username"
-                                               placeholder="Enter confirm password" required>
+
+
+                                        <div class="position-relative auth-pass-inputgroup mb-3">
+                                            <input type="password" name="cpass" class="form-control pe-5"
+                                                   placeholder="Enter confirm password" id="password-input2" required>
+                                            <button
+                                                class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted"
+                                                type="button" id="password-addon2"><i
+                                                    class="ri-eye-fill align-middle"></i></button>
+                                        </div>
+
                                     </div>
 
 

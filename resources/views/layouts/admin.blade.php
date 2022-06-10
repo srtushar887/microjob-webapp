@@ -11,6 +11,12 @@
     <link rel="shortcut icon" href="{{asset('assets/dashboard/')}}/images/faviconnew.png">
 
 
+    <link href="{{asset('assets/dashboard/')}}/libs/jsvectormap/css/jsvectormap.min.css" rel="stylesheet"
+          type="text/css"/>
+
+    <!--Swiper slider css-->
+    <link href="{{asset('assets/dashboard/')}}/libs/swiper/swiper-bundle.min.css" rel="stylesheet" type="text/css"/>
+
     <!-- Layout config Js -->
     <script src="{{asset('assets/dashboard/')}}/js/layout.js"></script>
     <!-- Bootstrap Css -->
@@ -613,8 +619,13 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="{{route('admin.job.task.report')}}">
-                            <i class="ri-honour-line"></i> <span data-key="t-widgets">Job Task Report</span>
+                        <a class="nav-link menu-link" href="{{route('admin.user.report')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">User Report</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link" href="{{route('admin.user.ip')}}">
+                            <i class="ri-honour-line"></i> <span data-key="t-widgets">User IP</span>
                         </a>
                     </li>
 
@@ -675,6 +686,8 @@
 
 <!--Swiper slider js-->
 <script src="{{asset('assets/dashboard/')}}/libs/swiper/swiper-bundle.min.js"></script>
+<!-- Dashboard init -->
+
 <script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
 <!-- Required datatable js -->
 <script src="{{asset('assets/dashboard/')}}/table/libs/datatables.net/js/jquery.dataTables.min.js"></script>

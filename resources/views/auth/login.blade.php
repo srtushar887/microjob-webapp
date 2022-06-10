@@ -121,6 +121,18 @@
                                 </div>
                             @endif
 
+
+                            @if(Session::has('user_active_error'))
+                                <div class="alert alert-warning alert-border-left alert-dismissible fade show"
+                                     role="alert">
+                                    <i class="ri-alert-line me-3 align-middle fs-16"></i><strong>Warning</strong>
+                                    - {{Session::get('user_active_error')}} <br>
+
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                </div>
+                            @endif
+
                             <div class="p-2 mt-4">
                                 <form action="{{route('user.login.submit')}}" method="post">
                                     @csrf
