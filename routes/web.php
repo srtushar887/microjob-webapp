@@ -225,6 +225,21 @@ Route::group(['middleware' => ['auth:admin']], function () {
         //all users
         Route::get('/all-users', [Controllers\Admin\AdminUsersController::class, 'all_users'])->name('admin.all.users');
         Route::get('/all-users-get', [Controllers\Admin\AdminUsersController::class, 'all_users_get'])->name('admin.get.all.users');
+
+        //active users
+        Route::get('/active-users', [Controllers\Admin\AdminUsersController::class, 'active_users'])->name('admin.active.users');
+        Route::get('/active-users-get', [Controllers\Admin\AdminUsersController::class, 'active_users_get'])->name('admin.active.users.get');
+
+        //inactive users
+        Route::get('/inactive-users', [Controllers\Admin\AdminUsersController::class, 'inactive_users'])->name('admin.inactive.users');
+        Route::get('/inactive-users-get', [Controllers\Admin\AdminUsersController::class, 'inactive_users_get'])->name('admin.inactive.users.get');
+
+        //blocked users
+        Route::get('/blocked-users', [Controllers\Admin\AdminUsersController::class, 'blocked_users'])->name('admin.blocked.users');
+        Route::get('/blocked-users-get', [Controllers\Admin\AdminUsersController::class, 'blocked_users_get'])->name('admin.blocked.users.get');
+
+
+        //user edit
         Route::get('/user-details/{id}', [Controllers\Admin\AdminUsersController::class, 'user_details'])->name('admin.user.details');
         Route::post('/user-details-update', [Controllers\Admin\AdminUsersController::class, 'user_details_update'])->name('admin.user.profile.update');
         Route::get('/user-change-password/{id}', [Controllers\Admin\AdminUsersController::class, 'user_change_password'])->name('admin.user.change.password');

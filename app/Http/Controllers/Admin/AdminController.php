@@ -16,6 +16,9 @@ class AdminController extends Controller
     public function index()
     {
         $total_users = User::select('id')->count();
+        $active_users = User::select('id', 'account_status')->where('account_status', 2)->count();
+        $inactive_users = User::select('id', 'account_status')->where('account_status', 1)->count();
+        $blocked_users = User::select('id', 'account_status')->where('account_status', 3)->count();
         $total_jobs = all_job::select('id')->count();
         $total_approved_jobs = all_job::select('id', 'job_status')->where('job_status', 2)->count();
         $total_pending_jobs = all_job::select('id', 'job_status')->where('job_status', 1)->count();
@@ -35,7 +38,7 @@ class AdminController extends Controller
         $er_bal_trns = user_transfer_balance::sum('transfer_amount');
         $t_user_dep_bal = User::sum('balance');
         $t_user_ear_bal = User::sum('earning_bal');
-        return view('admin.index', compact('total_users', 'total_jobs', 'total_approved_jobs', 'total_pending_jobs', 'total_rej_jobs', 'total_dep', 'total_app_dep',
+        return view('admin.index', compact('total_users', 'active_users', 'inactive_users', 'blocked_users', 'total_jobs', 'total_approved_jobs', 'total_pending_jobs', 'total_rej_jobs', 'total_dep', 'total_app_dep',
             'total_pen_dep', 'total_rej_dep', 'total_with', 'total_app_with', 'total_pen_with', 'total_rej_with', 'recent_users', 'recent_jobs', 'recent_dep', 'recent_with', 'er_bal_trns', 't_user_dep_bal',
             't_user_ear_bal'));
     }

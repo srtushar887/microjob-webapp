@@ -107,14 +107,14 @@
                                                     </span></div>
                                                 <div class="vr"></div>
                                                 <div>Job Status :
-                                                    @if ($job_details->job_status == 0)
+                                                    @if ($job_details->job_status == 1)
                                                         <span class="fw-medium badge bg-success">In-Review</span>
-                                                    @elseif($job_details->job_status == 1)
-                                                        <span class="fw-medium badge bg-success">Active</span>
                                                     @elseif($job_details->job_status == 2)
-                                                        <span class="fw-medium badge bg-success">Rejected</span>
+                                                        <span class="fw-medium badge bg-success">Active</span>
                                                     @elseif($job_details->job_status == 3)
-                                                        <span class="fw-medium badge bg-success">Completed</span>
+                                                        <span class="fw-medium badge bg-success">Pushed</span>
+                                                    @elseif($job_details->job_status == 4)
+                                                        <span class="fw-medium badge bg-success">Rejected</span>
                                                     @else
                                                         <span class="fw-medium badge bg-success">Not Set</span>
                                                     @endif
