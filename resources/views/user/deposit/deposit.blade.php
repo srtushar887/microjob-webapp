@@ -46,7 +46,7 @@
                                        value="{{$gen_settings->usd_rate}}" readonly>
                             </div>
                             <div class="col-md-4">
-                                <label for="validationDefault01" class="form-label">BDT Rate</label>
+                                <label for="validationDefault01" class="form-label">Total BDT</label>
                                 <input type="text" class="form-control total_usd" name="total_usd" value="0.00"
                                        readonly>
                             </div>

@@ -29,6 +29,8 @@ Route::get('/cache_clear', function () {
 
 
 Route::get('/', [Controllers\FrontendController::class, 'index'])->name('front');
+Route::get('/about', [Controllers\FrontendController::class, 'about'])->name('about');
+Route::get('/forum', [Controllers\FrontendController::class, 'forum'])->name('forum');
 
 Auth::routes();
 
@@ -89,6 +91,9 @@ Route::group(['middleware' => ['auth', 'uverify']], function () {
 
         //my jobs
         Route::get('/my-jobs', [Controllers\User\UserJobController::class, 'my_jobs'])->name('user.my.jobs');
+
+        //my tasks
+        Route::get('/my-tasks', [Controllers\User\UserJobController::class, 'my_tasks'])->name('user.my.tasks');
 
         //deposit
         Route::get('/deposit', [Controllers\User\UserDepositController::class, 'deposit'])->name('user.deposit');

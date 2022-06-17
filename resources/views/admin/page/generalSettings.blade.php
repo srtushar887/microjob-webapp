@@ -10,22 +10,28 @@
                     <div class="live-preview">
                         <form class="row g-3" action="{{route('admin.general.settings.save')}}" method="post">
                             @csrf
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">Site Name</label>
                                 <input type="text" class="form-control" name="site_name"
                                        value="{{$gen->site_name}}">
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">Site Email</label>
                                 <input type="text" class="form-control" name="site_email"
                                        value="{{$gen->site_email}}">
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">Site Phone Number</label>
                                 <input type="text" class="form-control" name="site_phone"
                                        value="{{$gen->site_phone}}">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="validationDefault01" class="form-label">Welcome Balance</label>
+                                <input type="text" class="form-control" name="welcome_balance"
+                                       value="{{number_format($gen->welcome_balance,2)}}">
                             </div>
 
                             <div class="col-md-12">

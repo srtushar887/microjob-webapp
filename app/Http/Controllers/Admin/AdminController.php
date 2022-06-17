@@ -56,6 +56,7 @@ class AdminController extends Controller
         $gen->site_name = $request->site_name;
         $gen->site_email = $request->site_email;
         $gen->site_phone = $request->site_phone;
+        $gen->welcome_balance = $request->welcome_balance;
         $gen->site_address = $request->site_address;
         $gen->is_under_main = $request->is_under_main;
         $gen->usd_rate = $request->usd_rate;

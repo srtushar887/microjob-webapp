@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\AccActiveEmail;
+use App\Models\general_setting;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,10 +49,11 @@ class CustomLoginController extends Controller
             exit();
         }
 
-
+        $gen = general_setting::first();
         $new_user = new User();
         $new_user->user_ref_id = $user_id;
-        $new_user->balance = 0.00;
+        $new_user->balance = $gen->welcome_balance;
+        $new_user->earning_bal = 0.00;
         $new_user->name = $request->name;
         $new_user->email = $request->email;
         $new_user->phone_number = $request->phone_number;

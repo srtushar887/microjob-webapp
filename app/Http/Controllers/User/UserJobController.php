@@ -222,7 +222,7 @@ class UserJobController extends Controller
         $mcat_filter = $request->mcat_filter;
         $scat_filter = $request->scat_filter;
         $search_title = $request->search_title;
-        $sql = "SELECT * FROM all_jobs WHERE job_status=1 ";
+        $sql = "SELECT * FROM all_jobs WHERE job_status=2 ";
 
         if (isset($reg_fil)) {
             $sql .= "AND region_name='$reg_fil' ";
@@ -236,13 +236,17 @@ class UserJobController extends Controller
             $sql .= "AND sub_category=$scat_filter ";
         }
 
-        if (isset($search_title) && $search_title != null) {
-            $sql .= "AND job_title LIKE '%$search_title%' ";
+        if (isset($search_title)) {
+            if ($search_title != null || $search_title != '') {
+                $sql .= "AND job_title LIKE '%$search_title%' ";
+            }
+
         }
 
 
         $sql .= "ORDER BY id desc";
         $query_exe = DB::select($sql);
+
 
         $all_jobs = $this->arrayPaginator($query_exe, $request);
         return response()->json([
@@ -420,6 +424,7 @@ class UserJobController extends Controller
         $job_update->specific_task = $request->specific_task;
         $job_update->worker_need = $job_update->worker_need + $request->worker_need;
         $job_update->est_job_cost = $request->est_job_cost;
+        $job_update->job_status = 1;
         $job_update->save();
 
 
@@ -438,6 +443,13 @@ class UserJobController extends Controller
     {
         $my_jobs = all_job::where('user_id', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
         return view('user.job.myJobs', compact('my_jobs'));
+    }
+
+
+    public function my_tasks()
+    {
+        $my_tasks = job_apply::where('user_id', Auth::user()->id)->paginate(20);
+        return view('user.job.myTask', compact('my_tasks'));
     }
 
 
