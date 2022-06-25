@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $faker = Faker::create();
-        foreach (range(1,2000) as $index){
+        foreach (range(1, 500000) as $index) {
 //            $user = new User();
 //            $user->user_ref_id = rand(0000000,9999999);
 //            $user->balance = rand(0000,4444);
@@ -31,22 +31,22 @@ class DatabaseSeeder extends Seeder
 //            $user->account_status = 1;
 //            $user->save();
 
-            $check_job = all_job::select('id')->orderBy('id','desc')->count();
+            $check_job = all_job::select('id')->orderBy('id', 'desc')->count();
             $job_count = $check_job + 1;
 
             if ($job_count < 10) {
-                $job_id = '0000'.$job_count;
-            }elseif ($job_count >= 10 && $job_count <= 99){
-                $job_id = '000'.$job_count;
-            }elseif ($job_count >= 100 && $job_count <= 999){
-                $job_id = '00'.$job_count;
-            }elseif ($job_count >= 1000 && $job_count <= 9999){
-                $job_id = '0'.$job_count;
-            }else{
+                $job_id = '0000' . $job_count;
+            } elseif ($job_count >= 10 && $job_count <= 99) {
+                $job_id = '000' . $job_count;
+            } elseif ($job_count >= 100 && $job_count <= 999) {
+                $job_id = '00' . $job_count;
+            } elseif ($job_count >= 1000 && $job_count <= 9999) {
+                $job_id = '0' . $job_count;
+            } else {
                 $job_id = $job_count;
             }
             $job = new all_job();
-            $job->user_id = rand(1,100);
+            $job->user_id = rand(1, 100);
             $job->job_id = $job_id;
             $job->region_name = "Asia";
             $job->main_category = 2;
@@ -59,12 +59,10 @@ class DatabaseSeeder extends Seeder
             $job->each_worker_earn = 1.25;
             $job->screenshot = 2;
             $job->est_day = 7;
-            $job->est_job_cost = (7*1.25);
+            $job->est_job_cost = (7 * 1.25);
             $job->job_status = 1;
+            $job->admin_income = 2;
             $job->save();
-
-
-
 
 
         }

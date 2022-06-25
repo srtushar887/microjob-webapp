@@ -87,7 +87,8 @@ class UserJobController extends Controller
         }
 
 
-        $charge = ($request->est_job_cost * $gen_set->service_charge) / 100;
+        $charge1 = (number_format($request->est_job_cost) * $gen_set->service_charge);
+        $charge = $charge1 / 100;
 
 
         $new_job->user_id = Auth::user()->id;
@@ -181,7 +182,7 @@ class UserJobController extends Controller
         $mcat_filter = $request->mcat_filter;
         $scat_filter = $request->scat_filter;
         $search_title = $request->search_title;
-        $sql = "SELECT * FROM all_jobs WHERE job_status=2 ";
+        $sql = "SELECT id,user_id,job_title,created_at,each_worker_earn,worker_need FROM all_jobs WHERE job_status=2 ";
 
         if (isset($reg_fil)) {
             $sql .= "AND region_name='$reg_fil' ";
@@ -222,7 +223,7 @@ class UserJobController extends Controller
         $mcat_filter = $request->mcat_filter;
         $scat_filter = $request->scat_filter;
         $search_title = $request->search_title;
-        $sql = "SELECT * FROM all_jobs WHERE job_status=2 ";
+        $sql = "SELECT id,user_id,job_title,created_at,each_worker_earn,worker_need FROM all_jobs WHERE job_status=2 ";
 
         if (isset($reg_fil)) {
             $sql .= "AND region_name='$reg_fil' ";
@@ -292,7 +293,7 @@ class UserJobController extends Controller
         } else {
             $new_job_apply->auto_approve_date = Carbon::now()->addDays($gen_set->auto_post_date);
         }
-
+        $new_job_apply->submi_end_date = Carbon::now()->addDay(1);
         $new_job_apply->save();
 
 
