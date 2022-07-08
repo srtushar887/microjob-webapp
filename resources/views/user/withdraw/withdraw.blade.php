@@ -3,6 +3,11 @@
     Withdraw
 @endsection
 @section('user')
+    <div class="alert alert-secondary" role="alert">
+        <strong>
+            <marquee>A scrolling text created with HTML Marquee element.</marquee>
+        </strong>
+    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">

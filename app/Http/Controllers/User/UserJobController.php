@@ -182,6 +182,19 @@ class UserJobController extends Controller
         $mcat_filter = $request->mcat_filter;
         $scat_filter = $request->scat_filter;
         $search_title = $request->search_title;
+
+
+//        $all_jobs = all_job::select('id', 'user_id', 'job_title', 'region_name', 'main_category', 'sub_category', 'created_at', 'each_worker_earn', 'worker_need', 'job_status')
+//            ->active()
+//            ->where('job_title', 'LIKE', '%' . $search_title . '%')
+//            ->where('region_name', 'LIKE', '%' . $reg_fil . '%')
+//            ->orWhere('main_category', $mcat_filter)
+//            ->orWhere('sub_category', $scat_filter)
+//            ->with(['user', 'applyedJob'])
+//            ->paginate(20);
+//
+//
+//
         $sql = "SELECT id,user_id,job_title,created_at,each_worker_earn,worker_need FROM all_jobs WHERE job_status=2 ";
 
         if (isset($reg_fil)) {
@@ -223,6 +236,8 @@ class UserJobController extends Controller
         $mcat_filter = $request->mcat_filter;
         $scat_filter = $request->scat_filter;
         $search_title = $request->search_title;
+        
+
         $sql = "SELECT id,user_id,job_title,created_at,each_worker_earn,worker_need FROM all_jobs WHERE job_status=2 ";
 
         if (isset($reg_fil)) {

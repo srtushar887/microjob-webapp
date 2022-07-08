@@ -3,6 +3,9 @@
     Dashboard
 @endsection
 @section('user')
+
+
+
     <!-- start page title -->
     <div class="row">
         <div class="col-12">
@@ -14,6 +17,12 @@
             </div>
         </div>
     </div>
+    <div class="alert alert-secondary" role="alert">
+        <strong>
+            <marquee>A scrolling text created with HTML Marquee element.</marquee>
+        </strong>
+    </div>
+
     <!-- end page title -->
     <div class="row">
         <div class="col-xl-3 col-md-6">
@@ -29,7 +38,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="559.25">{{$total_jobs}}</span>
+                                                                                  data-target="{{$total_jobs}}">{{$total_jobs}}</span>
                             </h4>
                         </div>
                     </div>
@@ -50,7 +59,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="559.25">{{$pen_jobs}}</span>
+                                                                                  data-target="{{$pen_jobs}}">{{$pen_jobs}}</span>
                             </h4>
                         </div>
                     </div>
@@ -71,7 +80,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="559.25">{{$app_jobs}}</span>
+                                                                                  data-target="{{$app_jobs}}">{{$app_jobs}}</span>
                             </h4>
 
                         </div>
@@ -93,7 +102,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="559.25">{{$rej_jobs}}</span>
+                                                                                  data-target="{{$rej_jobs}}">{{$rej_jobs}}</span>
                             </h4>
 
                         </div>
@@ -117,7 +126,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($to_dep,2)}}</span>
+                                    data-target="{{number_format($to_dep,2)}}">{{number_format($to_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -141,7 +150,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($pen_dep,2)}}</span>
+                                    data-target="{{number_format($pen_dep,2)}}">{{number_format($pen_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -165,7 +174,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($app_dep,2)}}</span>
+                                    data-target="{{number_format($app_dep,2)}}">{{number_format($app_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -189,7 +198,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($rej_dep,2)}}</span>
+                                    data-target="{{number_format($rej_dep,2)}}">{{number_format($rej_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -213,7 +222,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($tot_wid,2)}}</span>
+                                    data-target="{{number_format($tot_wid,2)}}">{{number_format($tot_wid,2)}}</span>
                             </h4>
 
                         </div>
@@ -237,7 +246,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($pen_wid,2)}}</span>
+                                    data-target="{{number_format($pen_wid,2)}}">{{number_format($pen_wid,2)}}</span>
                             </h4>
 
                         </div>
@@ -261,7 +270,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($app_wid,2)}}</span>
+                                    data-target="{{number_format($app_wid,2)}}">{{number_format($app_wid,2)}}</span>
                             </h4>
 
                         </div>
@@ -284,7 +293,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="559.25">{{number_format($rej_wid,2)}}</span>
+                                    data-target="{{number_format($rej_wid,2)}}">{{number_format($rej_wid,2)}}</span>
                             </h4>
 
                         </div>

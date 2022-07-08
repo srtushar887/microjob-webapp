@@ -9,9 +9,22 @@ class all_job extends Model
 {
     use HasFactory;
 
+
+    public function scopeActive($query)
+    {
+        return $query->where('job_status',2);
+    }
+
     public function user()
     {
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->hasOne(User::class,'id','user_id')->select('id','name');
     }
+
+
+    public function applyedJob()
+    {
+        return $this->hasMany(job_apply::class,'job_id','id');
+    }
+
 
 }
