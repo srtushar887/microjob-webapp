@@ -57,6 +57,9 @@
         }
     </style>
 @endsection
+@section('title')
+    Apply Members
+@endsection
 @section('user')
     <div class="row">
         <div class="col-lg-12">

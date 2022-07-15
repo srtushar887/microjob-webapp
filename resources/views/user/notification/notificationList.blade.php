@@ -1,5 +1,7 @@
 @extends('layouts.user')
-
+@section('title')
+    Notification
+@endsection
 @section('user')
     <div class="row">
         <div class="col-12">

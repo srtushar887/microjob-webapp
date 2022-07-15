@@ -5,7 +5,7 @@
 @section('user')
     <div class="alert alert-secondary" role="alert">
         <strong>
-            <marquee>A scrolling text created with HTML Marquee element.</marquee>
+            <marquee>{!! $gnl->with_noti_msg !!}</marquee>
         </strong>
     </div>
     <div class="row">
@@ -41,18 +41,25 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">Amount</label>
                                 <input type="text" class="form-control amount" name="amount" required>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">USD Rate</label>
                                 <input type="text" class="form-control usd_rate" name="usd_rate"
                                        value="{{$gen_settings->usd_rate}}" readonly>
+                                <input type="text" class="form-control with_ser_charge" name="with_ser_charge"
+                                       value="{{$gen_settings->with_ser_charge}}" readonly>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label for="validationDefault01" class="form-label">Total USD</label>
                                 <input type="text" class="form-control total_usd" name="total_usd" value="0.00"
+                                       readonly>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="validationDefault01" class="form-label">You Will Get</label>
+                                <input type="text" class="form-control final_am" name="final_am" value="0.00"
                                        readonly>
                             </div>
                             <div class="col-md-6">
@@ -163,11 +170,15 @@
             $('.amount').keyup(function () {
                 let am = $(this).val();
                 let usd_rate = $('.usd_rate').val();
+                let ser_charge = $('.with_ser_charge').val();
                 let to_usd = am * usd_rate;
+                let final_crg_am = (am * ser_charge) / 100;
+                let final_am = am - final_crg_am;
                 $('.total_usd').val(to_usd);
+                $('.final_am').val(final_am);
 
 
-            })
+            });
 
         })
     </script>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\general_setting;
 use App\Models\transaction;
 use App\Models\user_deposit;
 use App\Models\user_notification;
@@ -15,7 +16,8 @@ class AdminWithdrawController extends Controller
 {
     public function all_withdraw()
     {
-        return view('admin.withdraw.allWithdraw');
+        $gen = general_setting::first();
+        return view('admin.withdraw.allWithdraw',compact('gen'));
     }
 
 
@@ -101,7 +103,8 @@ class AdminWithdrawController extends Controller
 
     public function pending_withdraw()
     {
-        return view('admin.withdraw.pendingWithdraw');
+        $gen = general_setting::first();
+        return view('admin.withdraw.pendingWithdraw',compact('gen'));
     }
 
 
@@ -124,7 +127,8 @@ class AdminWithdrawController extends Controller
 
     public function approved_withdraw()
     {
-        return view('admin.withdraw.approvedWithdraw');
+        $gen = general_setting::first();
+        return view('admin.withdraw.approvedWithdraw',compact('gen'));
     }
 
     public function approved_withdraw_get()
@@ -146,7 +150,8 @@ class AdminWithdrawController extends Controller
 
     public function rejected_withdraw()
     {
-        return view('admin.withdraw.rejectedWithdraw');
+        $gen = general_setting::first();
+        return view('admin.withdraw.rejectedWithdraw',compact('gen'));
     }
 
     public function rejected_withdraw_get()

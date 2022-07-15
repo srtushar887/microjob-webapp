@@ -1,4 +1,7 @@
 @extends('layouts.user')
+@section('title')
+    Change Password
+@endsection
 @section('user')
     <br>
     <br>

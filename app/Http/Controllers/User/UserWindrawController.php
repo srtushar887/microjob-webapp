@@ -33,6 +33,7 @@ class UserWindrawController extends Controller
         $new_with->usd_rate = $request->usd_rate;
         $new_with->total_usd = $request->total_usd;
         $new_with->receiver_number = $request->receiver_number;
+        $new_with->user_will_get = $request->final_am;
         $new_with->status = 0;
         $new_with->save();
 

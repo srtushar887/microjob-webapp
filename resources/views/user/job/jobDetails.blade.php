@@ -1,4 +1,7 @@
 @extends('layouts.user')
+@section('title')
+    Job Details
+@endsection
 @section('user')
 
     <div class="row">

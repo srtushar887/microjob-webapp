@@ -67,6 +67,7 @@ Route::group(['middleware' => ['auth', 'uverify']], function () {
         //job edit
         Route::get('/job-edit/{id}', [Controllers\User\UserJobController::class, 'job_edit'])->name('user.job.edit');
         Route::post('/job-update', [Controllers\User\UserJobController::class, 'job_update'])->name('user.job.update');
+        Route::get('/job-delete/{id}', [Controllers\User\UserJobController::class, 'job_delete'])->name('user.job.delete');
 
         //user find job
         Route::get('/find-job', [Controllers\User\UserJobController::class, 'find_job'])->name('user.find.job');
@@ -148,6 +149,9 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/country-get', [Controllers\Admin\AdminRegionController::class, 'country_get_all'])->name('admin.country.get.all');
         Route::post('/main-category-by-country', [Controllers\Admin\AdminRegionController::class, 'main_category_by_country'])->name('admin.main.category.by.country');
         Route::post('/main-category-by-region', [Controllers\Admin\AdminRegionController::class, 'main_category_by_region'])->name('admin.main.category.by.region');
+        Route::post('/region-country-save', [Controllers\Admin\AdminRegionController::class, 'region_country_save'])->name('admin.region.country.save');
+        Route::post('/region-country-single', [Controllers\Admin\AdminRegionController::class, 'region_country_single'])->name('admin.region.country.single');
+        Route::post('/region-country-update', [Controllers\Admin\AdminRegionController::class, 'region_country_update'])->name('admin.region.country.update');
 
 
         //main category

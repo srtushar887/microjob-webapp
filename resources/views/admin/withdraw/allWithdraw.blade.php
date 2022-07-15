@@ -21,6 +21,7 @@
                             <th>Gateway</th>
                             <th>Receiver No.</th>
                             <th>Amount</th>
+                            <th>User Get</th>
                             <th>Status</th>
                             <th>Created Date</th>
                             <th>Action</th>
@@ -144,6 +145,7 @@
                         },
                         {data: 'receiver_number', name: 'receiver_number', class: 'text-center'},
                         {data: 'amount', name: 'amount', class: 'text-center'},
+                        {data: 'user_will_get', name: 'user_will_get', class: 'text-center'},
                         {
                             data: 'status', class: 'text-center',
                             render: function (data) {

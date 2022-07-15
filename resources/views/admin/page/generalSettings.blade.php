@@ -93,22 +93,47 @@
                                        value="{{$gen->site_currency}}">
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="validationDefault01" class="form-label">Default Job Message</label>
                                 <textarea class="form-control" id="job-msg" cols="4" rows="4"
                                           name="default_job_msg">{!! $gen->default_job_msg !!}</textarea>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="validationDefault01" class="form-label">Default Deposit Message</label>
                                 <textarea class="form-control" id="dep-msg" cols="4" rows="4"
                                           name="default_dep_msg">{!! $gen->default_dep_msg !!}</textarea>
                             </div>
 
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="validationDefault01" class="form-label">Default Withdraw Message</label>
                                 <textarea class="form-control" id="wit-msg" cols="4" rows="4"
                                           name="default_with_msg">{!! $gen->default_with_msg !!}</textarea>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <label for="validationDefault01" class="form-label">Dashboard Notification Message</label>
+                                <textarea class="form-control" id="wit-msg" cols="4" rows="4"
+                                          name="das_noti_msg">{!! $gen->das_noti_msg !!}</textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="validationDefault01" class="form-label">Deposit Notification Message</label>
+                                <textarea class="form-control" id="wit-msg" cols="4" rows="4"
+                                          name="dep_noti_msg">{!! $gen->dep_noti_msg !!}</textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="validationDefault01" class="form-label">Withdraw Notification Message</label>
+                                <textarea class="form-control" id="wit-msg" cols="4" rows="4"
+                                          name="with_noti_msg">{!! $gen->with_noti_msg !!}</textarea>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="validationDefault01" class="form-label">Withdraw Service Charge</label>
+                                <input type="text" class="form-control" name="with_ser_charge"
+                                       value="{{number_format($gen->with_ser_charge,2)}}">
                             </div>
 
 

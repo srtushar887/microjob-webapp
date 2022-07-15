@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('title')
-    My Jobs
+    My Task
 @endsection
 @section('user')
     <div class="row">

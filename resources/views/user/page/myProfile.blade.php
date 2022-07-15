@@ -1,4 +1,7 @@
 @extends('layouts.user')
+@section('title')
+    My Profile
+@endsection
 @section('user')
    <br>
    <br>

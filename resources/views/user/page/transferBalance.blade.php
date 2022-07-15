@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('title')
-    Withdraw
+    Transfer Balance
 @endsection
 @section('user')
     <div class="row">

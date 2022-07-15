@@ -147,6 +147,9 @@ class UserJobController extends Controller
     }
 
 
+
+
+
     public function find_job()
     {
         $all_reg = region_country::distinct()->select('region')->where('region', '!=', '')->get();
@@ -236,7 +239,7 @@ class UserJobController extends Controller
         $mcat_filter = $request->mcat_filter;
         $scat_filter = $request->scat_filter;
         $search_title = $request->search_title;
-        
+
 
         $sql = "SELECT id,user_id,job_title,created_at,each_worker_earn,worker_need FROM all_jobs WHERE job_status=2 ";
 
@@ -451,6 +454,46 @@ class UserJobController extends Controller
         $act->save();
 
         return back()->with('success', 'Job Successfully Updated');
+
+    }
+
+
+    public function job_delete($id)
+    {
+        $job_delete = all_job::where('id',$id)->first();
+        $job_apply = job_apply::where('job_id',$id)
+                ->where('status',1)
+                ->count();
+
+        $job_creator = User::where('id',$job_delete->user_id)->first();
+
+
+        if ($job_delete){
+            if ($job_apply > 0){
+                $total_user_need =$job_delete->worker_need - $job_apply;
+                $count_bal =  $total_user_need * $job_delete->each_worker_earn;
+
+                $job_creator->balance = $job_creator->balance + $count_bal;
+                $job_creator->save();
+
+                $del_app_mem = job_apply::where('job_id',$id)->delete();
+
+                $job_delete->delete();
+            }else{
+                $count_bal =  $job_delete->worker_need * $job_delete->each_worker_earn;
+                $job_creator->balance = $job_creator->balance + $count_bal;
+                $job_creator->save();
+
+                $del_app_mem = job_apply::where('job_id',$id)->delete();
+
+                $job_delete->delete();
+            }
+
+            return back()->with('success','Job Successfully Deleted');
+        }else{
+            return back()->with('alert','Job Not Found');
+        }
+
 
     }
 

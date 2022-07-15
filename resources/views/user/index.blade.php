@@ -19,7 +19,7 @@
     </div>
     <div class="alert alert-secondary" role="alert">
         <strong>
-            <marquee>A scrolling text created with HTML Marquee element.</marquee>
+            <marquee>{!! $gnl->das_noti_msg !!}</marquee>
         </strong>
     </div>
 

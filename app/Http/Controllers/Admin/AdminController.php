@@ -69,6 +69,10 @@ class AdminController extends Controller
         $gen->default_job_msg = $request->default_job_msg;
         $gen->default_dep_msg = $request->default_dep_msg;
         $gen->default_with_msg = $request->default_with_msg;
+        $gen->das_noti_msg = $request->das_noti_msg;
+        $gen->dep_noti_msg = $request->dep_noti_msg;
+        $gen->with_noti_msg = $request->with_noti_msg;
+        $gen->with_ser_charge = $request->with_ser_charge;
         $gen->save();
         return back()->with('success', 'General Settings Successfully Updated');
     }

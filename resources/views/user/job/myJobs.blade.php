@@ -76,7 +76,7 @@
                                 <td>
                                     <a href="{{route('user.find.job.details',$job->id)}}" class="btn btn-sm btn-soft-primary">View</a>
                                     <a href="{{route('user.job.edit',$job->id)}}" class="btn btn-sm btn-soft-secondary">Edit</a>
-                                    <a href="apps-crypto-buy-sell.html" class="btn btn-sm btn-soft-danger">Delete</a>
+                                    <a href="{{route('user.job.delete',$job->id)}}" class="btn btn-sm btn-soft-danger">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
