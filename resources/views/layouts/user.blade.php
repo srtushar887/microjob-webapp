@@ -382,10 +382,12 @@
     src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script
     src="{{asset('assets/dashboard/')}}/table/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
-<script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
+
 
 <script src="{{asset('assets/dashboard/')}}/js/pages/form-wizard.init.js"></script>
 <script src="{{asset('assets/dashboard/')}}/form-widget.js"></script>
+
+<script src="{{asset('assets/dashboard/')}}/js/app.js"></script>
 
 {{--<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>--}}
 

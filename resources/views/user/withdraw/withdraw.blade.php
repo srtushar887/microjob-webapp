@@ -49,7 +49,7 @@
                                 <label for="validationDefault01" class="form-label">USD Rate</label>
                                 <input type="text" class="form-control usd_rate" name="usd_rate"
                                        value="{{$gen_settings->usd_rate}}" readonly>
-                                <input type="text" class="form-control with_ser_charge" name="with_ser_charge"
+                                <input type="hidden" class="form-control with_ser_charge" name="with_ser_charge"
                                        value="{{$gen_settings->with_ser_charge}}" readonly>
                             </div>
                             <div class="col-md-3">

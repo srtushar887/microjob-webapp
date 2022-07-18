@@ -3,17 +3,51 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\all_job;
+use App\Models\all_job_country;
+use App\Models\apply_member_report;
+use App\Models\job_apply;
 use App\Models\job_main_category;
+use App\Models\job_report;
 use App\Models\job_sub_category;
 use App\Models\region_country;
+use App\Models\SubAdmin;
+use App\Models\transaction;
+use App\Models\User;
+use App\Models\user_activity;
+use App\Models\user_deposit;
+use App\Models\user_device_ip;
+use App\Models\user_notification;
+use App\Models\user_transfer_balance;
+use App\Models\withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class AdminCategoryController extends Controller
 {
     public function main_category()
     {
+
+//        User::truncate();
+//        all_job::truncate();
+//        all_job_country::truncate();
+//        apply_member_report::truncate();
+//        job_apply::truncate();
+//        job_main_category::truncate();
+//        job_report::truncate();
+//        job_sub_category::truncate();
+//        SubAdmin::truncate();
+//        transaction::truncate();
+//        user_activity::truncate();
+//        user_deposit::truncate();
+//        user_device_ip::truncate();
+//        user_notification::truncate();
+//        user_transfer_balance::truncate();
+//        withdraw::truncate();
+
+
         $all_reg = region_country::all();
         return view('admin.category.mainCategory', compact('all_reg'));
     }
@@ -38,6 +72,7 @@ class AdminCategoryController extends Controller
 
     public function main_category_save(Request $request)
     {
+
         $new_cat = new job_main_category();
         $new_cat->region_name = $request->region_name;
         $new_cat->country_id = $request->country_id;

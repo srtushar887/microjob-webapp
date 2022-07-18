@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">All Job Task Report</h4>
+                <h4 class="mb-sm-0">Job Task Report</h4>
             </div>
         </div>
     </div>
@@ -17,8 +17,9 @@
                         <thead class="table-light">
                         <tr>
                             <th>Reported By</th>
-                            <th>Job Title</th>
-                            <th>Reason</th>
+                            <th>Reported To</th>
+                            <th>Task ID</th>
+                            <th>Status</th>
                             <th>Created Date</th>
                             <th>Action</th>
                         </tr>
@@ -54,11 +55,23 @@
                 $('#alldeposit').DataTable({
                     "processing": true,
                     "serverSide": true,
-                    "ajax": "{{ route('admin.job.report.get') }}",
+                    "ajax": "{{ route('admin.user.task.report.get') }}",
                     columns: [
                         {data: 'user_id', name: 'user_id', class: 'text-center'},
-                        {data: 'job_id', name: 'job_id', class: 'text-center'},
-                        {data: 'report_summery', name: 'report_summery', class: 'text-center'},
+                        {data: 'applied_user_id', name: 'applied_user_id', class: 'text-center'},
+                        {data: 'apply_id', name: 'apply_id', class: 'text-center'},
+                        {
+                            data: 'is_review', class: 'text-center',
+                            render: function (data) {
+                                if (data == 0) {
+                                    return 'New Report';
+                                } else if (data == 1) {
+                                    return 'Reviewed';
+                                }  else {
+                                    return 'not set'
+                                }
+                            }
+                        },
                         {data: 'created_at', name: 'created_at', class: 'text-center'},
                         {data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'},
                     ]

@@ -8,7 +8,8 @@
                 <div class="card-body">
 
                     <div class="live-preview">
-                        <form class="row g-3" action="{{route('admin.payment.gateway.update')}}" method="post">
+                        <form class="row g-3" action="{{route('admin.payment.gateway.update')}}" method="post"
+                              enctype="multipart/form-data">
                             @csrf
                             <div class="col-md-6">
                                 <label for="validationDefault01" class="form-label">Gateway Name</label>
@@ -17,6 +18,10 @@
 
                                 <input type="hidden" class="form-control edit_main_cat_id"
                                        name="gateway_edit" value="{{$gateway_edit->id}}">
+
+
+                                <input type="file" class="form-control edit_main_cat_id"
+                                       name="file_csv">
                             </div>
 
                             <div class="col-md-6">

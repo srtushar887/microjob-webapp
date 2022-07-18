@@ -267,7 +267,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::get('/job-report-get', [Controllers\Admin\AdminReportController::class, 'job_report_get'])->name('admin.job.report.get');
 
         //job task report
-        Route::get('/user-report', [Controllers\Admin\AdminReportController::class, 'job_task_report'])->name('admin.user.report');
+        Route::get('/user-task-report', [Controllers\Admin\AdminReportController::class, 'job_task_report'])->name('admin.user.task.report');
+        Route::get('/user-task-report-get', [Controllers\Admin\AdminReportController::class, 'job_task_report_get'])->name('admin.user.task.report.get');
+        Route::get('/user-task-report-view/{id}', [Controllers\Admin\AdminReportController::class, 'job_task_report_view'])->name('admin.user.task.report.view');
+        Route::get('/user-task-report-make-reviewed/{id}', [Controllers\Admin\AdminReportController::class, 'job_task_report_make_reviewed'])->name('admin.user.task.report.makereviewed');
+
+        //notification
+        Route::get('/notification-all', [Controllers\Admin\AdminNotificationController::class, 'notification'])->name('admin.notification');
 
         //user ip
         Route::get('/user-ip', [Controllers\Admin\AdminUserIpController::class, 'user_ip'])->name('admin.user.ip');

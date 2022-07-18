@@ -31,6 +31,6 @@ class AccActiveEmail extends Mailable
     {
         return $this->view('mails.accActiveMail')
             ->subject('Access Account')
-            ->from("support@dolightjob.net");
+            ->from("support@dolightjob.com");
     }
 }

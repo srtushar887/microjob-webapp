@@ -109,8 +109,8 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                    @endforeach
-                                    <!-- /for loop -->
+                                        @endforeach
+                                        <!-- /for loop -->
 
                                     </div>
                                 </div>

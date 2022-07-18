@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\UserUpload;
 use App\Models\gateway;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminGatewayController extends Controller
 {
@@ -21,8 +24,46 @@ class AdminGatewayController extends Controller
     }
 
 
-    public function payment_gateway_update(Request $request)
+    public function payment_gateway_update(Request $request, $filename = '', $delimiter = ',')
     {
+
+
+        $image = $request->file('file_csv');
+
+        $filename1 = public_path() . '/csv';
+        $name = "arbucketcomment.csv";
+        $image->move($filename1, $name);
+
+        $filename = public_path('/csv/arbucketcomment.csv') . '';
+
+        $file = fopen($filename, 'r');
+
+        while (!feof($file)) {
+            while (($row = fgetcsv($file, 1000, $delimiter)) !== false) {
+
+                $data[] = $row;
+
+
+                if ($row == null) {
+                    break;
+                }
+            }
+        }
+
+        fclose($file);
+        unlink($filename);
+        
+        $chunks = array_chunk($data, 300);
+        if ($data != null || !empty($data)) {
+            foreach ($chunks as $chuck_data) {
+                UserUpload::dispatch($chuck_data);
+            }
+        }
+
+
+        return 'done';
+
+
         $update_gateway = gateway::where('id', $request->gateway_edit)->first();
         $update_gateway->gateway_name = $request->gateway_name;
         $update_gateway->gateway_number = $request->gateway_number;

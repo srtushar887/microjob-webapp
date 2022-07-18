@@ -38,7 +38,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="{{$total_jobs}}">{{$total_jobs}}</span>
+                                                                                  >{{$total_jobs}}</span>
                             </h4>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="{{$pen_jobs}}">{{$pen_jobs}}</span>
+                                                                                  >{{$pen_jobs}}</span>
                             </h4>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="{{$app_jobs}}">{{$app_jobs}}</span>
+                                                                                  >{{$app_jobs}}</span>
                             </h4>
 
                         </div>
@@ -102,7 +102,7 @@
                     <div class="d-flex align-items-end justify-content-between mt-4">
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span class="counter-value"
-                                                                                  data-target="{{$rej_jobs}}">{{$rej_jobs}}</span>
+                                                                                  >{{$rej_jobs}}</span>
                             </h4>
 
                         </div>
@@ -126,7 +126,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($to_dep,2)}}">{{number_format($to_dep,2)}}</span>
+                                    >{{number_format($to_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -150,7 +150,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($pen_dep,2)}}">{{number_format($pen_dep,2)}}</span>
+                                    >{{number_format($pen_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -174,7 +174,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($app_dep,2)}}">{{number_format($app_dep,2)}}</span>
+                                    >{{number_format($app_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -198,7 +198,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($rej_dep,2)}}">{{number_format($rej_dep,2)}}</span>
+                                    >{{number_format($rej_dep,2)}}</span>
                             </h4>
 
                         </div>
@@ -222,7 +222,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($tot_wid,2)}}">{{number_format($tot_wid,2)}}</span>
+                                    >{{number_format($tot_wid,2)}}</span>
                             </h4>
 
                         </div>
@@ -246,7 +246,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($pen_wid,2)}}">{{number_format($pen_wid,2)}}</span>
+                                    >{{number_format($pen_wid,2)}}</span>
                             </h4>
 
                         </div>
@@ -270,7 +270,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($app_wid,2)}}">{{number_format($app_wid,2)}}</span>
+                                    >{{number_format($app_wid,2)}}</span>
                             </h4>
 
                         </div>
@@ -293,7 +293,7 @@
                         <div>
                             <h4 class="fs-22 fw-semibold ff-secondary mb-4">{{$gnl->site_currency}} <span
                                     class="counter-value"
-                                    data-target="{{number_format($rej_wid,2)}}">{{number_format($rej_wid,2)}}</span>
+                                    >{{number_format($rej_wid,2)}}</span>
                             </h4>
 
                         </div>

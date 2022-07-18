@@ -409,7 +409,9 @@ class UserJobController extends Controller
         $new_report->user_id = Auth::user()->id;
         $new_report->applied_user_id = $appy_data->user_id;
         $new_report->apply_id = $request->report_apply_id;
+        $new_report->job_id = $appy_data->job_id;
         $new_report->report_desc = $request->report_desc;
+        $new_report->is_review = 0;
         $new_report->save();
 
         return back()->with('success', 'Report Submitted Successfully');

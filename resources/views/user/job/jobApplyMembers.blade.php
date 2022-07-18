@@ -216,10 +216,12 @@
                                         $count_report = \App\Models\apply_member_report::where('apply_id', $app_job->id)->where('applied_user_id', $user_name->id)->count();
                                         ?>
                                         @if($count_report < 1)
+                                            @if($app_job->is_submit == 1)
                                             <button type="button" class="btn btn-sm btn-primary btn-light "
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#inviteMembersreportModal{{$app_job->id}}">Report
                                             </button>
+                                                @endif
                                         @endif
                                     </td>
                                 </tr>

@@ -31,6 +31,6 @@ class ForgetPasswordMail extends Mailable
     {
         return $this->view('mails.forgetPassMail')
             ->subject('Forget Password')
-            ->from("support@dolightjob.net");
+            ->from("support@dolightjob.com");
     }
 }
