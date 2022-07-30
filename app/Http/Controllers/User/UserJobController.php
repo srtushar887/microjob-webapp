@@ -147,9 +147,6 @@ class UserJobController extends Controller
     }
 
 
-
-
-
     public function find_job()
     {
         $all_reg = region_country::distinct()->select('region')->where('region', '!=', '')->get();
@@ -372,6 +369,16 @@ class UserJobController extends Controller
     public function job_apply_members_change_status(Request $request)
     {
 
+        $gen = general_setting::first();
+
+        if ($request->is_sat == 2) {
+            $count_unsatis = job_apply::where('status', 3)->count();
+            if ($count_unsatis > $gen->job_unsatis_limit) {
+                return back()->with('alert', 'Your job Unsatisfied limit is ' . $gen->job_unsatis_limit . ' You have cross your Unsatisfied limit');
+                exit();
+            }
+        }
+
 
         $job_apply = job_apply::where('id', $request->apply_id)->first();
         $job_apply->is_sat = $request->is_sat;
@@ -462,38 +469,38 @@ class UserJobController extends Controller
 
     public function job_delete($id)
     {
-        $job_delete = all_job::where('id',$id)->first();
-        $job_apply = job_apply::where('job_id',$id)
-                ->where('status',1)
-                ->count();
+        $job_delete = all_job::where('id', $id)->first();
+        $job_apply = job_apply::where('job_id', $id)
+            ->where('status', 1)
+            ->count();
 
-        $job_creator = User::where('id',$job_delete->user_id)->first();
+        $job_creator = User::where('id', $job_delete->user_id)->first();
 
 
-        if ($job_delete){
-            if ($job_apply > 0){
-                $total_user_need =$job_delete->worker_need - $job_apply;
-                $count_bal =  $total_user_need * $job_delete->each_worker_earn;
+        if ($job_delete) {
+            if ($job_apply > 0) {
+                $total_user_need = $job_delete->worker_need - $job_apply;
+                $count_bal = $total_user_need * $job_delete->each_worker_earn;
 
                 $job_creator->balance = $job_creator->balance + $count_bal;
                 $job_creator->save();
 
-                $del_app_mem = job_apply::where('job_id',$id)->delete();
+                $del_app_mem = job_apply::where('job_id', $id)->delete();
 
                 $job_delete->delete();
-            }else{
-                $count_bal =  $job_delete->worker_need * $job_delete->each_worker_earn;
+            } else {
+                $count_bal = $job_delete->worker_need * $job_delete->each_worker_earn;
                 $job_creator->balance = $job_creator->balance + $count_bal;
                 $job_creator->save();
 
-                $del_app_mem = job_apply::where('job_id',$id)->delete();
+                $del_app_mem = job_apply::where('job_id', $id)->delete();
 
                 $job_delete->delete();
             }
 
-            return back()->with('success','Job Successfully Deleted');
-        }else{
-            return back()->with('alert','Job Not Found');
+            return back()->with('success', 'Job Successfully Deleted');
+        } else {
+            return back()->with('alert', 'Job Not Found');
         }
 
 

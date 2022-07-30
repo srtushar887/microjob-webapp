@@ -20,6 +20,9 @@ class UserUpload implements ShouldQueue
      *
      * @return void
      */
+
+    public $chuck_data;
+
     public function __construct($chuck_data)
     {
         $this->chuck_data = $chuck_data;

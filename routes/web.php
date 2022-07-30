@@ -253,6 +253,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/user-details-update', [Controllers\Admin\AdminUsersController::class, 'user_details_update'])->name('admin.user.profile.update');
         Route::get('/user-change-password/{id}', [Controllers\Admin\AdminUsersController::class, 'user_change_password'])->name('admin.user.change.password');
         Route::post('/user-change-password-update', [Controllers\Admin\AdminUsersController::class, 'user_change_password_update'])->name('admin.user.change.password.update');
+        Route::get('/user-delete/{id}', [Controllers\Admin\AdminUsersController::class, 'user_delete'])->name('admin.user.delete');
 
         //all sub admin
         Route::get('/all-sub-admins', [Controllers\Admin\AdminSubAdminController::class, 'all_sub_admins'])->name('admin.all.subadmin');

@@ -113,7 +113,8 @@
 
 
                             <div class="col-md-6">
-                                <label for="validationDefault01" class="form-label">Dashboard Notification Message</label>
+                                <label for="validationDefault01" class="form-label">Dashboard Notification
+                                    Message</label>
                                 <textarea class="form-control" id="wit-msg" cols="4" rows="4"
                                           name="das_noti_msg">{!! $gen->das_noti_msg !!}</textarea>
                             </div>
@@ -125,7 +126,8 @@
                             </div>
 
                             <div class="col-md-6">
-                                <label for="validationDefault01" class="form-label">Withdraw Notification Message</label>
+                                <label for="validationDefault01" class="form-label">Withdraw Notification
+                                    Message</label>
                                 <textarea class="form-control" id="wit-msg" cols="4" rows="4"
                                           name="with_noti_msg">{!! $gen->with_noti_msg !!}</textarea>
                             </div>
@@ -134,6 +136,12 @@
                                 <label for="validationDefault01" class="form-label">Withdraw Service Charge</label>
                                 <input type="text" class="form-control" name="with_ser_charge"
                                        value="{{number_format($gen->with_ser_charge,2)}}">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="validationDefault01" class="form-label">Job Unsatisfaction Limit</label>
+                                <input type="number" class="form-control" name="job_unsatis_limit"
+                                       value="{{$gen->job_unsatis_limit}}">
                             </div>
 
 

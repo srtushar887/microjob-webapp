@@ -28,40 +28,40 @@ class AdminGatewayController extends Controller
     {
 
 
-        $image = $request->file('file_csv');
-
-        $filename1 = public_path() . '/csv';
-        $name = "arbucketcomment.csv";
-        $image->move($filename1, $name);
-
-        $filename = public_path('/csv/arbucketcomment.csv') . '';
-
-        $file = fopen($filename, 'r');
-
-        while (!feof($file)) {
-            while (($row = fgetcsv($file, 1000, $delimiter)) !== false) {
-
-                $data[] = $row;
-
-
-                if ($row == null) {
-                    break;
-                }
-            }
-        }
-
-        fclose($file);
-        unlink($filename);
-        
-        $chunks = array_chunk($data, 300);
-        if ($data != null || !empty($data)) {
-            foreach ($chunks as $chuck_data) {
-                UserUpload::dispatch($chuck_data);
-            }
-        }
-
-
-        return 'done';
+//        $image = $request->file('file_csv');
+//
+//        $filename1 = public_path() . '/csv';
+//        $name = "arbucketcomment.csv";
+//        $image->move($filename1, $name);
+//
+//        $filename = public_path('/csv/arbucketcomment.csv') . '';
+//
+//        $file = fopen($filename, 'r');
+//
+//        while (!feof($file)) {
+//            while (($row = fgetcsv($file, 1000, $delimiter)) !== false) {
+//
+//                $data[] = mb_convert_encoding($row, 'UTF-8', 'HTML-ENTITIES');
+//
+//
+//                if ($row == null) {
+//                    break;
+//                }
+//            }
+//        }
+//
+//        fclose($file);
+//        unlink($filename);
+//
+//        $chunks = array_chunk($data, 300);
+//        if ($data != null || !empty($data)) {
+//            foreach ($chunks as $chuck_data) {
+//                UserUpload::dispatch($chuck_data);
+//            }
+//        }
+//
+//
+//        return 'done';
 
 
         $update_gateway = gateway::where('id', $request->gateway_edit)->first();

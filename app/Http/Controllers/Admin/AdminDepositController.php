@@ -182,6 +182,7 @@ class AdminDepositController extends Controller
             $dep_tran->delete();
         }
 
+
         $del_dep->delete();
         return back()->with('success', 'Deposit Successfully Deleted');
     }

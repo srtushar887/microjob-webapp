@@ -18,10 +18,7 @@
 
                                 <input type="hidden" class="form-control edit_main_cat_id"
                                        name="gateway_edit" value="{{$gateway_edit->id}}">
-
-
-                                <input type="file" class="form-control edit_main_cat_id"
-                                       name="file_csv">
+                                
                             </div>
 
                             <div class="col-md-6">

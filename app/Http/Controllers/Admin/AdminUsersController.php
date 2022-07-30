@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\all_job;
+use App\Models\job_apply;
+use App\Models\transaction;
 use App\Models\User;
+use App\Models\user_deposit;
+use App\Models\user_notification;
+use App\Models\user_transfer_balance;
 use App\Models\withdraw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -110,6 +116,26 @@ class AdminUsersController extends Controller
         $update_profile->account_status = $request->account_status;
         $update_profile->save();
         return back()->with('success', 'Profile Successfully Updated');
+    }
+
+
+    public function user_delete($id)
+    {
+        $user = User::where('id', $id)->first();
+
+        all_job::where('user_id', $id)->delete();
+        job_apply::where('user_id', $id)->delete();
+        user_deposit::where('user_id', $id)->delete();
+        withdraw::where('user_id', $id)->delete();
+        transaction::where('user_id', $id)->delete();
+        user_transfer_balance::where('user_id', $id)->delete();
+        user_notification::where('user_id', $id)->delete();
+
+        $user->delete();
+        
+        return redirect(route('admin.all.users'))->with('success', 'User Successfully Deleted');
+
+
     }
 
 

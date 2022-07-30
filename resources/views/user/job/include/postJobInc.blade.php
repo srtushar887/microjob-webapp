@@ -17,7 +17,7 @@
                 $(this).addClass('active');
                 $(this).closest('.regg_name').find("input[name='region_name']").prop('checked', true);
                 let a = $(this).closest('.regg_name').find("input[name='region_name']").val();
-
+                $('.sub_cats').empty();
 
             });
 
@@ -64,6 +64,9 @@
             });
 
 
+            $('.sub_cats').empty();
+
+
             $(document).on('click', '.regg_name', function () {
                 let reg_name_change = $(this).data('id');
                 $.ajax({
@@ -74,6 +77,7 @@
                         'reg_name': reg_name_change,
                     },
                     success: function (data) {
+
                         $('.main_cats').empty();
                         $.each(data, function (index, value) {
                             $('.main_cats').append(
@@ -109,7 +113,6 @@
 
             $(document).on('click', '.m_cat_name', function () {
                 let reg_name = $("input[name='region_name']:checked").val();
-                // let main_cat = $("input[name='main_category']:checked").val();
                 let main_cat = $(this).data('id');
 
 
@@ -133,12 +136,13 @@
                         'main_cat': main_cat,
                     },
                     success: function (data) {
+                        console.log(data)
                         $('.sub_cats').empty();
                         $.each(data, function (index, value) {
                             $('.sub_cats').append(
                                 `
-                            <li class="list-inline-item mb-3 s_cat_name" data-id="${value.id}">
-                                                    <button type="button" class="btn btn-sm btn-light">
+                          <li class="list-inline-item mb-3 s_cat_name" data-id="${value.id}">
+                                                    <button type="button" class="btn btn-sm btn-light sub_cat_btn">
                                                         <label class="form-check-label">
                                                             <input type="radio"
                                                                    class="form-check-input d-none sub_cat_name" value="${value.id}"
@@ -146,7 +150,13 @@
                                                         </label>
                                                     </button>
                                                 </li>
-                            `
+
+
+
+
+
+
+`
                             );
                         });
 
@@ -170,6 +180,7 @@
 
 
             $(document).on('click', '.s_cat_name', function () {
+                console.log($(this).data('id'))
                 let sub_cat_id = $("input[name='sub_category']:checked").val();
                 let s_cat_id = $(this).data('id');
 
@@ -179,11 +190,33 @@
                     }
                 });
 
+
+                $('.sub_cat_name').each(function () {
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
+                    }
+                });
+
+
+                $('.sub_cat_btn').each(function () {
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
+                    }
+
+                    if ($(this).closest('.s_cat_name').find("input[name='sub_category']").prop('checked') == true) {
+                        $(this).closest('.sub_cat_btn').addClass('active');
+                    }
+
+                });
+
                 $('.sub_cat_name').each(function () {
                     $(this).prop('checked', false);
                 });
+
                 $(this).addClass('active');
+                $(this).css({"background-color": "yellow"});
                 $(this).closest('.s_cat_name').find("input[name='sub_category']").prop('checked', true);
+
                 let scat = $(this).closest('.s_cat_name').find("input[name='sub_category']").val();
 
                 $.ajax({

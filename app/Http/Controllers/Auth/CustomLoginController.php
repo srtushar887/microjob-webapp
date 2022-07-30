@@ -84,15 +84,18 @@ class CustomLoginController extends Controller
             'email' => 'required',
             'password' => 'required|min:8'
         ]);
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            return redirect(route('admin.dashboard'));
+        }
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             return redirect(route('home'));
-        } elseif (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect(route('admin.dashboard'));
-        } elseif (Auth::guard('subadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect(route('subadmin.dashboard'));
-        } else {
-            return redirect(route('login'))->with('user_login_error', 'Invalid Credentials');
         }
+
+        if (Auth::guard('subadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            return redirect(route('subadmin.dashboard'));
+        }
+        
+        return redirect(route('login'))->with('user_login_error', 'Invalid Credentials');
     }
 
 }
