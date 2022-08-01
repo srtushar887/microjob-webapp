@@ -24,7 +24,7 @@ class AdminRegionController extends Controller
             ->addColumn('action', function ($all_region_country) {
                 return '
                 <button id="' . $all_region_country->id . '" onclick="editreg(this.id)" type="button" class="btn btn-sm btn-light editcatmd" data-bs-toggle="modal" data-bs-target="#editreg">Edit</button>
-
+                <button id="' . $all_region_country->id . '" onclick="deletereg(this.id)"  type="button" class="btn btn-sm btn-light delreg" data-bs-toggle="modal" data-bs-target="#deletereg">Delete</button>
                 ';
             })
             ->editColumn('created_at', function ($all_region_country) {
@@ -84,6 +84,14 @@ class AdminRegionController extends Controller
         $new_reg->country_name = $request->country_name;
         $new_reg->save();
         return back()->with('success','Region and Country Successfully updated');
+    }
+
+
+    public function region_country_delete(Request $request)
+    {
+        $del_reg = region_country::where('id',$request->delete_reg_id)->first();
+        $del_reg->delete();
+        return back()->with('success','Region and Country Successfully Deleted');
     }
 
 

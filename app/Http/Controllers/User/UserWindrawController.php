@@ -35,6 +35,7 @@ class UserWindrawController extends Controller
         $new_with->receiver_number = $request->receiver_number;
         $new_with->user_will_get = $request->final_am;
         $new_with->status = 0;
+        $new_with->admin_income = ($request->amount - $request->final_am);
         $new_with->save();
 
 
@@ -49,6 +50,7 @@ class UserWindrawController extends Controller
         $new_trans->total_usd = $new_with->total_usd;
         $new_trans->status = 0;
         $new_trans->type = 2;
+        $new_trans->admin_income = $new_with->admin_income;
         $new_trans->save();
 
 

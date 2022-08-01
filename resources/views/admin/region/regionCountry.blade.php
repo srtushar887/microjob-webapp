@@ -111,6 +111,33 @@
     </div>
 
 
+    <div class="modal fade" id="deletereg" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Delete Region & Country</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+               <form action="{{route('admin.region.country.delete')}}" method="post">
+                   @csrf
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>are you sure to delete this region & country ?</label>
+                        <input type="hidden" class="form-control delete_reg_id" name="delete_reg_id">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="deleteMainCat">Delete</button>
+                </div>
+               </form>
+            </div>
+        </div>
+    </div>
+
+
 
 
 
@@ -120,8 +147,8 @@
     <script>
 
 
-        function deletemaincat(id) {
-            $('.delete_main_cat_id').val(id);
+        function deletereg(id) {
+            $('.delete_reg_id').val(id);
         }
 
         function editreg(id) {

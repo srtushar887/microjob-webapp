@@ -373,11 +373,20 @@ class UserJobController extends Controller
 
         if ($request->is_sat == 2) {
             $count_unsatis = job_apply::where('status', 3)->count();
-            if ($count_unsatis > $gen->job_unsatis_limit) {
+
+            $check_limit = ($count_unsatis * $gen->job_unsatis_limit);
+            $percen = $check_limit / 100;
+
+
+            if ((int)$percen >= $count_unsatis) {
                 return back()->with('alert', 'Your job Unsatisfied limit is ' . $gen->job_unsatis_limit . ' You have cross your Unsatisfied limit');
                 exit();
             }
         }
+
+
+
+
 
 
         $job_apply = job_apply::where('id', $request->apply_id)->first();
@@ -446,13 +455,23 @@ class UserJobController extends Controller
             $imgUrl = $directory . $imageName;
             Image::make($image)->save($imgUrl);
             $job_update->thumbnail = $imgUrl;
+
+            $job_update->job_status = 1;
         }
 
         $job_update->job_title = $request->job_title;
         $job_update->specific_task = $request->specific_task;
         $job_update->worker_need = $job_update->worker_need + $request->worker_need;
         $job_update->est_job_cost = $request->est_job_cost;
-        $job_update->job_status = 1;
+
+        if($job_update->job_title != $request->job_title){
+            $job_update->job_status = 1;
+        }elseif($job_update->specific_task != $request->specific_task){
+            $job_update->job_status = 1;
+        }else{
+
+        }
+
         $job_update->save();
 
 

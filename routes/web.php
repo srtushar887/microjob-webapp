@@ -152,6 +152,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
         Route::post('/region-country-save', [Controllers\Admin\AdminRegionController::class, 'region_country_save'])->name('admin.region.country.save');
         Route::post('/region-country-single', [Controllers\Admin\AdminRegionController::class, 'region_country_single'])->name('admin.region.country.single');
         Route::post('/region-country-update', [Controllers\Admin\AdminRegionController::class, 'region_country_update'])->name('admin.region.country.update');
+        Route::post('/region-country-delete', [Controllers\Admin\AdminRegionController::class, 'region_country_delete'])->name('admin.region.country.delete');
 
 
         //main category

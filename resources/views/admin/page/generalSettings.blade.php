@@ -70,7 +70,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label for="validationDefault01" class="form-label">Service Charge(%)</label>
+                                <label for="validationDefault01" class="form-label">Job Service Charge(%)</label>
                                 <input type="text" class="form-control" name="service_charge"
                                        value="{{$gen->service_charge}}">
                             </div>
@@ -133,13 +133,13 @@
                             </div>
 
                             <div class="col-md-3">
-                                <label for="validationDefault01" class="form-label">Withdraw Service Charge</label>
+                                <label for="validationDefault01" class="form-label">Withdraw Service Charge (%)</label>
                                 <input type="text" class="form-control" name="with_ser_charge"
                                        value="{{number_format($gen->with_ser_charge,2)}}">
                             </div>
 
                             <div class="col-md-3">
-                                <label for="validationDefault01" class="form-label">Job Unsatisfaction Limit</label>
+                                <label for="validationDefault01" class="form-label">Job Unsatisfaction Limit (%)</label>
                                 <input type="number" class="form-control" name="job_unsatis_limit"
                                        value="{{$gen->job_unsatis_limit}}">
                             </div>
